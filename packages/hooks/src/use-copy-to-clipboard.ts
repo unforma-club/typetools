@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type CopiedValue = string | null;
 type CopyFn = (text: string) => Promise<boolean>; // Return success
 
-export function useCopyToClipboard(): [CopiedValue, CopyFn] {
+export function useCopyToClipboard(timeout: number): [CopiedValue, CopyFn] {
     const [copiedText, setCopiedText] = useState<CopiedValue>(null);
 
     const copy: CopyFn = async (text) => {
@@ -23,6 +23,12 @@ export function useCopyToClipboard(): [CopiedValue, CopyFn] {
             return false;
         }
     };
+
+    useEffect(() => {
+        if (!copiedText) return;
+        const timer = setTimeout(() => setCopiedText(null), timeout);
+        return () => clearTimeout(timer);
+    }, [timeout, copiedText]);
 
     return [copiedText, copy];
 }
