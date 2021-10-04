@@ -1,5 +1,6 @@
 .etc
 .next
+dist
 node_modules
 
 .env*
