@@ -5,6 +5,7 @@
   "main": "dist/index",
   "types": "dist/index",
   "private": false,
+  "repository": "https://github.com/unforma-club/typetools/tree/main/packages/hooks",
   "keywords": [
     "hooks"
   ],

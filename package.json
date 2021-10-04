@@ -11,7 +11,7 @@
   "scripts": {
     "clean": "lerna run clean",
     "build": "lerna run build",
-    "pub": "lerna publish from-git",
+    "pub": "lerna publish",
     "test": "lerna run test"
   },
   "devDependencies": {
