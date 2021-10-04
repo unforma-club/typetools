@@ -1,0 +1,6 @@
+.etc
+.next
+node_modules
+
+.env*
+*.log

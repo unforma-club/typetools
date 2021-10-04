@@ -1,0 +1,10 @@
+{
+  "extends": "./tsconfig.build.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@unforma-club/*": ["packages/*/src"]
+    },
+    "noEmit": true
+  }
+}

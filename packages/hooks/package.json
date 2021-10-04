@@ -4,12 +4,16 @@
   "description": "Hooks",
   "main": "dist/index",
   "types": "dist/index",
+  "private": false,
   "keywords": [
     "hooks"
   ],
   "files": [
     "dist"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "build": "yarn run clean && yarn run compile",
     "clean": "rimraf -rf ./dist",
