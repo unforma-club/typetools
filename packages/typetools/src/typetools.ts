@@ -1,6 +1,10 @@
+import type { FileReaderOutput } from "./types/file";
+import type {
+    VariableAxes,
+    VariableInstance,
+    BaseTypeface,
+} from "./types/typeface";
 import { load, Font } from "opentype.js";
-import { FileReaderOutput } from "./types/file";
-import { VariableAxes, VariableInstance } from "./types/typeface";
 import VariableTools from "./VariableTools";
 
 export default class Typetools {
@@ -39,22 +43,6 @@ export default class Typetools {
         return italic;
     }
 
-    private generateFullName(font: Font) {
-        const fullName = font.names.fullName.en;
-        const typefaceVariable = this.generateVariableFont(font);
-        const italic = this.checkItalic(font);
-
-        return typefaceVariable
-            ? fullName.includes("Variable")
-                ? fullName
-                : `${fullName} ${
-                      italic && !fullName.includes("Italic" || "Ital")
-                          ? "Italic Variable"
-                          : "Variable"
-                  }`
-            : fullName;
-    }
-
     private generateFamily(font: Font) {
         // @ts-ignore
         const typefaceFamily = font.names.preferredFamily
@@ -79,6 +67,29 @@ export default class Typetools {
         return uniqueLayout;
     }
 
+    private generateFullName(font: Font) {
+        const fullName = font.names.fullName.en;
+        const typefaceVariable = this.generateVariableFont(font);
+        const italic = this.checkItalic(font);
+
+        return typefaceVariable
+            ? fullName.includes("Variable")
+                ? fullName
+                : `${fullName} ${
+                      italic && !fullName.includes("Italic" || "Ital")
+                          ? "Italic Variable"
+                          : "Variable"
+                  }`
+            : fullName;
+    }
+
+    private generateShortName(font: Font) {
+        const fontFamily = this.generateFamily(font);
+        const fullName = font.names.fullName.en;
+        const afterReplace = fullName.replace(fontFamily, "");
+        return afterReplace.length !== 0 ? afterReplace : "Regular";
+    }
+
     private generateFontInfo(font: Font) {
         const names = font.names;
         return {
@@ -100,43 +111,50 @@ export default class Typetools {
         };
     }
 
-    public generateFontface(typefaces: Array<any>) {
+    /**
+     * Method that will install `font` to the `DOM`, it use javascript font constructor.
+     * @param typefaces
+     * @returns
+     */
+    public generateFontface(typefaces: Array<BaseTypeface>) {
         return Promise.all(
             typefaces
-                .sort((a, b) => a.typefaceWeight - b.typefaceWeight)
+                // .sort((a, b) => a.typefaceWeight - b.typefaceWeight)
                 .map(async (typeface) => {
                     const newName = typeface.typefaceFullName;
+                    const weight = typeface.typefaceWeight.toString();
+                    const style =
+                        typeface.typefaceStyle === "italic"
+                            ? "italic"
+                            : "normal";
 
-                    // @ts-ignore
                     const fontFace = new FontFace(
                         newName,
                         `url("${typeface.fileUrl}")`,
-                        {
-                            display: "block",
-                            weight: typeface.typefaceWeight.toString(),
-                            style:
-                                typeface.typefaceStyle === "italic"
-                                    ? "italic"
-                                    : "normal",
-                        }
+                        { weight, style }
                     );
 
                     try {
                         await fontFace.load();
-
-                        // @ts-ignore
                         document.fonts.add(fontFace);
                         console.log(
-                            `%c>>> [new] ${typeface.typefaceFullName} - ${typeface.typefaceStyle} - ${typeface.typefaceWeight}.`,
+                            `%c>>> [new] ${typeface.typefaceFullName} - [${typeface.typefaceStyle}] - [${typeface.typefaceWeight}].`,
                             `color: #ff00ff;`
                         );
                     } catch (error) {}
 
-                    return new Promise<any>((resolve) => resolve(typeface));
+                    return new Promise<BaseTypeface>((resolve) =>
+                        resolve(typeface)
+                    );
                 })
         );
     }
 
+    /**
+     * This where magic happens
+     * @param urls
+     * @returns
+     */
     public generateOpenType(urls: Array<FileReaderOutput>) {
         return Promise.all(
             urls.map(async (item) => {
@@ -145,6 +163,7 @@ export default class Typetools {
                 const typefaceVariable = this.generateVariableFont(font);
                 const typefaceFamily = this.generateFamily(font);
                 const typefaceFullName = this.generateFullName(font);
+                const typefaceShortName = this.generateShortName(font);
                 const typefaceFeatures = this.generateFontFeatures(font);
                 const typefaceInfo = this.generateFontInfo(font);
 
@@ -153,16 +172,18 @@ export default class Typetools {
                     : "roman";
                 const typefaceWeight = font.tables.os2.usWeightClass;
 
-                return new Promise((resolve) => {
+                return new Promise<BaseTypeface>((resolve) => {
                     resolve({
+                        ...item,
                         typefaceFamily,
+                        typefaceSubFamily: "",
                         typefaceFullName,
+                        typefaceShortName,
                         typefaceVariable,
                         typefaceStyle,
                         typefaceWeight,
                         typefaceFeatures,
                         typefaceInfo,
-                        fileUrl: item.fileUrl,
                     });
                 });
             })

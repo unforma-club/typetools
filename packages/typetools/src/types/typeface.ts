@@ -24,6 +24,19 @@ export type FontStyle = "roman" | "italic";
 export type FontFamily = string;
 export type FontSubFamily = string;
 
+interface FontInfoNesting {
+    value: string;
+    url: string;
+}
+export interface FontInfo {
+    copyright: string;
+    trademark: string;
+    version: string;
+    designer: FontInfoNesting;
+    license: FontInfoNesting;
+    manufacturer: FontInfoNesting;
+}
+
 export interface FontMedia {
     cover: Array<string>;
     speciment: {
@@ -45,17 +58,22 @@ export interface FontPrice {
     priceCut: number;
 }
 
-export interface Typeface extends FileReaderOutput {
-    typefaceAnatomy: FontAnatomy;
+export interface BaseTypeface extends FileReaderOutput {
     typefaceFamily: FontFamily;
     typefaceSubFamily: FontSubFamily;
     typefaceFullName: string;
-    typefaceWeight: number;
+    typefaceShortName: string;
     typefaceStyle: FontStyle;
-    typefacePrice: FontPrice;
+    typefaceWeight: number;
     typefaceFeatures: Array<string>;
+    typefaceVariable: VariableFont | null;
+    typefaceInfo: FontInfo;
+}
+
+export interface Typeface extends BaseTypeface {
+    typefaceAnatomy: FontAnatomy;
+    typefacePrice: FontPrice;
     typefaceDefault: boolean;
     typefaceCategory: string;
-    typefaceVariable: VariableFont | null;
     sampleText: string;
 }
