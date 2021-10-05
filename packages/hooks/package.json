@@ -21,5 +21,10 @@
     "compile": "tsc -p tsconfig.build.json",
     "prepublishOnly": "yarn run build",
     "test": "yarn run build"
+  },
+  "devDependencies": {
+    "@types/react": "^17.0.27",
+    "react": "^17.0.2",
+    "typescript": "^4.4.3"
   }
 }
