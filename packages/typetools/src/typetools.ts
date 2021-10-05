@@ -3,11 +3,6 @@ import { FileReaderOutput } from "./types/file";
 import { VariableAxes, VariableInstance } from "./types/typeface";
 import VariableTools from "./VariableTools";
 
-type VR = {
-    axes: VariableAxes[];
-    instances: VariableInstance[];
-};
-
 export default class Typetools {
     private generateVariableFont(font: Font) {
         const variableFont = new VariableTools(font);
