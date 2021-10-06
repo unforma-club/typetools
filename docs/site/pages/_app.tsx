@@ -18,10 +18,19 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             </ThemeProvider>
 
             <style jsx global>{`
+                body {
+                    overscroll-behavior: auto none;
+                }
+
                 pre {
                     white-space: pre-wrap;
                     font-size: 0.8em;
                     font-family: var(--font-monospace);
+                }
+
+                a {
+                    color: currentColor;
+                    text-decoration: none;
                 }
 
                 #__next {

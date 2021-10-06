@@ -1,4 +1,7 @@
+import { generateAlphabet, VariableAxes } from "@unforma-club/typetools";
 import { useFonts } from "libs/context/ContextFonts";
+import { CSSProperties, useCallback, useEffect, useState } from "react";
+import { TextMetrics } from "components/TextMetrics";
 
 interface InfoProps {
     label: string;
@@ -23,87 +26,152 @@ const Info = ({ label, value }: InfoProps) => {
 };
 
 export default function Page() {
-    const { fonts } = useFonts();
+    const { selectedFont } = useFonts();
+    const [vf, setVf] = useState<Array<VariableAxes>>([]);
+    useEffect(() => {
+        if (!selectedFont) {
+            return setVf([]);
+        }
+        if (!selectedFont.typefaceVariable) {
+            return setVf([]);
+        }
+        const newVF = selectedFont.typefaceVariable;
+        setVf(newVF.axes);
+    }, [selectedFont]);
+
+    const customFontStyle = useCallback(() => {
+        if (!selectedFont) return {};
+        const { typefaceWeight, typefaceStyle, typefaceFullName } =
+            selectedFont;
+
+        const baseStyle: CSSProperties = {
+            fontFamily: typefaceFullName,
+            fontWeight: typefaceWeight,
+            fontStyle: typefaceStyle === "italic" ? "italic" : "normal",
+        };
+
+        if (vf.length === 0) return baseStyle;
+        const reduce = vf.reduce((p, c) => ({ ...p, [c.tag]: c.value }), {});
+        const stringify = JSON.stringify(reduce).replace(/[{}:]/g, " ");
+        return {
+            fontFamily: baseStyle.fontFamily,
+            fontStyle: baseStyle.fontStyle,
+            fontVariationSettings: stringify,
+        };
+    }, [vf, selectedFont]);
     return (
         <main>
-            {fonts.length !== 0 && (
-                <ul
-                    style={{
-                        listStyle: "none",
-                        padding: "var(--grid-gap)",
-                        margin: 0,
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "var(--grid-gap)",
-                    }}
-                >
-                    {fonts.map((item, i) => (
-                        <li
-                            key={i}
-                            style={{
-                                border: "1px solid",
-                                padding: "var(--grid-gap)",
-                                display: "grid",
-                                gridTemplateColumns: "1fr 1fr",
-                                alignItems: "center",
-                            }}
-                        >
-                            <ul
-                                style={{
-                                    listStyle: "none",
-                                    padding: 0,
-                                    margin: 0,
-                                }}
-                            >
-                                <Info
-                                    label="Version"
-                                    value={item.typefaceInfo.version}
-                                />
-                                <Info
-                                    label="Designer"
-                                    value={item.typefaceInfo.designer.value}
-                                />
-                                <Info
-                                    label="Designer Url"
-                                    value={item.typefaceInfo.designer.url}
-                                />
-                                <Info
-                                    label="Manufacturer"
-                                    value={item.typefaceInfo.manufacturer.value}
-                                />
-                                <Info
-                                    label="Manufacturer Url"
-                                    value={item.typefaceInfo.manufacturer.url}
-                                />
-                                <Info
-                                    label="License"
-                                    value={item.typefaceInfo.license.value}
-                                />
-                                <Info
-                                    label="License Url"
-                                    value={item.typefaceInfo.license.url}
-                                />
-                                <Info
-                                    label="Trademark"
-                                    value={item.typefaceInfo.trademark}
-                                />
-                                <Info
-                                    label="Copyright"
-                                    value={item.typefaceInfo.copyright}
-                                />
-                            </ul>
-                            <div
-                                style={{
-                                    fontSize: "3em",
-                                    fontFamily: item.typefaceFullName,
-                                }}
-                            >
-                                {item.typefaceFamily} - {item.typefaceShortName}{" "}
-                                - {item.typefaceWeight}
-                            </div>
-                        </li>
-                    ))}
-                </ul>
+            {selectedFont && (
+                <div>
+                    <ul
+                        style={{
+                            listStyle: "none",
+                            padding: "var(--grid-gap)",
+                            margin: 0,
+                        }}
+                    >
+                        <Info
+                            label="Family"
+                            value={selectedFont.typefaceFamily}
+                        />
+                        <Info
+                            label="Full Name"
+                            value={selectedFont.typefaceFullName}
+                        />
+                        <Info
+                            label="Version"
+                            value={selectedFont.typefaceInfo.version}
+                        />
+                        <Info
+                            label="Designer"
+                            value={selectedFont.typefaceInfo.designer.value}
+                        />
+                        <Info
+                            label="Designer Url"
+                            value={selectedFont.typefaceInfo.designer.url}
+                        />
+                        <Info
+                            label="Manufacturer"
+                            value={selectedFont.typefaceInfo.manufacturer.value}
+                        />
+                        <Info
+                            label="Manufacturer Url"
+                            value={selectedFont.typefaceInfo.manufacturer.url}
+                        />
+                        <Info
+                            label="License"
+                            value={selectedFont.typefaceInfo.license.value}
+                        />
+                        <Info
+                            label="License Url"
+                            value={selectedFont.typefaceInfo.license.url}
+                        />
+                        <Info
+                            label="Trademark"
+                            value={selectedFont.typefaceInfo.trademark}
+                        />
+                        <Info
+                            label="Copyright"
+                            value={selectedFont.typefaceInfo.copyright}
+                        />
+                    </ul>
+                    <div
+                        style={{
+                            display: "grid",
+                            gridTemplateColumns: "repeat(3, 1fr)",
+                        }}
+                    >
+                        <TextMetrics fontSize={200} lineHeight={1} use="hhea" />
+                        <TextMetrics fontSize={200} lineHeight={1} use="win" />
+                        <TextMetrics fontSize={200} lineHeight={1} use="typo" />
+                    </div>
+                    {vf.length !== 0 && (
+                        <form style={{ display: "flex" }}>
+                            {vf.map((item, i) => (
+                                <label key={i}>
+                                    <div
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "space-between",
+                                            fontFeatureSettings: `"ss04", "tnum"`,
+                                        }}
+                                    >
+                                        <span>{item.tag}</span>
+                                        <span>{item.value}</span>
+                                    </div>
+                                    <input
+                                        key={i}
+                                        type="range"
+                                        min={item.min}
+                                        max={item.max}
+                                        step={item.step}
+                                        value={item.value}
+                                        onChange={(e) => {
+                                            const newValue =
+                                                e.target.valueAsNumber;
+                                            setVf((prev) => {
+                                                prev[i].value = newValue;
+                                                return [...prev];
+                                            });
+                                        }}
+                                    />
+                                </label>
+                            ))}
+                        </form>
+                    )}
+                    <p
+                        style={{
+                            fontFamily: selectedFont.typefaceFullName,
+                            fontSize: "4em",
+                            ...customFontStyle(),
+                            transition:
+                                "font-variation-settings var(--main-transition)",
+                        }}
+                    >
+                        {generateAlphabet()}
+                    </p>
+                </div>
             )}
         </main>
     );
