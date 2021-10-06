@@ -58,6 +58,19 @@ export interface FontPrice {
     priceCut: number;
 }
 
+export interface TypefaceMetrics {
+    unitsPerEm: number;
+    usWinAscent: any;
+    usWinDescent: any;
+    sTypoAscender: any;
+    sTypoDescender: any;
+    descender: any;
+    ascender: any;
+    xHeight: any;
+    capHeight: any;
+    baseLine: number;
+}
+
 export interface BaseTypeface extends FileReaderOutput {
     typefaceFamily: FontFamily;
     typefaceSubFamily: FontSubFamily;
@@ -68,6 +81,8 @@ export interface BaseTypeface extends FileReaderOutput {
     typefaceFeatures: Array<string>;
     typefaceVariable: VariableFont | null;
     typefaceInfo: FontInfo;
+    typefaceTables: Array<string>;
+    typefaceMetrics: TypefaceMetrics;
 }
 
 export interface Typeface extends BaseTypeface {

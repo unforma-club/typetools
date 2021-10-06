@@ -3,6 +3,7 @@ import type {
     VariableAxes,
     VariableInstance,
     BaseTypeface,
+    FontInfo,
 } from "./types/typeface";
 import { load, Font } from "opentype.js";
 import VariableTools from "./VariableTools";
@@ -73,7 +74,7 @@ export default class Typetools {
         const italic = this.checkItalic(font);
 
         return typefaceVariable
-            ? fullName.includes("Variable")
+            ? fullName.includes("Var" || "Variable")
                 ? fullName
                 : `${fullName} ${
                       italic && !fullName.includes("Italic" || "Ital")
@@ -90,7 +91,7 @@ export default class Typetools {
         return afterReplace.length !== 0 ? afterReplace : "Regular";
     }
 
-    private generateFontInfo(font: Font) {
+    private generateFontInfo(font: Font): FontInfo {
         const names = font.names;
         return {
             copyright: names.copyright ? names.copyright.en : "",
@@ -172,6 +173,24 @@ export default class Typetools {
                     : "roman";
                 const typefaceWeight = font.tables.os2.usWeightClass;
 
+                const typefaceTables = Object.keys(font.tables);
+
+                const typefaceMetrics = {
+                    unitsPerEm: font.unitsPerEm,
+                    usWinAscent: font.tables.os2.usWinAscent,
+                    usWinDescent: font.tables.os2.usWinDescent,
+                    sTypoAscender: font.tables.os2.sTypoAscender,
+                    sTypoDescender: font.tables.os2.sTypoDescender,
+                    descender: font.tables.hhea.descender,
+                    ascender: font.tables.hhea.ascender,
+                    xHeight: font.tables.os2.sxHeight,
+                    capHeight: font.tables.os2.sCapHeight,
+                    baseLine: 0,
+                };
+
+                // @ts-ignore
+                const glyphs = font.glyphs.glyphs;
+
                 return new Promise<BaseTypeface>((resolve) => {
                     resolve({
                         ...item,
@@ -184,6 +203,10 @@ export default class Typetools {
                         typefaceWeight,
                         typefaceFeatures,
                         typefaceInfo,
+                        typefaceTables,
+                        typefaceMetrics,
+                        // @ts-ignore
+                        glyphs,
                     });
                 });
             })
