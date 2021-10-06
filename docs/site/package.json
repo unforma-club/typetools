@@ -1,6 +1,6 @@
 {
   "name": "typetools-site",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Typetools by Unforma™Club",
   "author": "Taufik Oktama <oktamataufik@gmail.com>",
   "homepage": "https://github.com/unforma-club/typetools#readme",
@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@unforma-club/hooks": "^1.0.6",
-    "@unforma-club/typetools": "^1.0.2",
+    "@unforma-club/typetools": "^1.0.3-alpha.0",
     "next": "^11.1.2",
     "next-themes": "^0.0.15",
     "opentype.js": "^1.3.3",
