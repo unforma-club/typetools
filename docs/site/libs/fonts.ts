@@ -2,24 +2,17 @@ import { FileReaderOutput } from "@unforma-club/typetools";
 
 export const fonts: Array<FileReaderOutput> = [
     {
-        fileName: "Space Grotesk",
+        fileName: "Roboto Mono",
         fileDestination: "",
         fileSize: 100,
         fileType: "font/ttf",
-        fileUrl: `/font/Space-Grotesk/SpaceGrotesk-VariableFont_wght.ttf`,
+        fileUrl: `/font/Roboto-Mono/RobotoMono[wght].ttf`,
     },
     {
-        fileName: "JetBrains Mono",
+        fileName: "Roboto Mono",
         fileDestination: "",
         fileSize: 100,
         fileType: "font/ttf",
-        fileUrl: "/font/JetBrains-Mono/JetBrainsMono-Variable.ttf",
-    },
-    {
-        fileName: "JetBrains Mono",
-        fileDestination: "",
-        fileSize: 100,
-        fileType: "font/ttf",
-        fileUrl: "/font/JetBrains-Mono/JetBrainsMono-Italic-Variable.ttf",
+        fileUrl: `/font/Roboto-Mono/RobotoMono-Italic[wght].ttf`,
     },
 ];
