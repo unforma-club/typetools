@@ -1,7 +1,9 @@
 import { generateAlphabet, VariableAxes } from "@unforma-club/typetools";
+import { MainLayout } from "components/Layout";
 import { useFonts } from "libs/context/ContextFonts";
 import { CSSProperties, useCallback, useEffect, useState } from "react";
 import { TextMetrics } from "components/TextMetrics";
+import { Slider } from "components/Slider";
 
 interface InfoProps {
     label: string;
@@ -60,7 +62,7 @@ export default function Page() {
         };
     }, [vf, selectedFont]);
     return (
-        <main>
+        <MainLayout>
             {selectedFont && (
                 <div>
                     <ul
@@ -121,42 +123,46 @@ export default function Page() {
                             gridTemplateColumns: "repeat(3, 1fr)",
                         }}
                     >
-                        <TextMetrics fontSize={200} lineHeight={1} use="hhea" />
-                        <TextMetrics fontSize={200} lineHeight={1} use="win" />
-                        <TextMetrics fontSize={200} lineHeight={1} use="typo" />
+                        <TextMetrics
+                            fontSize={180}
+                            lineHeight={1.5}
+                            use="hhea"
+                        />
+                        <TextMetrics
+                            fontSize={180}
+                            lineHeight={1.5}
+                            use="win"
+                        />
+                        <TextMetrics
+                            fontSize={180}
+                            lineHeight={1.5}
+                            use="typo"
+                        />
                     </div>
                     {vf.length !== 0 && (
                         <form style={{ display: "flex" }}>
                             {vf.map((item, i) => (
-                                <label key={i}>
-                                    <div
-                                        style={{
-                                            display: "flex",
-                                            alignItems: "center",
-                                            justifyContent: "space-between",
-                                            fontFeatureSettings: `"ss04", "tnum"`,
-                                        }}
-                                    >
-                                        <span>{item.tag}</span>
-                                        <span>{item.value}</span>
-                                    </div>
-                                    <input
-                                        key={i}
-                                        type="range"
-                                        min={item.min}
-                                        max={item.max}
-                                        step={item.step}
-                                        value={item.value}
-                                        onChange={(e) => {
-                                            const newValue =
-                                                e.target.valueAsNumber;
-                                            setVf((prev) => {
-                                                prev[i].value = newValue;
-                                                return [...prev];
-                                            });
-                                        }}
-                                    />
-                                </label>
+                                <Slider
+                                    key={i}
+                                    label={item.name}
+                                    min={item.min}
+                                    max={item.max}
+                                    step={item.step}
+                                    value={item.value}
+                                    defaultValue={item.defaultValue}
+                                    onChange={(e) => {
+                                        setVf((prev) => {
+                                            prev[i].value = e;
+                                            return [...prev];
+                                        });
+                                    }}
+                                    onDoubleClick={(e) => {
+                                        setVf((prev) => {
+                                            prev[i].value = e;
+                                            return [...prev];
+                                        });
+                                    }}
+                                />
                             ))}
                         </form>
                     )}
@@ -173,6 +179,6 @@ export default function Page() {
                     </p>
                 </div>
             )}
-        </main>
+        </MainLayout>
     );
 }

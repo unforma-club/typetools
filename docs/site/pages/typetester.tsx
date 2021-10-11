@@ -1,3 +1,5 @@
+import { MainLayout } from "components/Layout";
+
 export default function Page() {
-    return <main>Page Typetester</main>;
+    return <MainLayout>Page Typetester</MainLayout>;
 }

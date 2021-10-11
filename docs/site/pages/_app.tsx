@@ -22,6 +22,13 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                     overscroll-behavior: auto none;
                 }
 
+                main {
+                    position: relative;
+                    min-height: 100vh;
+                    background-color: inherit;
+                    color: inherit;
+                }
+
                 pre {
                     white-space: pre-wrap;
                     font-size: 0.8em;
@@ -36,6 +43,31 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 #__next {
                     display: grid;
                     grid-template-columns: max-content 1fr;
+                    background-color: inherit;
+                    color: inherit;
+                }
+
+                [data-scrollbar="hide"] {
+                    overflow: -moz-scrollbars-none;
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+                }
+                [data-scrollbar="hide"]::-webkit-scrollbar {
+                    width: 0px !important;
+                    display: none;
+                }
+
+                .marquee {
+                    animation: marqueeText 10000ms infinite;
+                }
+
+                @keyframes marqueeText {
+                    0% {
+                        transform: translateX(0%);
+                    }
+                    100% {
+                        transform: translateX(-100%);
+                    }
                 }
 
                 @media screen and (min-width: 1921px) {
