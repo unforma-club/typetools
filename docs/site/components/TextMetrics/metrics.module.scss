@@ -1,0 +1,47 @@
+.guide_line {
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    user-select: none;
+    border-bottom-width: 1px;
+    border-bottom-color: var(--accents-3) !important;
+    border-bottom-style: dashed;
+
+    &[data-guide="baseline"] {
+        // border-bottom-color: currentColor !important;
+        border-bottom-style: solid;
+    }
+    // &[data-guide="x height"] {
+    //     border-bottom-color: currentColor !important;
+    // }
+    // &[data-guide="cap height"] {
+    //     border-bottom-color: currentColor !important;
+    // }
+}
+
+.guide_line_info {
+    font-size: 0.6em;
+    font-feature-settings: "ss04", "tnum";
+    text-transform: capitalize;
+
+    color: var(--accents-8);
+
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 100%;
+    padding: 0 calc(var(--grid-gap) / 1);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--grid-gap);
+
+    > span {
+        background-color: var(--accents-3);
+        padding: 0 var(--grid-gap);
+        color: var(--accents-14);
+        border-radius: calc(var(--grid-gap) / 2);
+    }
+}
