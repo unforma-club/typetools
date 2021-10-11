@@ -112,6 +112,37 @@ export default class Typetools {
         };
     }
 
+    private generateGlyphs(font: Font) {
+        return (
+            // @ts-ignore
+            Object.values(font.glyphs.glyphs!)
+                // @ts-ignore
+                .filter((g) => g.unicode !== undefined)
+                .map((glyph) => {
+                    // @ts-ignore
+                    const hasUnicode = glyph.unicode;
+                    // @ts-ignore
+                    const glyphIndex = glyph.index as number;
+                    // @ts-ignore
+                    const glyphName = glyph.name as string;
+                    const cUnicode = `0x${(
+                        "0000" + parseInt(hasUnicode).toString(16)
+                    ).slice(-4)}`;
+
+                    return {
+                        character: hasUnicode
+                            ? String.fromCharCode(hasUnicode)
+                            : undefined,
+                        unicode_dec: hasUnicode ? hasUnicode : undefined,
+                        unicode: hasUnicode ? cUnicode : undefined,
+                        html_code: hasUnicode ? `&#${hasUnicode};` : undefined,
+                        glyph_id: glyphIndex,
+                        name: glyphName,
+                    };
+                })
+        );
+    }
+
     /**
      * Method that will install `font` to the `DOM`, it use javascript font constructor.
      * @param typefaces
@@ -206,7 +237,9 @@ export default class Typetools {
                         typefaceTables,
                         typefaceMetrics,
                         // @ts-ignore
+                        characters: this.generateGlyphs(font),
                         glyphs,
+                        tables: font.tables,
                     });
                 });
             })
