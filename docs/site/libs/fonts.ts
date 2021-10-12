@@ -15,4 +15,18 @@ export const fonts: Array<FileReaderOutput> = [
         fileType: "font/ttf",
         fileUrl: `/font/Roboto-Mono/RobotoMono-Italic[wght].ttf`,
     },
+    {
+        fileName: "PlusJakarta Sans",
+        fileDestination: "",
+        fileSize: 100,
+        fileType: "font/ttf",
+        fileUrl: `/font/Plus-Jakarta-Sans/PlusJakartaSans[wght].ttf`,
+    },
+    {
+        fileName: "PlusJakarta Sans",
+        fileDestination: "",
+        fileSize: 100,
+        fileType: "font/ttf",
+        fileUrl: `/font/Plus-Jakarta-Sans/PlusJakartaSans-Italic[wght].ttf`,
+    },
 ];
