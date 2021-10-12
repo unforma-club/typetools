@@ -61,11 +61,6 @@ const MetricsList = ({}: MetricsListProps) => {
                     padding: "0 var(--grid-gap)",
                     margin: 0,
                     gap: "var(--grid-gap)",
-                    // position: "absolute",
-                    // top: "50%",
-                    // left: "50%",
-                    // transform: "translate(-50%, -50%)",
-                    // width: "100%",
                 }}
             >
                 <TextMetrics
@@ -90,9 +85,17 @@ const MetricsList = ({}: MetricsListProps) => {
 
 export default function Page() {
     const { selectedFont } = useFonts();
+
+    if (!selectedFont) {
+        return (
+            <MainLayout>
+                <div className="not-found">Loading...</div>
+            </MainLayout>
+        );
+    }
     return (
         <MainLayout title="Vertical Metrics">
-            {selectedFont && <MetricsList font={selectedFont} />}
+            <MetricsList font={selectedFont} />
         </MainLayout>
     );
 }

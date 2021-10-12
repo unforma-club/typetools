@@ -4,7 +4,13 @@ import { useFonts } from "libs/context/ContextFonts";
 export default function Page() {
     const { selectedFont } = useFonts();
 
-    if (!selectedFont) return <MainLayout>Loading...</MainLayout>;
+    if (!selectedFont) {
+        return (
+            <MainLayout>
+                <div className="not-found">Loading...</div>
+            </MainLayout>
+        );
+    }
     return (
         <MainLayout>
             <ul
