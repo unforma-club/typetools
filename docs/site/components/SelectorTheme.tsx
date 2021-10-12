@@ -1,14 +1,15 @@
 import styles from "./selector.module.scss";
-import { useRef, useState } from "react";
-import { useFonts } from "libs/context/ContextFonts";
 import { useOnClickOutside } from "libs/hooks";
+import { useRef, useState } from "react";
+import { useTheme } from "next-themes";
 
-export const SelectorFont = () => {
-    const { fonts, selectedFont, chooseFont } = useFonts();
+export const SelectorTheme = () => {
     const [state, setState] = useState(false);
 
     const refContainer = useRef(null);
     useOnClickOutside(refContainer, () => setState(false));
+
+    const { themes, theme, setTheme } = useTheme();
 
     return (
         <div ref={refContainer} className={styles.container}>
@@ -16,11 +17,8 @@ export const SelectorFont = () => {
                 className={styles.toggle}
                 onClick={() => setState((prev) => !prev)}
                 data-active={state}
-                style={{
-                    width: "var(--aside-width)",
-                }}
             >
-                <span>{selectedFont?.typefaceFullName}</span>
+                <span style={{ textTransform: "capitalize" }}>{theme}</span>
                 <span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -34,31 +32,17 @@ export const SelectorFont = () => {
                     </svg>
                 </span>
             </button>
-            {state && fonts.length !== 0 && (
+            {state && (
                 <ul className={styles.dropdown}>
-                    {fonts.map((item, i) => {
-                        const familyName = item.typefaceFamily;
-                        const fullName = item.typefaceFullName;
-
+                    {themes.map((item, i) => {
                         return (
                             <li key={i} className={styles.list}>
                                 <button
-                                    onClick={() =>
-                                        chooseFont(item.typefaceFullName)
-                                    }
-                                    data-active={
-                                        selectedFont?.typefaceFullName ===
-                                        item.typefaceFullName
-                                    }
+                                    onClick={() => setTheme(item)}
+                                    data-active={item === theme}
+                                    style={{ textTransform: "capitalize" }}
                                 >
-                                    <span>{familyName}</span> -{" "}
-                                    <span
-                                        style={{
-                                            fontFamily: item.typefaceFullName,
-                                        }}
-                                    >
-                                        {fullName.slice(familyName.length)}
-                                    </span>
+                                    {item}
                                 </button>
                             </li>
                         );
@@ -68,3 +52,5 @@ export const SelectorFont = () => {
         </div>
     );
 };
+
+export default SelectorTheme;

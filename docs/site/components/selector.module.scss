@@ -19,7 +19,7 @@
     text-align: left;
 
     transition: background-color var(--main-transition),
-        border-color var(--main-transition);
+        border-color var(--main-transition), color var(--main-transition);
 
     &[data-active="true"],
     &:hover {
@@ -37,7 +37,8 @@
     border: 1px solid;
     border-radius: calc(var(--grid-gap) / 2);
     position: relative;
-    width: var(--aside-width);
+    width: 100%;
+    max-width: var(--aside-width);
 
     padding: 0 0 0 var(--grid-gap);
 
@@ -60,9 +61,9 @@
             align-items: center;
             justify-content: center;
 
-            // > svg {
-            //     fill: var(--accents-12);
-            // }
+            > svg {
+                fill: var(--accents-8);
+            }
         }
     }
 }

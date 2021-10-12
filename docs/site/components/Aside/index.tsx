@@ -1,11 +1,12 @@
 import styles from "./aside.module.scss";
 import NextDynamic from "next/dynamic";
 import NextLink from "next/link";
+import { useRouter } from "next/router";
 import { STATIC_LINKS } from "libs/static-links";
 import { InputFont } from "components/InputFont";
-import { useRouter } from "next/router";
+import { Footer } from "./Footer";
 
-const ThemeSelector = NextDynamic(() => import("components/ThemeSelector"), {
+const SelectorTheme = NextDynamic(() => import("components/SelectorTheme"), {
     ssr: false,
 });
 
@@ -24,9 +25,7 @@ export const Aside = () => {
                 >
                     <span
                         style={{
-                            // fontSize: "1.5em",
                             height: "1.75em",
-                            // border: "1px solid",
                             width: "100%",
                             display: "flex",
                             alignItems: "center",
@@ -39,7 +38,7 @@ export const Aside = () => {
                     style={{
                         listStyle: "none",
                         padding: "0 calc(var(--grid-gap) * 3)",
-                        margin: "2em 0",
+                        margin: "1.75em 0",
                     }}
                 >
                     {STATIC_LINKS.map((item, i) => (
@@ -50,7 +49,6 @@ export const Aside = () => {
                                     style={{
                                         display: "flex",
                                         height: "1.75em",
-                                        fontWeight: 300,
                                         alignItems: "center",
                                         padding: "0 var(--grid-gap)",
                                         borderRadius:
@@ -67,8 +65,24 @@ export const Aside = () => {
                         </li>
                     ))}
                 </ul>
-                <ThemeSelector />
-                <InputFont />
+                <ul
+                    style={{
+                        listStyle: "none",
+                        padding: "0 calc(var(--grid-gap) * 3)",
+                        margin: "1.75em 0",
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "var(--grid-gap)",
+                    }}
+                >
+                    <li>
+                        <SelectorTheme />
+                    </li>
+                    <li>
+                        <InputFont />
+                    </li>
+                </ul>
+                <Footer />
             </div>
         </aside>
     );
