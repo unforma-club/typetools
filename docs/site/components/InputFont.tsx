@@ -63,10 +63,7 @@ export const InputFont = () => {
                     {isDrop ? (
                         <>Reading Opentype...</>
                     ) : (
-                        <>
-                            Drop (.otf / .ttf)
-                            <br /> or Click here...
-                        </>
+                        <>Drop (.otf / .ttf) or Click here...</>
                     )}
                 </div>
                 <input

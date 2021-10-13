@@ -18,6 +18,7 @@ export const SelectorFont = () => {
                 data-active={state}
                 style={{
                     width: "var(--aside-width)",
+                    fontFeatureSettings: `"ss04", "tnum"`,
                 }}
             >
                 <span>{selectedFont?.typefaceFullName}</span>

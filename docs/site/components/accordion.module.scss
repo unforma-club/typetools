@@ -1,0 +1,83 @@
+@import "styles/mixin.scss";
+
+.container {
+    position: relative;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list {
+    position: relative;
+}
+
+.button {
+    @include basePadding();
+    appearance: none;
+    background: none;
+    border: none;
+
+    font-size: inherit;
+    font-family: inherit;
+    font-feature-settings: "ss04", "tnum";
+    font-variation-settings: "wght" 800;
+
+    cursor: pointer;
+
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+
+    margin: 0;
+
+    color: currentColor;
+
+    height: var(--header-height);
+
+    overflow: hidden;
+    z-index: 1000;
+
+    user-select: none;
+    transition: color var(--main-transition),
+        font-variation-settings var(--main-transition);
+
+    &[data-active="true"] {
+        &::after {
+            content: "";
+            position: absolute;
+            top: var(--grid-gap);
+            right: 0;
+
+            width: var(--grid-gap);
+            height: var(--grid-gap);
+
+            border-radius: 100%;
+            border: 0.15em solid var(--geist-ufc-color);
+        }
+    }
+
+    &[data-active="false"] {
+        &:hover {
+            // color: var(--geist-ufc-color);
+            font-variation-settings: "wght" 400;
+        }
+    }
+
+    .button_text {
+        font-size: 4em;
+        text-transform: uppercase;
+        line-height: 0.8;
+        @include media("screen", "<tablet") {
+            font-size: 3em;
+        }
+    }
+}
+
+.layout {
+    @include basePadding();
+    position: relative;
+
+    &[data-active="false"] {
+        overflow: hidden;
+    }
+}

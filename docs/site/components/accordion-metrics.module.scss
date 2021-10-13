@@ -1,0 +1,11 @@
+@import "styles/media.scss";
+
+.metrics {
+    display: grid;
+    @include media("screen", ">tablet") {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    @include media("screen", "<tablet") {
+        grid-template-columns: 1fr;
+    }
+}

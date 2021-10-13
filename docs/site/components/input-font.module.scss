@@ -1,14 +1,15 @@
 .container {
     position: relative;
-    padding: 0;
+    padding: 0 var(--grid-gap);
 
     font-size: inherit;
     font-family: inherit;
 
     border: 1px solid;
     border-radius: calc(var(--grid-gap) / 2);
-    width: 100%;
-    height: var(--aside-width);
+    width: var(--aside-width);
+    height: 1.75em;
+    // height: var(--aside-width);
 
     background-color: var(--accents-1);
     transition: background-color var(--main-transition),
@@ -21,9 +22,9 @@
         border-color: var(--accents-2) !important;
         background-color: var(--accents-2);
 
-        > label {
-            transform: scale(1.2);
-        }
+        // > label {
+        //     transform: scale(1.2);
+        // }
     }
 
     &[data-error="true"] {
@@ -37,9 +38,9 @@
         height: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: flex-start;
         font-feature-settings: "ss04";
-        font-size: 0.8em;
+        font-size: inherit;
         transition: transform var(--main-transition);
 
         > input {

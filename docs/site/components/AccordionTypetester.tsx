@@ -8,16 +8,6 @@ export const AccordionTypetester = (props: BaseAccordion) => {
     const { selectedFont } = useFonts();
 
     const [vf, setVf] = useState<Array<VariableAxes>>([]);
-    useEffect(() => {
-        if (!selectedFont) {
-            return setVf([]);
-        }
-        if (!selectedFont.typefaceVariable) {
-            return setVf([]);
-        }
-        const newVF = selectedFont.typefaceVariable;
-        setVf(newVF.axes);
-    }, [selectedFont]);
 
     const customFontStyle = useCallback(() => {
         if (!selectedFont) return {};
@@ -39,6 +29,17 @@ export const AccordionTypetester = (props: BaseAccordion) => {
             fontVariationSettings: stringify,
         };
     }, [vf, selectedFont]);
+
+    useEffect(() => {
+        if (!selectedFont) {
+            return setVf([]);
+        }
+        if (!selectedFont.typefaceVariable) {
+            return setVf([]);
+        }
+        const newVF = selectedFont.typefaceVariable;
+        setVf(newVF.axes);
+    }, [selectedFont]);
 
     return (
         <AccordionLayout {...props}>
@@ -73,6 +74,12 @@ export const AccordionTypetester = (props: BaseAccordion) => {
             {selectedFont && (
                 <p
                     style={{
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        transform: "translate(-50%, -50%)",
+                        textAlign: "center",
+                        margin: 0,
                         fontFamily: selectedFont.typefaceFullName,
                         fontSize: "4em",
                         ...customFontStyle(),

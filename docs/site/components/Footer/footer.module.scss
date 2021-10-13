@@ -1,0 +1,14 @@
+@import "styles/mixin.scss";
+
+.container {
+    @include basePadding();
+    position: relative;
+
+    height: var(--header-height);
+
+    display: flex;
+    align-items: center;
+
+    background-color: inherit;
+    z-index: 1001;
+}

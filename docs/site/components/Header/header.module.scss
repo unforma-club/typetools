@@ -1,6 +1,8 @@
+@import "styles/mixin.scss";
+
 .container {
-    position: sticky;
-    top: 0;
+    @include basePadding();
+    position: relative;
 
     display: flex;
     align-items: center;
@@ -8,17 +10,31 @@
 
     height: var(--header-height);
 
-    padding: 0 var(--grid-gap);
-
     background-color: inherit;
     color: inherit;
 
-    box-shadow: var(--shadow-sticky);
-    transition: box-shadow var(--main-transition),
-        border-color var(--main-transition);
-    z-index: 1000;
-
     &[data-lifting="false"] {
         box-shadow: none;
+    }
+}
+
+.selector {
+    position: fixed;
+    top: 0;
+    right: calc(var(--grid-gap) * 2);
+    z-index: 1001;
+
+    height: var(--header-height);
+
+    display: flex;
+    gap: var(--grid-gap);
+
+    @include media("screen", ">tablet") {
+        align-items: center;
+    }
+
+    @include media("screen", "<tablet") {
+        flex-direction: column;
+        right: calc(var(--grid-gap) * 2);
     }
 }

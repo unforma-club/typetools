@@ -1,14 +1,35 @@
 import styles from "./header.module.scss";
+import NextDynamic from "next/dynamic";
 import { SelectorFont } from "components/SelectorFont";
-import useScrollDirection from "libs/hooks/use-scroll-direction";
+import { InputFont } from "components/InputFont";
+
+const SelectorTheme = NextDynamic(() => import("components/SelectorTheme"), {
+    ssr: false,
+});
 
 export const Header = () => {
-    const { isLifting } = useScrollDirection(null, 1);
     return (
-        <header data-lifting={isLifting} className={styles.container}>
-            <div>
+        <header className={styles.container}>
+            <div className={styles.selector}>
+                <SelectorTheme />
                 <SelectorFont />
+                <InputFont />
             </div>
+
+            <a
+                href="https://unforma.club"
+                target="_blank"
+                rel="noopener"
+                style={{
+                    fontSize: "1em",
+                    fontWeight: "bold",
+                    textTransform: "uppercase",
+                    fontFeatureSettings: `"ss04", "tnum"`,
+                }}
+            >
+                {/* Unforma™Club */}
+                Unforma®Club
+            </a>
         </header>
     );
 };

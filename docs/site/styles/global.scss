@@ -1,0 +1,72 @@
+@import "./media.scss";
+
+:root {
+    @include media("screen", "<tablet") {
+        --header-height: calc(var(--grid-gap) * 6);
+    }
+}
+
+* {
+    scroll-behavior: smooth;
+
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        width: 0px !important;
+        display: none;
+    }
+}
+
+body {
+    overscroll-behavior: auto none;
+
+    @include media("screen", ">xlMonitor") {
+        font-size: 20px;
+    }
+}
+
+pre {
+    white-space: pre-wrap;
+    font-size: 0.8em;
+    font-family: var(--font-monospace);
+}
+
+a,
+button {
+    color: currentColor;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+main,
+#__next {
+    position: relative;
+    background-color: inherit;
+    color: inherit;
+}
+
+[data-scrollbar="hide"] {
+    overflow: -moz-scrollbars-none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+[data-scrollbar="hide"]::-webkit-scrollbar {
+    width: 0px !important;
+    display: none;
+}
+
+.marquee {
+    animation: marqueeText 10000ms infinite;
+}
+
+@keyframes marqueeText {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-100%);
+    }
+}

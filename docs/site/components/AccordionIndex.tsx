@@ -1,6 +1,5 @@
 import { AccordionLayout, BaseAccordion } from "components/AccordionLayout";
 import { useFonts } from "libs/context/ContextFonts";
-import { InputFont } from "./InputFont";
 
 interface InfoProps {
     label: string;
@@ -19,7 +18,9 @@ const Info = ({ label, value }: InfoProps) => {
             }}
         >
             <span>{label}</span>
-            <span>{value ? value : "-"}</span>
+            <span style={{ whiteSpace: "pre-wrap", wordBreak: "break-word" }}>
+                {value ? value : "-"}
+            </span>
         </li>
     );
 };
@@ -83,8 +84,6 @@ export const AccordionIndex = (props: BaseAccordion) => {
                             value={selectedFont.typefaceInfo.copyright}
                         />
                     </ul>
-
-                    <InputFont />
                 </>
             )}
         </AccordionLayout>

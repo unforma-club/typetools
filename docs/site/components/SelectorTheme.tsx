@@ -41,7 +41,11 @@ export const SelectorTheme = () => {
                                 <button
                                     onClick={() => setTheme(item)}
                                     data-active={item === theme}
-                                    style={{ textTransform: "capitalize" }}
+                                    style={{
+                                        textTransform: "capitalize",
+                                        fontFeatureSettings: `"ss04", "tnum"`,
+                                        textAlign: "center",
+                                    }}
                                 >
                                     {item}
                                 </button>

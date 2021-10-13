@@ -1,3 +1,4 @@
+import styles from "./accordion-metrics.module.scss";
 import { AccordionLayout, BaseAccordion } from "components/AccordionLayout";
 import { useFonts } from "libs/context/ContextFonts";
 import { TextMetrics } from "components/TextMetrics";
@@ -53,12 +54,7 @@ export const AccordionMetrics = (props: BaseAccordion) => {
                             />
                         </li>
                     </ul>
-                    <div
-                        style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(3, 1fr)",
-                        }}
-                    >
+                    <div className={styles.metrics}>
                         <TextMetrics
                             font={selectedFont}
                             fontSize={fontSize}

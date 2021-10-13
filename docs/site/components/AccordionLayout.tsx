@@ -1,4 +1,4 @@
-import styles from "./accordion-layout.module.scss";
+import styles from "./accordion.module.scss";
 import type { CSSProperties, FC } from "react";
 import { animated, useSpring } from "react-spring";
 import { useElementSize } from "libs/hooks";
@@ -35,20 +35,14 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
     return (
         <animated.div
             data-active={isActive}
-            className={styles.container}
-            style={{
-                position: "relative",
-                padding: "0 calc(var(--grid-gap) * 4)",
-                ...spring,
-            }}
+            className={styles.layout}
+            style={{ ...spring }}
         >
             <div
                 // @ts-ignore
                 ref={ref}
                 style={{
-                    // position: "relative",
                     minHeight: "calc(100vh - calc(var(--header-height) * 6))",
-                    // maxHeight: "calc(100vh - calc(var(--header-height) * 2))",
                     ...style,
                 }}
             >

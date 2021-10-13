@@ -156,6 +156,7 @@ export const TextMetrics = (props: TextMetricsProps) => {
                     fontSize: "0.8em",
                     position: "absolute",
                     bottom: 0,
+                    color: "var(--accents-8)",
                 }}
             >
                 <li style={{ ...liStyle }}>

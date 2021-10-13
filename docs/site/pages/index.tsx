@@ -1,3 +1,4 @@
+import styles from "components/accordion.module.scss";
 import type { ComponentType } from "react";
 import { useEffect, useRef, useState } from "react";
 import NextHead from "next/head";
@@ -5,11 +6,10 @@ import { BaseAccordion } from "components/AccordionLayout";
 import { AccordionMetrics } from "components/AccordionMetrics";
 import { AccordionTypetester } from "components/AccordionTypetester";
 import { AccordionGlyphs } from "components/AccordionGlyphs";
-import { SelectorFont } from "components/SelectorFont";
-import SelectorTheme from "components/SelectorTheme";
 import { AccordionIndex } from "components/AccordionIndex";
 import { AccordionButton } from "components/AccordionButton";
 import { Footer } from "components/Footer";
+import { Header } from "components/Header";
 interface Accordion {
     label:
         | "Index"
@@ -76,81 +76,41 @@ export default function Page() {
                 <meta name="description" content={meta.description} />
             </NextHead>
 
-            <div
-                style={{
-                    position: "fixed",
-                    top: 0,
-                    right: "2em",
-                    zIndex: 1001,
-                    height: "var(--header-height)",
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "var(--grid-gap)",
-                }}
-            >
-                <SelectorTheme />
-                <SelectorFont />
-            </div>
+            <Header />
 
-            <div
-                style={{
-                    height: "var(--header-height)",
-                    padding: "0 calc(var(--grid-gap) * 4)",
-                    display: "flex",
-                    alignItems: "center",
-                }}
-            >
-                <span
-                    style={{
-                        fontSize: "2em",
-                        fontWeight: "bold",
-                        textTransform: "uppercase",
-                        fontFeatureSettings: `"ss04", "tnum"`,
-                    }}
-                >
-                    Unforma™Club
-                </span>
-            </div>
+            <main>
+                <ul className={styles.container}>
+                    {accordion.map((item, i) => {
+                        const { label, component: Component, isActive } = item;
+                        return (
+                            <li
+                                key={i}
+                                ref={isActive ? refParent : null}
+                                className={styles.list}
+                                data-active={isActive}
+                            >
+                                <AccordionButton
+                                    label={label}
+                                    active={isActive}
+                                    onClick={() => {
+                                        setAccordion((prev) => {
+                                            const prevActive = prev.find(
+                                                (item) => item.isActive
+                                            );
+                                            if (!prevActive) return prev;
+                                            prevActive.isActive = false;
+                                            prev[i].isActive = true;
+                                            return [...prev];
+                                        });
+                                    }}
+                                />
 
-            <ul
-                style={{
-                    position: "relative",
-                    listStyle: "none",
-                    padding: 0,
-                    margin: 0,
-                }}
-            >
-                {accordion.map((item, i) => {
-                    const { label, component: Component, isActive } = item;
-                    return (
-                        <li
-                            key={i}
-                            ref={isActive ? refParent : null}
-                            id={label}
-                            style={{ position: "relative" }}
-                        >
-                            <AccordionButton
-                                label={label}
-                                active={isActive}
-                                onClick={() => {
-                                    setAccordion((prev) => {
-                                        const prevActive = prev.find(
-                                            (item) => item.isActive
-                                        );
-                                        if (!prevActive) return prev;
-                                        prevActive.isActive = false;
-                                        prev[i].isActive = true;
-                                        return [...prev];
-                                    });
-                                }}
-                            />
-
-                            <Component isActive={isActive} label={label} />
-                        </li>
-                    );
-                })}
-            </ul>
-
+                                <Component isActive={isActive} label={label} />
+                            </li>
+                        );
+                    })}
+                </ul>
+            </main>
             <Footer />
         </>
     );

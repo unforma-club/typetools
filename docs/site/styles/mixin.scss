@@ -1,0 +1,8 @@
+@import "styles/media.scss";
+
+@mixin basePadding {
+    padding: 0 calc(var(--grid-gap) * 2);
+    @include media("screen", "<tablet") {
+        padding: 0 calc(var(--grid-gap) * 2);
+    }
+}
