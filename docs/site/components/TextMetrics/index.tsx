@@ -1,8 +1,8 @@
 import { CSSProperties } from "react";
 import { useMetrics } from "@unforma-club/typetools";
-import { useFonts } from "libs/context/ContextFonts";
 import { GuideLine } from "./GuideLine";
 import { GuideBox } from "./GuideBox";
+import { BaseTypeface } from "@unforma-club/typetools";
 
 type UseProps = "hhea" | "typo" | "win";
 
@@ -11,13 +11,12 @@ interface TextMetricsProps {
     lineHeight: number;
     use: UseProps;
     style?: CSSProperties;
+    font: BaseTypeface;
 }
 
 const spanStyle: CSSProperties = {
-    height: "1.75em",
     display: "flex",
     alignItems: "center",
-    borderBottom: "1px solid",
 };
 
 const liStyle: CSSProperties = {
@@ -27,8 +26,13 @@ const liStyle: CSSProperties = {
 };
 
 export const TextMetrics = (props: TextMetricsProps) => {
-    const { fontSize = 50, lineHeight = 1.3, use = "hhea", style } = props;
-    const { selectedFont } = useFonts();
+    const {
+        fontSize = 50,
+        lineHeight = 1.3,
+        use = "hhea",
+        style,
+        font,
+    } = props;
 
     const {
         baselineOffset,
@@ -39,26 +43,37 @@ export const TextMetrics = (props: TextMetricsProps) => {
         boundingBoxRatio,
         lineHeightRatio,
         originOffset,
-    } = useMetrics({ font: selectedFont, use, fontSize, lineHeight });
+    } = useMetrics({ font, use, fontSize, lineHeight });
 
-    if (!selectedFont) return <div>Loading...</div>;
-    const { typefaceMetrics, typefaceFullName } = selectedFont;
+    const { typefaceMetrics, typefaceFullName } = font;
 
     return (
-        <div style={{ position: "relative" }}>
+        <div
+            style={{
+                position: "relative",
+                height: "calc(100vh - calc(var(--header-height) * 6))",
+                overflow: "hidden",
+            }}
+        >
             <div
                 style={{
                     fontWeight: "bold",
                     fontSize: "2em",
                     textTransform: "capitalize",
+                    marginTop: "calc(var(--header-height) / 2)",
+                    zIndex: 10,
+                    position: "relative",
                 }}
             >
                 {use}
             </div>
             <div
                 style={{
-                    position: "relative",
+                    position: "absolute",
+                    top: "calc(50% - calc(var(--header-height) * 1))",
+                    transform: "translateY(-50%)",
                     margin: "4em 0",
+                    width: "100%",
                 }}
             >
                 <GuideBox
@@ -139,6 +154,8 @@ export const TextMetrics = (props: TextMetricsProps) => {
                     margin: 0,
                     fontFeatureSettings: `"ss04", "tnum"`,
                     fontSize: "0.8em",
+                    position: "absolute",
+                    bottom: 0,
                 }}
             >
                 <li style={{ ...liStyle }}>

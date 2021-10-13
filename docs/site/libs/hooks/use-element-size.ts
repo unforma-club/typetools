@@ -1,40 +1,42 @@
-import { RefObject, useCallback, useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Resize from "resize-observer-polyfill";
 
-// See: https://usehooks-typescript.com/react-hook/use-event-listener
-import { useEventListener } from "./use-event-listener";
+export function useElementSize(dependencies: Array<any> = []) {
+    const IS_BROWSER = typeof window !== "undefined";
+    const ref = useRef<HTMLElement>(null);
 
-interface Size {
-    width: number;
-    height: number;
-}
-
-export function useElementSize<T extends HTMLElement = HTMLDivElement>(
-    elementRef: RefObject<T>,
-    dependencies: Array<any>
-): Size {
-    const [size, setSize] = useState<Size>({
-        width: 0,
+    const [bounds, set] = useState<{
+        bottom: number;
+        height: number;
+        left: number;
+        right: number;
+        top: number;
+        width: number;
+        x: number;
+        y: number;
+    }>({
+        bottom: 0,
         height: 0,
+        left: 0,
+        right: 0,
+        top: 0,
+        width: 0,
+        x: 0,
+        y: 0,
     });
 
-    // Prevent too many rendering using useCallback
-    const updateSize = useCallback(() => {
-        const node = elementRef?.current;
-        if (node) {
-            setSize({
-                width: node.offsetWidth || 0,
-                height: node.offsetHeight || 0,
-            });
-        }
-    }, [elementRef]);
+    const [ro] = useState(
+        () => IS_BROWSER && new Resize(([entry]: any) => set(entry.contentRect))
+    );
 
-    // Initial size on mount
     useEffect(() => {
-        updateSize();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+        if (!ro) return;
+        if (!ref.current) return;
+        // @ts-ignore
+        ro.observe(ref.current);
+
+        return () => ro.disconnect();
     }, [...dependencies]);
 
-    useEventListener("resize", updateSize);
-
-    return size;
+    return { ref, bounds };
 }

@@ -1,7 +1,6 @@
 import { AppProps } from "next/app";
 import { ThemeProvider } from "next-themes";
 import { ProviderFonts } from "libs/context/ContextFonts";
-import { Aside } from "components/Aside";
 
 export default function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -12,12 +11,28 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 themes={["light", "dark", "gray", "blue", "red"]}
             >
                 <ProviderFonts>
-                    <Aside />
                     <Component {...pageProps} />
                 </ProviderFonts>
             </ThemeProvider>
 
             <style jsx global>{`
+                :root {
+                    --accordion-button-height: 5em;
+                }
+
+                * {
+                    scroll-behavior: smooth;
+
+                    overflow: -moz-scrollbars-none;
+                    scrollbar-width: none;
+                    -ms-overflow-style: none;
+                }
+
+                *::-webkit-scrollbar {
+                    width: 0px !important;
+                    display: none;
+                }
+
                 body {
                     overscroll-behavior: auto none;
                 }
@@ -41,8 +56,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
                 }
 
                 #__next {
-                    display: grid;
-                    grid-template-columns: max-content 1fr;
                     background-color: inherit;
                     color: inherit;
                 }

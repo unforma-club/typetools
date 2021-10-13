@@ -1,0 +1,5 @@
+.container {
+    &[data-active="false"] {
+        overflow: hidden;
+    }
+}

@@ -1,175 +1,157 @@
-import { generateAlphabet, VariableAxes } from "@unforma-club/typetools";
-import { MainLayout } from "components/Layout";
-import { useFonts } from "libs/context/ContextFonts";
-import { CSSProperties, useCallback, useEffect, useState } from "react";
-import { TextMetrics } from "components/TextMetrics";
-import { Slider } from "components/Slider";
-
-interface InfoProps {
-    label: string;
-    value: string;
+import type { ComponentType } from "react";
+import { useEffect, useRef, useState } from "react";
+import NextHead from "next/head";
+import { BaseAccordion } from "components/AccordionLayout";
+import { AccordionMetrics } from "components/AccordionMetrics";
+import { AccordionTypetester } from "components/AccordionTypetester";
+import { AccordionGlyphs } from "components/AccordionGlyphs";
+import { SelectorFont } from "components/SelectorFont";
+import SelectorTheme from "components/SelectorTheme";
+import { AccordionIndex } from "components/AccordionIndex";
+import { AccordionButton } from "components/AccordionButton";
+import { Footer } from "components/Footer";
+interface Accordion {
+    label:
+        | "Index"
+        | "Typetools"
+        | "Overview"
+        | "Typetester"
+        | "Glyphs"
+        | "Metrics";
+    isActive: boolean;
+    component: ComponentType<BaseAccordion>;
 }
 
-const Info = ({ label, value }: InfoProps) => {
-    return (
-        <li
-            style={{
-                display: "grid",
-                gridTemplateColumns: "10em 1fr",
-                fontFeatureSettings: `"ss04", "tnum"`,
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.8em",
-            }}
-        >
-            <span>{label}</span>
-            <span>{value ? value : "-"}</span>
-        </li>
-    );
-};
-
 export default function Page() {
-    const { selectedFont } = useFonts();
-    const [vf, setVf] = useState<Array<VariableAxes>>([]);
+    const meta = {
+        title: "Typetools by Unforma™Club",
+        description: "Typetools by Unforma™Club",
+    };
+    const [accordion, setAccordion] = useState<Array<Accordion>>([
+        {
+            label: "Index",
+            isActive: true,
+            component: (props: BaseAccordion) => <AccordionIndex {...props} />,
+        },
+        {
+            label: "Typetester",
+            isActive: false,
+            component: (props: BaseAccordion) => (
+                <AccordionTypetester {...props} />
+            ),
+        },
+        {
+            label: "Glyphs",
+            isActive: false,
+            component: (props: BaseAccordion) => <AccordionGlyphs {...props} />,
+        },
+        {
+            label: "Metrics",
+            isActive: false,
+            component: (props: BaseAccordion) => (
+                <AccordionMetrics {...props} />
+            ),
+        },
+    ]);
+
+    const refParent = useRef<HTMLLIElement>(null);
     useEffect(() => {
-        if (!selectedFont) {
-            return setVf([]);
-        }
-        if (!selectedFont.typefaceVariable) {
-            return setVf([]);
-        }
-        const newVF = selectedFont.typefaceVariable;
-        setVf(newVF.axes);
-    }, [selectedFont]);
+        const timeout = setTimeout(() => {
+            if (!refParent.current) return;
+            refParent.current.scrollIntoView({
+                block: "start",
+                behavior: "smooth",
+                inline: "start",
+            });
+        }, 400);
 
-    const customFontStyle = useCallback(() => {
-        if (!selectedFont) return {};
-        const { typefaceWeight, typefaceStyle, typefaceFullName } =
-            selectedFont;
+        return () => clearTimeout(timeout);
+    }, [accordion]);
 
-        const baseStyle: CSSProperties = {
-            fontFamily: typefaceFullName,
-            fontWeight: typefaceWeight,
-            fontStyle: typefaceStyle === "italic" ? "italic" : "normal",
-        };
-
-        if (vf.length === 0) return baseStyle;
-        const reduce = vf.reduce((p, c) => ({ ...p, [c.tag]: c.value }), {});
-        const stringify = JSON.stringify(reduce).replace(/[{}:]/g, " ");
-        return {
-            fontFamily: baseStyle.fontFamily,
-            fontStyle: baseStyle.fontStyle,
-            fontVariationSettings: stringify,
-        };
-    }, [vf, selectedFont]);
-
-    if (!selectedFont) {
-        return (
-            <MainLayout>
-                <div className="not-found">Loading...</div>
-            </MainLayout>
-        );
-    }
     return (
-        <MainLayout>
-            <div>
-                <ul
+        <>
+            <NextHead>
+                <title>{meta.title}</title>
+                <meta name="title" content={meta.title} />
+                <meta name="description" content={meta.description} />
+            </NextHead>
+
+            <div
+                style={{
+                    position: "fixed",
+                    top: 0,
+                    right: "2em",
+                    zIndex: 1001,
+                    height: "var(--header-height)",
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "var(--grid-gap)",
+                }}
+            >
+                <SelectorTheme />
+                <SelectorFont />
+            </div>
+
+            <div
+                style={{
+                    height: "var(--header-height)",
+                    padding: "0 calc(var(--grid-gap) * 4)",
+                    display: "flex",
+                    alignItems: "center",
+                }}
+            >
+                <span
                     style={{
-                        listStyle: "none",
-                        padding: "var(--grid-gap)",
-                        margin: 0,
+                        fontSize: "2em",
+                        fontWeight: "bold",
+                        textTransform: "uppercase",
+                        fontFeatureSettings: `"ss04", "tnum"`,
                     }}
                 >
-                    <Info label="Family" value={selectedFont.typefaceFamily} />
-                    <Info
-                        label="Full Name"
-                        value={selectedFont.typefaceFullName}
-                    />
-                    <Info
-                        label="Version"
-                        value={selectedFont.typefaceInfo.version}
-                    />
-                    <Info
-                        label="Designer"
-                        value={selectedFont.typefaceInfo.designer.value}
-                    />
-                    <Info
-                        label="Designer Url"
-                        value={selectedFont.typefaceInfo.designer.url}
-                    />
-                    <Info
-                        label="Manufacturer"
-                        value={selectedFont.typefaceInfo.manufacturer.value}
-                    />
-                    <Info
-                        label="Manufacturer Url"
-                        value={selectedFont.typefaceInfo.manufacturer.url}
-                    />
-                    <Info
-                        label="License"
-                        value={selectedFont.typefaceInfo.license.value}
-                    />
-                    <Info
-                        label="License Url"
-                        value={selectedFont.typefaceInfo.license.url}
-                    />
-                    <Info
-                        label="Trademark"
-                        value={selectedFont.typefaceInfo.trademark}
-                    />
-                    <Info
-                        label="Copyright"
-                        value={selectedFont.typefaceInfo.copyright}
-                    />
-                </ul>
-                <div
-                    style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(3, 1fr)",
-                    }}
-                >
-                    <TextMetrics fontSize={180} lineHeight={1.5} use="hhea" />
-                    <TextMetrics fontSize={180} lineHeight={1.5} use="win" />
-                    <TextMetrics fontSize={180} lineHeight={1.5} use="typo" />
-                </div>
-                {vf.length !== 0 && (
-                    <form style={{ display: "flex" }}>
-                        {vf.map((item, i) => (
-                            <Slider
-                                key={i}
-                                label={item.name}
-                                min={item.min}
-                                max={item.max}
-                                step={item.step}
-                                value={item.value}
-                                defaultValue={item.defaultValue}
-                                onChange={(e) => {
-                                    setVf((prev) => {
-                                        prev[i].value = e;
-                                        return [...prev];
-                                    });
-                                }}
-                                onDoubleClick={(e) => {
-                                    setVf((prev) => {
-                                        prev[i].value = e;
+                    Unforma™Club
+                </span>
+            </div>
+
+            <ul
+                style={{
+                    position: "relative",
+                    listStyle: "none",
+                    padding: 0,
+                    margin: 0,
+                }}
+            >
+                {accordion.map((item, i) => {
+                    const { label, component: Component, isActive } = item;
+                    return (
+                        <li
+                            key={i}
+                            ref={isActive ? refParent : null}
+                            id={label}
+                            style={{ position: "relative" }}
+                        >
+                            <AccordionButton
+                                label={label}
+                                active={isActive}
+                                onClick={() => {
+                                    setAccordion((prev) => {
+                                        const prevActive = prev.find(
+                                            (item) => item.isActive
+                                        );
+                                        if (!prevActive) return prev;
+                                        prevActive.isActive = false;
+                                        prev[i].isActive = true;
                                         return [...prev];
                                     });
                                 }}
                             />
-                        ))}
-                    </form>
-                )}
-                <p
-                    style={{
-                        fontFamily: selectedFont.typefaceFullName,
-                        fontSize: "4em",
-                        ...customFontStyle(),
-                        transition:
-                            "font-variation-settings var(--main-transition)",
-                    }}
-                >
-                    {generateAlphabet()}
-                </p>
-            </div>
-        </MainLayout>
+
+                            <Component isActive={isActive} label={label} />
+                        </li>
+                    );
+                })}
+            </ul>
+
+            <Footer />
+        </>
     );
 }

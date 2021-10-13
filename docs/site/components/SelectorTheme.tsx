@@ -17,6 +17,7 @@ export const SelectorTheme = () => {
                 className={styles.toggle}
                 onClick={() => setState((prev) => !prev)}
                 data-active={state}
+                style={{ width: "6em" }}
             >
                 <span style={{ textTransform: "capitalize" }}>{theme}</span>
                 <span>
