@@ -5,8 +5,47 @@ import type {
     BaseTypeface,
     FontInfo,
 } from "./types/typeface";
-import { load, Font } from "opentype.js";
+import { load, Font, Glyph } from "opentype.js";
 import VariableTools from "./VariableTools";
+
+export interface NewGlyph {
+    id: number;
+    name: string;
+    unicode: string;
+    html: string;
+    character: string;
+    glyph: Glyph;
+}
+
+interface Feature {
+    featureParams: number;
+    lookupListIndexes: Array<number>;
+}
+
+interface SubTable {
+    coverage: {
+        format: number;
+        glyphs: Array<number>;
+    };
+    substFormat: number;
+    substitute: Array<number>;
+}
+
+interface Lookup {
+    lookupFlag: number;
+    lookupType: number;
+    markFilteringSet: unknown;
+    subtables: Array<SubTable>;
+}
+
+interface GSUB {
+    features: Array<{
+        feature: Feature;
+        tag: string;
+    }>;
+    lookups: Array<Lookup>;
+    scripts: Array<unknown>;
+}
 
 export default class Typetools {
     private generateVariableFont(font: Font) {
@@ -42,6 +81,11 @@ export default class Typetools {
     private checkItalic(font: Font) {
         const italic = font.tables.post.italicAngle !== 0;
         return italic;
+    }
+
+    private generateItalic(font: Font) {
+        const italic = this.checkItalic(font);
+        return italic ? "italic" : "roman";
     }
 
     private generateFamily(font: Font) {
@@ -112,35 +156,39 @@ export default class Typetools {
         };
     }
 
-    private generateGlyphs(font: Font) {
-        return (
-            // @ts-ignore
-            Object.values(font.glyphs.glyphs!)
-                // @ts-ignore
-                .filter((g) => g.unicode !== undefined)
-                .map((glyph) => {
-                    // @ts-ignore
-                    const hasUnicode = glyph.unicode;
-                    // @ts-ignore
-                    const glyphIndex = glyph.index as number;
-                    // @ts-ignore
-                    const glyphName = glyph.name as string;
-                    const cUnicode = `0x${(
-                        "0000" + parseInt(hasUnicode).toString(16)
-                    ).slice(-4)}`;
+    public async generateGlyphs(url: string) {
+        const font = await load(url);
+        const initLength = font.glyphs.length;
+        const glyphLength = Array(initLength).fill(0);
 
-                    return {
-                        character: hasUnicode
-                            ? String.fromCharCode(hasUnicode)
-                            : undefined,
-                        unicode_dec: hasUnicode ? hasUnicode : undefined,
-                        unicode: hasUnicode ? cUnicode : undefined,
-                        html_code: hasUnicode ? `&#${hasUnicode};` : undefined,
-                        glyph_id: glyphIndex,
-                        name: glyphName,
-                    };
-                })
+        return Promise.all(
+            glyphLength.map((_i, i) => {
+                const glyph = font.glyphs.get(i);
+                const unicode = glyph.unicode;
+                const newOBJ = {
+                    id: glyph.index,
+                    name: glyph.name,
+                    unicode: unicode
+                        ? `${("0000" + unicode.toString(16)).slice(-4)}`
+                        : undefined,
+                    html: unicode ? `&#${unicode};` : undefined,
+                    character: unicode
+                        ? String.fromCharCode(unicode)
+                        : undefined,
+                    glyph,
+                };
+                return new Promise<NewGlyph>((resolve) => {
+                    resolve(newOBJ);
+                });
+            })
         );
+    }
+
+    public async getGSUB(url: string) {
+        const font = await load(url);
+        // @ts-ignore
+        const mantep = font.tables["gsub"] as GSUB;
+        return mantep;
     }
 
     /**
@@ -199,9 +247,7 @@ export default class Typetools {
                 const typefaceFeatures = this.generateFontFeatures(font);
                 const typefaceInfo = this.generateFontInfo(font);
 
-                const typefaceStyle = this.checkItalic(font)
-                    ? "italic"
-                    : "roman";
+                const typefaceStyle = this.generateItalic(font);
                 const typefaceWeight = font.tables.os2.usWeightClass;
 
                 const typefaceTables = Object.keys(font.tables);
@@ -219,9 +265,6 @@ export default class Typetools {
                     baseLine: 0,
                 };
 
-                // @ts-ignore
-                const glyphs = font.glyphs.glyphs;
-
                 return new Promise<BaseTypeface>((resolve) => {
                     resolve({
                         ...item,
@@ -236,10 +279,6 @@ export default class Typetools {
                         typefaceInfo,
                         typefaceTables,
                         typefaceMetrics,
-                        // @ts-ignore
-                        characters: this.generateGlyphs(font),
-                        glyphs,
-                        tables: font.tables,
                     });
                 });
             })
