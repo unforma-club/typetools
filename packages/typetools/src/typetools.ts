@@ -11,9 +11,9 @@ import VariableTools from "./VariableTools";
 export interface NewGlyph {
     id: number;
     name: string;
-    unicode: string;
-    html: string;
-    character: string;
+    unicode: string | undefined;
+    html: string | undefined;
+    character: string | undefined;
     glyph: Glyph;
 }
 
