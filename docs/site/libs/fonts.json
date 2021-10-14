@@ -1,16 +1,452 @@
 [
   {
-    "fileName": "",
-    "fileDestination": "",
+    "fileName": "PlusJakarta Sans",
     "fileSize": 100,
-    "fileType": "",
-    "fileUrl": "/font/Space-Grotesk/SpaceGrotesk-VariableFont_wght.ttf"
+    "fileType": "font/ttf",
+    "fileUrl": "/font/Plus-Jakarta-Sans/PlusJakartaSans[wght].ttf",
+    "fileDestination": "",
+    "typefaceFamily": "Plus Jakarta Sans",
+    "typefaceFeatures": [
+      "aalt",
+      "calt",
+      "case",
+      "ccmp",
+      "dnom",
+      "frac",
+      "liga",
+      "locl",
+      "numr",
+      "ordn",
+      "salt",
+      "sinf",
+      "ss01",
+      "ss02",
+      "ss03",
+      "subs",
+      "sups"
+    ],
+    "typefaceFullName": "Plus Jakarta Sans ExtraLight Variable",
+    "typefaceInfo": {
+      "copyright": "Copyright 2020 The Plus Jakarta Sans Project Authors (https://github.com/tokotype/PlusJakartaSans)",
+      "trademark": "",
+      "version": "Version 2.005",
+      "designer": {
+        "value": "Gumpita Rahayu",
+        "url": "https://www.tokotype.com"
+      },
+      "license": {
+        "value": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL",
+        "url": "http://scripts.sil.org/OFL"
+      },
+      "manufacturer": {
+        "value": "Tokotype",
+        "url": "https://www.tokotype.com"
+      }
+    },
+    "typefaceMetrics": {
+      "unitsPerEm": 1000,
+      "usWinAscent": 1214,
+      "usWinDescent": 395,
+      "sTypoAscender": 1038,
+      "sTypoDescender": -222,
+      "descender": -222,
+      "ascender": 1038,
+      "xHeight": 526,
+      "capHeight": 745,
+      "baseLine": 0
+    },
+    "typefaceShortName": " ExtraLight",
+    "typefaceStyle": "roman",
+    "typefaceSubFamily": "",
+    "typefaceTables": [
+      "os2",
+      "cmap",
+      "head",
+      "hhea",
+      "maxp",
+      "post",
+      "prep",
+      "name",
+      "gpos",
+      "gsub",
+      "fvar"
+    ],
+    "typefaceVariable": {
+      "axes": [
+        {
+          "tag": "wght",
+          "name": "Weight",
+          "value": 200,
+          "defaultValue": 200,
+          "min": 200,
+          "max": 800,
+          "step": 1
+        }
+      ],
+      "instances": [
+        {
+          "coordinates": {
+            "wght": 200
+          },
+          "name": "ExtraLight"
+        },
+        {
+          "coordinates": {
+            "wght": 300
+          },
+          "name": "Light"
+        },
+        {
+          "coordinates": {
+            "wght": 400
+          },
+          "name": "Regular"
+        },
+        {
+          "coordinates": {
+            "wght": 500
+          },
+          "name": "Medium"
+        },
+        {
+          "coordinates": {
+            "wght": 700
+          },
+          "name": "Bold"
+        },
+        {
+          "coordinates": {
+            "wght": 800
+          },
+          "name": "ExtraBold"
+        }
+      ]
+    },
+    "typefaceWeight": 200
   },
   {
-    "fileName": "",
-    "fileDestination": "",
+    "fileName": "PlusJakarta Sans",
     "fileSize": 100,
-    "fileType": "",
-    "fileUrl": "/font/JetBrains-Mono/JetBrainsMono-Variable.ttf"
+    "fileType": "font/ttf",
+    "fileUrl": "/font/Plus-Jakarta-Sans/PlusJakartaSans-Italic[wght].ttf",
+    "fileDestination": "",
+    "typefaceFamily": "Plus Jakarta Sans",
+    "typefaceFeatures": [
+      "aalt",
+      "calt",
+      "case",
+      "ccmp",
+      "dnom",
+      "frac",
+      "liga",
+      "locl",
+      "numr",
+      "ordn",
+      "salt",
+      "sinf",
+      "ss01",
+      "ss02",
+      "ss03",
+      "subs",
+      "sups"
+    ],
+    "typefaceFullName": "Plus Jakarta Sans ExtraLight Italic Variable",
+    "typefaceInfo": {
+      "copyright": "Copyright 2020 The Plus Jakarta Sans Project Authors (https://github.com/tokotype/PlusJakartaSans)",
+      "trademark": "",
+      "version": "Version 2.005",
+      "designer": {
+        "value": "Gumpita Rahayu",
+        "url": "https://www.tokotype.com"
+      },
+      "license": {
+        "value": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL",
+        "url": "http://scripts.sil.org/OFL"
+      },
+      "manufacturer": {
+        "value": "Tokotype",
+        "url": "https://www.tokotype.com"
+      }
+    },
+    "typefaceMetrics": {
+      "unitsPerEm": 1000,
+      "usWinAscent": 1214,
+      "usWinDescent": 395,
+      "sTypoAscender": 1038,
+      "sTypoDescender": -222,
+      "descender": -222,
+      "ascender": 1038,
+      "xHeight": 526,
+      "capHeight": 745,
+      "baseLine": 0
+    },
+    "typefaceShortName": " ExtraLight Italic",
+    "typefaceStyle": "italic",
+    "typefaceSubFamily": "",
+    "typefaceTables": [
+      "os2",
+      "cmap",
+      "head",
+      "hhea",
+      "maxp",
+      "post",
+      "prep",
+      "name",
+      "gpos",
+      "gsub",
+      "fvar"
+    ],
+    "typefaceVariable": {
+      "axes": [
+        {
+          "tag": "wght",
+          "name": "Weight",
+          "value": 200,
+          "defaultValue": 200,
+          "min": 200,
+          "max": 800,
+          "step": 1
+        }
+      ],
+      "instances": [
+        {
+          "coordinates": {
+            "wght": 200
+          },
+          "name": "ExtraLight Italic"
+        },
+        {
+          "coordinates": {
+            "wght": 300
+          },
+          "name": "Light Italic"
+        },
+        {
+          "coordinates": {
+            "wght": 400
+          },
+          "name": "Italic"
+        },
+        {
+          "coordinates": {
+            "wght": 500
+          },
+          "name": "Medium Italic"
+        },
+        {
+          "coordinates": {
+            "wght": 700
+          },
+          "name": "Bold Italic"
+        },
+        {
+          "coordinates": {
+            "wght": 800
+          },
+          "name": "ExtraBold Italic"
+        }
+      ]
+    },
+    "typefaceWeight": 200
+  },
+  {
+    "fileName": "Roboto Mono",
+    "fileSize": 100,
+    "fileType": "font/ttf",
+    "fileUrl": "/font/Roboto-Mono/RobotoMono[wght].ttf",
+    "fileDestination": "",
+    "typefaceFamily": "Roboto Mono",
+    "typefaceFeatures": ["smcp"],
+    "typefaceFullName": "Roboto Mono Regular Variable",
+    "typefaceInfo": {
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "trademark": "Roboto Mono is a trademark of Google.",
+      "version": "Version 3.000",
+      "designer": {
+        "value": "Google",
+        "url": "Christian Robertson"
+      },
+      "license": {
+        "value": "Licensed under the Apache License, Version 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+      },
+      "manufacturer": {
+        "value": "",
+        "url": "Google.com"
+      }
+    },
+    "typefaceMetrics": {
+      "unitsPerEm": 2048,
+      "usWinAscent": 2146,
+      "usWinDescent": 555,
+      "sTypoAscender": 2146,
+      "sTypoDescender": -555,
+      "descender": -555,
+      "ascender": 2146,
+      "xHeight": 1082,
+      "capHeight": 1456,
+      "baseLine": 0
+    },
+    "typefaceShortName": " Regular",
+    "typefaceStyle": "roman",
+    "typefaceSubFamily": "",
+    "typefaceTables": [
+      "os2",
+      "cmap",
+      "head",
+      "hhea",
+      "maxp",
+      "post",
+      "prep",
+      "name",
+      "gsub",
+      "fvar"
+    ],
+    "typefaceVariable": {
+      "axes": [
+        {
+          "tag": "wght",
+          "name": "Weight",
+          "value": 400,
+          "defaultValue": 400,
+          "min": 100,
+          "max": 700,
+          "step": 1
+        }
+      ],
+      "instances": [
+        {
+          "coordinates": {
+            "wght": 100
+          },
+          "name": "Thin"
+        },
+        {
+          "coordinates": {
+            "wght": 300
+          },
+          "name": "Light"
+        },
+        {
+          "coordinates": {
+            "wght": 400
+          },
+          "name": "Regular"
+        },
+        {
+          "coordinates": {
+            "wght": 500
+          },
+          "name": "Medium"
+        },
+        {
+          "coordinates": {
+            "wght": 700
+          },
+          "name": "Bold"
+        }
+      ]
+    },
+    "typefaceWeight": 400
+  },
+  {
+    "fileName": "Roboto Mono",
+    "fileSize": 100,
+    "fileType": "font/ttf",
+    "fileUrl": "/font/Roboto-Mono/RobotoMono-Italic[wght].ttf",
+    "fileDestination": "",
+    "typefaceFamily": "Roboto Mono",
+    "typefaceFeatures": ["smcp"],
+    "typefaceFullName": "Roboto Mono Italic Variable",
+    "typefaceInfo": {
+      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
+      "trademark": "Roboto Mono is a trademark of Google.",
+      "version": "Version 3.000",
+      "designer": {
+        "value": "Google",
+        "url": "Christian Robertson"
+      },
+      "license": {
+        "value": "Licensed under the Apache License, Version 2.0",
+        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+      },
+      "manufacturer": {
+        "value": "",
+        "url": "Google.com"
+      }
+    },
+    "typefaceMetrics": {
+      "unitsPerEm": 2048,
+      "usWinAscent": 2146,
+      "usWinDescent": 555,
+      "sTypoAscender": 2146,
+      "sTypoDescender": -555,
+      "descender": -555,
+      "ascender": 2146,
+      "xHeight": 1082,
+      "capHeight": 1456,
+      "baseLine": 0
+    },
+    "typefaceShortName": " Italic",
+    "typefaceStyle": "italic",
+    "typefaceSubFamily": "",
+    "typefaceTables": [
+      "os2",
+      "cmap",
+      "head",
+      "hhea",
+      "maxp",
+      "post",
+      "prep",
+      "name",
+      "gsub",
+      "fvar"
+    ],
+    "typefaceVariable": {
+      "axes": [
+        {
+          "tag": "wght",
+          "name": "Weight",
+          "value": 400,
+          "defaultValue": 400,
+          "min": 100,
+          "max": 700,
+          "step": 1
+        }
+      ],
+      "instances": [
+        {
+          "coordinates": {
+            "wght": 100
+          },
+          "name": "Thin Italic"
+        },
+        {
+          "coordinates": {
+            "wght": 300
+          },
+          "name": "Light Italic"
+        },
+        {
+          "coordinates": {
+            "wght": 400
+          },
+          "name": "Italic"
+        },
+        {
+          "coordinates": {
+            "wght": 500
+          },
+          "name": "Medium Italic"
+        },
+        {
+          "coordinates": {
+            "wght": 700
+          },
+          "name": "Bold Italic"
+        }
+      ]
+    },
+    "typefaceWeight": 400
   }
 ]
