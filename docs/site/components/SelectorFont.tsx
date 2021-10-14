@@ -56,6 +56,10 @@ export const SelectorFont = () => {
                                     <span
                                         style={{
                                             fontFamily: item.typefaceFullName,
+                                            fontStyle:
+                                                item.typefaceStyle === "italic"
+                                                    ? "italic"
+                                                    : "normal",
                                         }}
                                     >
                                         {fullName.slice(familyName.length)}
