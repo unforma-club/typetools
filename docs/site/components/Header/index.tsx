@@ -10,12 +10,6 @@ const SelectorTheme = NextDynamic(() => import("components/SelectorTheme"), {
 export const Header = () => {
     return (
         <header className={styles.container}>
-            <div className={styles.selector}>
-                <SelectorTheme />
-                <SelectorFont />
-                <InputFont />
-            </div>
-
             <a
                 href="https://unforma.club"
                 target="_blank"
@@ -27,9 +21,13 @@ export const Header = () => {
                     fontFeatureSettings: `"ss04", "tnum"`,
                 }}
             >
-                {/* Unforma™Club */}
                 Unforma®Club
             </a>
+            <div className={styles.selector}>
+                <SelectorTheme />
+                <SelectorFont />
+                <InputFont />
+            </div>
         </header>
     );
 };

@@ -24,8 +24,8 @@ export const AccordionMetrics = (props: BaseAccordion) => {
                             margin: 0,
                             position: "absolute",
                             top: 0,
-                            left: "calc(var(--grid-gap) * 4)",
-                            right: "calc(var(--grid-gap) * 4)",
+                            left: "calc(var(--grid-gap) * 2)",
+                            right: "calc(var(--grid-gap) * 2)",
                             zIndex: 10,
                         }}
                     >
@@ -59,18 +59,27 @@ export const AccordionMetrics = (props: BaseAccordion) => {
                             font={selectedFont}
                             fontSize={fontSize}
                             lineHeight={lineHeight}
+                            title
+                            info
+                            guideBar
                             use="hhea"
                         />
                         <TextMetrics
                             font={selectedFont}
                             fontSize={fontSize}
                             lineHeight={lineHeight}
+                            title
+                            info
+                            guideBar
                             use="win"
                         />
                         <TextMetrics
                             font={selectedFont}
                             fontSize={fontSize}
                             lineHeight={lineHeight}
+                            title
+                            info
+                            guideBar
                             use="typo"
                         />
                     </div>

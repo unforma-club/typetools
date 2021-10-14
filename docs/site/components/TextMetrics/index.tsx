@@ -12,6 +12,10 @@ interface TextMetricsProps {
     use: UseProps;
     style?: CSSProperties;
     font: BaseTypeface;
+    text?: string;
+    title?: boolean;
+    info?: boolean;
+    guideBar?: boolean;
 }
 
 const spanStyle: CSSProperties = {
@@ -32,6 +36,10 @@ export const TextMetrics = (props: TextMetricsProps) => {
         use = "hhea",
         style,
         font,
+        text = "Hxfg",
+        title = false,
+        info = false,
+        guideBar = false,
     } = props;
 
     const {
@@ -45,54 +53,61 @@ export const TextMetrics = (props: TextMetricsProps) => {
         originOffset,
     } = useMetrics({ font, use, fontSize, lineHeight });
 
-    const { typefaceMetrics, typefaceFullName } = font;
+    const { typefaceMetrics, typefaceFullName, typefaceStyle } = font;
 
     return (
         <div
             style={{
                 position: "relative",
-                height: "calc(100vh - calc(var(--header-height) * 6))",
+                height: "var(--accordion-height)",
                 overflow: "hidden",
             }}
         >
+            {title && (
+                <div
+                    style={{
+                        fontWeight: "bold",
+                        fontSize: "2em",
+                        textTransform: "capitalize",
+                        marginTop: "calc(var(--header-height) / 2)",
+                        zIndex: 10,
+                        position: "relative",
+                    }}
+                >
+                    {use}
+                </div>
+            )}
             <div
                 style={{
-                    fontWeight: "bold",
-                    fontSize: "2em",
-                    textTransform: "capitalize",
-                    marginTop: "calc(var(--header-height) / 2)",
-                    zIndex: 10,
+                    // position: "absolute",
+                    // top: "calc(50% - calc(var(--header-height) * 1))",
+                    // transform: "translateY(-50%)",
                     position: "relative",
-                }}
-            >
-                {use}
-            </div>
-            <div
-                style={{
-                    position: "absolute",
-                    top: "calc(50% - calc(var(--header-height) * 1))",
-                    transform: "translateY(-50%)",
                     margin: "4em 0",
                     width: "100%",
                 }}
             >
-                <GuideBox
-                    origin={originOffset}
-                    height={boundingBoxRatio * fontSize}
-                    width={fontSize * 0.3}
-                    y={originOffset - 1}
-                    x={fontSize * 0.3 + 5}
-                    label="bounding box"
-                />
+                {guideBar && (
+                    <>
+                        <GuideBox
+                            origin={originOffset}
+                            height={boundingBoxRatio * fontSize}
+                            width={fontSize * 0.3}
+                            y={originOffset - 1}
+                            x={fontSize * 0.3 + 5}
+                            label="bounding box"
+                        />
 
-                <GuideBox
-                    origin={originOffset}
-                    height={lineHeightRatio * fontSize}
-                    width={fontSize * 0.3}
-                    y={-1}
-                    x={0}
-                    label="line height"
-                />
+                        <GuideBox
+                            origin={originOffset}
+                            height={lineHeightRatio * fontSize}
+                            width={fontSize * 0.3}
+                            y={-1}
+                            x={0}
+                            label="line height"
+                        />
+                    </>
+                )}
 
                 <GuideLine
                     y={ascenderOffset}
@@ -137,67 +152,71 @@ export const TextMetrics = (props: TextMetricsProps) => {
                     style={{
                         ...style,
                         fontFamily: typefaceFullName,
+                        fontStyle:
+                            typefaceStyle === "italic" ? "italic" : "normal",
                         fontSize,
                         lineHeight,
                         textAlign: "center",
                         position: "relative",
                     }}
                 >
-                    Hxfg
+                    {text}
                 </div>
             </div>
 
-            <ul
-                style={{
-                    listStyle: "none",
-                    padding: 0,
-                    margin: 0,
-                    fontFeatureSettings: `"ss04", "tnum"`,
-                    fontSize: "0.8em",
-                    position: "absolute",
-                    bottom: 0,
-                    color: "var(--accents-8)",
-                }}
-            >
-                <li style={{ ...liStyle }}>
-                    <span style={{ ...spanStyle }}>Ascender</span>
-                    <span style={{ ...spanStyle }}>
-                        {use === "hhea"
-                            ? typefaceMetrics.ascender
-                            : use === "win"
-                            ? typefaceMetrics.usWinAscent
-                            : typefaceMetrics.sTypoAscender}
-                    </span>
-                </li>
-                <li style={{ ...liStyle }}>
-                    <span style={{ ...spanStyle }}>Cap Height</span>
-                    <span style={{ ...spanStyle }}>
-                        {typefaceMetrics.capHeight}
-                    </span>
-                </li>
-                <li style={{ ...liStyle }}>
-                    <span style={{ ...spanStyle }}>X Height</span>
-                    <span style={{ ...spanStyle }}>
-                        {typefaceMetrics.xHeight}
-                    </span>
-                </li>
-                <li style={{ ...liStyle }}>
-                    <span style={{ ...spanStyle }}>Baseline</span>
-                    <span style={{ ...spanStyle }}>
-                        {typefaceMetrics.baseLine}
-                    </span>
-                </li>
-                <li style={{ ...liStyle }}>
-                    <span style={{ ...spanStyle }}>Descender</span>
-                    <span style={{ ...spanStyle }}>
-                        {use === "hhea"
-                            ? typefaceMetrics.descender
-                            : use === "win"
-                            ? typefaceMetrics.usWinDescent
-                            : typefaceMetrics.sTypoDescender}
-                    </span>
-                </li>
-            </ul>
+            {info && (
+                <ul
+                    style={{
+                        listStyle: "none",
+                        padding: 0,
+                        margin: 0,
+                        fontFeatureSettings: `"ss04", "tnum"`,
+                        fontSize: "0.8em",
+                        position: "absolute",
+                        bottom: 0,
+                        color: "var(--accents-8)",
+                    }}
+                >
+                    <li style={{ ...liStyle }}>
+                        <span style={{ ...spanStyle }}>Ascender</span>
+                        <span style={{ ...spanStyle }}>
+                            {use === "hhea"
+                                ? typefaceMetrics.ascender
+                                : use === "win"
+                                ? typefaceMetrics.usWinAscent
+                                : typefaceMetrics.sTypoAscender}
+                        </span>
+                    </li>
+                    <li style={{ ...liStyle }}>
+                        <span style={{ ...spanStyle }}>Cap Height</span>
+                        <span style={{ ...spanStyle }}>
+                            {typefaceMetrics.capHeight}
+                        </span>
+                    </li>
+                    <li style={{ ...liStyle }}>
+                        <span style={{ ...spanStyle }}>X Height</span>
+                        <span style={{ ...spanStyle }}>
+                            {typefaceMetrics.xHeight}
+                        </span>
+                    </li>
+                    <li style={{ ...liStyle }}>
+                        <span style={{ ...spanStyle }}>Baseline</span>
+                        <span style={{ ...spanStyle }}>
+                            {typefaceMetrics.baseLine}
+                        </span>
+                    </li>
+                    <li style={{ ...liStyle }}>
+                        <span style={{ ...spanStyle }}>Descender</span>
+                        <span style={{ ...spanStyle }}>
+                            {use === "hhea"
+                                ? typefaceMetrics.descender
+                                : use === "win"
+                                ? typefaceMetrics.usWinDescent
+                                : typefaceMetrics.sTypoDescender}
+                        </span>
+                    </li>
+                </ul>
+            )}
         </div>
     );
 };

@@ -35,7 +35,7 @@ export const SelectorTheme = () => {
             </button>
             {state && (
                 <ul className={styles.dropdown}>
-                    {themes.map((item, i) => {
+                    {themes.sort().map((item, i) => {
                         return (
                             <li key={i} className={styles.list}>
                                 <button

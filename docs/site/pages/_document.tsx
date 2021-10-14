@@ -8,7 +8,7 @@ export default class MyDocument extends Document {
                     <link
                         rel="stylesheet"
                         type="text/css"
-                        href="/assets/css/global.css"
+                        href="/css/global.css"
                     />
                 </Head>
                 <body>
