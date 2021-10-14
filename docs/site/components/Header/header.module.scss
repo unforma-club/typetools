@@ -12,6 +12,7 @@
 
     background-color: inherit;
     color: inherit;
+    z-index: 1001;
 
     &[data-lifting="false"] {
         box-shadow: none;

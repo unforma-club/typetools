@@ -1,13 +1,15 @@
+import { CSSProperties } from "react";
 import styles from "./accordion.module.scss";
 
 interface AccordionButtonProps {
     active: boolean;
     label: string;
     onClick: () => void;
+    style?: CSSProperties;
 }
 
 export const AccordionButton = (props: AccordionButtonProps) => {
-    const { label, onClick, active } = props;
+    const { label, onClick, active, style } = props;
     return (
         <button
             name={label}
@@ -15,6 +17,8 @@ export const AccordionButton = (props: AccordionButtonProps) => {
             onClick={onClick}
             className={styles.button}
             data-active={active}
+            style={style}
+            disabled={active}
         >
             <span data-active={active} className={styles.button_text}>
                 {label}

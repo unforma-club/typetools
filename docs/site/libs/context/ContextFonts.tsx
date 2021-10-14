@@ -3,22 +3,29 @@ import {
     BaseTypeface,
     FileReaderOutput,
 } from "@unforma-club/typetools";
-import type { FC } from "react";
-import { createContext, useCallback, useContext, useState } from "react";
+import { FC } from "react";
+import {
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useState,
+} from "react";
 import dummyFonts from "libs/fonts.json";
 
 interface ContextFontAttr {
     fonts: Array<BaseTypeface>;
     addFontFiles: (files: Array<FileReaderOutput>) => void;
     chooseFont: (fullName: string) => void;
-    selectedFont: BaseTypeface | null;
+    selectedFont: BaseTypeface;
 }
 
 const init: ContextFontAttr = {
     fonts: [],
     addFontFiles: () => ({}),
     chooseFont: () => ({}),
-    selectedFont: null,
+    // @ts-ignore
+    selectedFont: {},
 };
 
 const ContextFont = createContext<ContextFontAttr>(init);
@@ -39,6 +46,13 @@ export const ProviderFonts: FC = ({ children }) => {
     const [selectedFont, setSelectedFont] = useState<BaseTypeface>(
         initFonts[0]
     );
+
+    const generateInitFonts = (files: Array<FileReaderOutput>) => {
+        readOpentype(files).then((res) => {
+            setFonts(res);
+            setSelectedFont(res[0]);
+        });
+    };
 
     const addFontFiles = (files: Array<FileReaderOutput>) => {
         readOpentype(files).then((res) => {
@@ -62,6 +76,20 @@ export const ProviderFonts: FC = ({ children }) => {
         },
         [fonts]
     );
+
+    useEffect(() => {
+        /**
+         * Update `fonts state` once on the browser, so we have the `opentype` object.
+         */
+        const newFiles: Array<FileReaderOutput> = initFonts.map((item) => ({
+            fileName: item.fileName,
+            fileSize: item.fileSize,
+            fileDestination: item.fileDestination,
+            fileUrl: item.fileUrl,
+            fileType: item.fileType,
+        }));
+        generateInitFonts(newFiles);
+    }, []);
 
     return (
         <ContextFont.Provider

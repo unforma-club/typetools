@@ -59,7 +59,7 @@ export const TextMetrics = (props: TextMetricsProps) => {
         <div
             style={{
                 position: "relative",
-                height: "var(--accordion-height)",
+                height: "calc(var(--accordion-height) - 2px)",
                 overflow: "hidden",
             }}
         >

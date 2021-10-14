@@ -2,13 +2,19 @@ import styles from "components/accordion.module.scss";
 import type { ComponentType } from "react";
 import type { BaseAccordion } from "components/AccordionLayout";
 import NextHead from "next/head";
+import NextDynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { Footer } from "components/Footer";
 import { Header } from "components/Header";
 import { AccordionMetrics } from "components/AccordionMetrics";
 import { AccordionTypetester } from "components/AccordionTypetester";
-import { AccordionGlyphs } from "components/AccordionGlyphs";
 import { AccordionButton } from "components/AccordionButton";
+import { useFonts } from "libs/context/ContextFonts";
+
+const AccordionGlyphs = NextDynamic(
+    () => import("components/AccordionGlyphs"),
+    { ssr: false }
+);
 
 interface Accordion {
     label: "Typetester" | "Glyphs" | "Metrics";
@@ -43,6 +49,7 @@ export default function Page() {
         },
     ]);
 
+    const { selectedFont } = useFonts();
     const refParent = useRef<HTMLLIElement>(null);
     useEffect(() => {
         /**
@@ -58,7 +65,7 @@ export default function Page() {
         }, 400);
 
         return () => clearTimeout(timeout);
-    }, [accordion]);
+    }, [accordion, selectedFont]);
 
     useEffect(() => {
         /**

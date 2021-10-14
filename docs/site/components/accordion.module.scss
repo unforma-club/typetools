@@ -8,11 +8,12 @@
 }
 
 .list {
+    @include basePadding();
     position: relative;
 }
 
 .button {
-    @include basePadding();
+    padding: 0;
     appearance: none;
     background: none;
     border: none;
@@ -34,32 +35,40 @@
 
     height: var(--header-height);
 
-    overflow: hidden;
+    // overflow: hidden;
     z-index: 1000;
 
     user-select: none;
     transition: color var(--main-transition),
         font-variation-settings var(--main-transition);
 
+    &::after {
+        content: "";
+        position: absolute;
+        top: var(--grid-gap);
+        right: calc(0px - calc(var(--grid-gap) * 2));
+
+        width: var(--grid-gap);
+        height: var(--grid-gap);
+
+        border-radius: 100%;
+        border: 0.15em solid var(--geist-ufc-color);
+        transition: opacity var(--main-transition);
+    }
+
     &[data-active="true"] {
         &::after {
-            content: "";
-            position: absolute;
-            top: var(--grid-gap);
-            right: 0;
-
-            width: var(--grid-gap);
-            height: var(--grid-gap);
-
-            border-radius: 100%;
-            border: 0.15em solid var(--geist-ufc-color);
+            opacity: 1;
         }
     }
 
     &[data-active="false"] {
         &:hover {
-            // color: var(--geist-ufc-color);
+            color: var(--geist-ufc-color);
             font-variation-settings: "wght" 400;
+        }
+        &::after {
+            opacity: 0;
         }
     }
 
@@ -74,7 +83,6 @@
 }
 
 .layout {
-    @include basePadding();
     position: relative;
 
     &[data-active="false"] {
