@@ -3,15 +3,9 @@ import {
     BaseTypeface,
     FileReaderOutput,
 } from "@unforma-club/typetools";
-import {
-    createContext,
-    FC,
-    useCallback,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
-import { fonts as libFonts } from "libs/fonts";
+import type { FC } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
+import dummyFonts from "libs/fonts.json";
 
 interface ContextFontAttr {
     fonts: Array<BaseTypeface>;
@@ -29,18 +23,22 @@ const init: ContextFontAttr = {
 
 const ContextFont = createContext<ContextFontAttr>(init);
 export const useFonts = () => useContext(ContextFont);
-export const ProviderFonts: FC = ({ children }) => {
-    const [fonts, setFonts] = useState<Array<BaseTypeface>>([]);
-    const [selectedFont, setSelectedFont] = useState<BaseTypeface | null>(
-        fonts.length !== 0 ? fonts[0] : null
-    );
 
-    const readOpentype = async (files: FileReaderOutput[]) => {
-        const tt = new Typetools();
-        const baseTypeface = await tt.generateOpenType(files);
-        const fontFace = await tt.generateFontface(baseTypeface);
-        return fontFace;
-    };
+const readOpentype = async (files: FileReaderOutput[]) => {
+    const tt = new Typetools();
+    const baseTypeface = await tt.generateOpenType(files);
+    const fontFace = await tt.generateFontface(baseTypeface);
+    return fontFace;
+};
+
+export const ProviderFonts: FC = ({ children }) => {
+    const unknownFonts = dummyFonts as unknown;
+    const initFonts = unknownFonts as Array<BaseTypeface>;
+
+    const [fonts, setFonts] = useState<Array<BaseTypeface>>(initFonts);
+    const [selectedFont, setSelectedFont] = useState<BaseTypeface>(
+        initFonts[0]
+    );
 
     const addFontFiles = (files: Array<FileReaderOutput>) => {
         readOpentype(files).then((res) => {
@@ -54,25 +52,17 @@ export const ProviderFonts: FC = ({ children }) => {
 
     const chooseFont = useCallback(
         (fullName: string) => {
-            const sele = fonts.find(
+            const newSelected = fonts.find(
                 (item) => item.typefaceFullName === fullName
             );
-            if (!sele) {
-                setSelectedFont(null);
-            } else {
-                setSelectedFont(sele);
-            }
+            setSelectedFont((prev) => {
+                if (!newSelected) return prev;
+                return newSelected;
+            });
         },
         [fonts]
     );
 
-    useEffect(() => {
-        readOpentype(libFonts).then((res) => {
-            console.log(res);
-            setFonts(res.sort((a, b) => a.typefaceWeight - b.typefaceWeight));
-            setSelectedFont(res[0]);
-        });
-    }, []);
     return (
         <ContextFont.Provider
             value={{ fonts, addFontFiles, chooseFont, selectedFont }}
