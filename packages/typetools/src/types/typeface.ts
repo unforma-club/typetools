@@ -69,6 +69,15 @@ export interface TypefaceMetrics {
     xHeight: any;
     capHeight: any;
     baseLine: number;
+    xMax: number;
+    xMin: number;
+    yMax: number;
+    yMin: number;
+}
+
+interface TypefaceFeature {
+    tag: string;
+    features: Array<unknown>;
 }
 
 export interface BaseTypeface extends FileReaderOutput {
@@ -78,7 +87,7 @@ export interface BaseTypeface extends FileReaderOutput {
     typefaceShortName: string;
     typefaceStyle: FontStyle;
     typefaceWeight: number;
-    typefaceFeatures: Array<string>;
+    typefaceFeatures: Array<TypefaceFeature>;
     typefaceVariable: VariableFont | null;
     typefaceInfo: FontInfo;
     typefaceTables: Array<string>;

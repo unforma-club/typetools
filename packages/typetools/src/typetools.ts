@@ -244,7 +244,16 @@ export default class Typetools {
                 const typefaceFamily = this.generateFamily(font);
                 const typefaceFullName = this.generateFullName(font);
                 const typefaceShortName = this.generateShortName(font);
-                const typefaceFeatures = this.generateFontFeatures(font);
+                const typefaceFeatures = this.generateFontFeatures(font).map(
+                    (item) => ({
+                        tag: item,
+                        // @ts-ignore
+                        features: font.substitution.getSingle(item)
+                            ? // @ts-ignore
+                              font.substitution.getSingle(item)
+                            : [],
+                    })
+                );
                 const typefaceInfo = this.generateFontInfo(font);
 
                 const typefaceStyle = this.generateItalic(font);
@@ -263,6 +272,10 @@ export default class Typetools {
                     xHeight: font.tables.os2.sxHeight,
                     capHeight: font.tables.os2.sCapHeight,
                     baseLine: 0,
+                    xMax: font.tables.head.xMax,
+                    xMin: font.tables.head.xMin,
+                    yMax: font.tables.head.yMax,
+                    yMin: font.tables.head.yMin,
                 };
 
                 return new Promise<BaseTypeface>((resolve) => {
