@@ -174,6 +174,7 @@ const Cell = (props: CellProps) => {
     const { chooseGlyph, selectedGlyph } = useGlyphs();
     const { glyph, parentWidth: width, unitsPerEm } = props;
 
+    // @ts-ignore
     const [hover, setHover] = useState(false);
 
     const pixelRatio = window.devicePixelRatio;
@@ -190,10 +191,12 @@ const Cell = (props: CellProps) => {
     const glyphBaseline = parentHeight - parentHeight / 4.5;
 
     const FG = glyph.glyph.advanceWidth * glyphScale;
+    // @ts-ignore
     const gW = glyphBaseline - parentHeight * glyphScale;
     const xmin = (parentWidth - FG) / 2; // Glyph position, divide by two mean horizontally centered from parent
 
     // Grid for glyph inspector
+    // @ts-ignore
     const ypx = (val: number) => glyphBaseline - val * glyphScale;
     return (
         <li
