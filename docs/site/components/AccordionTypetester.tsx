@@ -15,7 +15,7 @@ export const AccordionTypetester = (props: BaseAccordion) => {
             selectedFont;
 
         const baseStyle: CSSProperties = {
-            fontFamily: typefaceFullName,
+            fontFamily: `${typefaceFullName}, var(--font-sans)`,
             fontWeight: typefaceWeight,
             fontStyle: typefaceStyle === "italic" ? "italic" : "normal",
         };

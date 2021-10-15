@@ -16,9 +16,11 @@ export const Header = () => {
                 rel="noopener"
                 style={{
                     fontSize: "1em",
-                    fontWeight: "bold",
-                    textTransform: "uppercase",
-                    fontFeatureSettings: `"ss04", "tnum"`,
+                    // fontWeight: "bold",
+                    fontVariationSettings: `"wght" 500`,
+                    fontFamily: "var(--font-display)",
+                    // textTransform: "uppercase",
+                    // fontFeatureSettings: `"ss04", "tnum"`,
                 }}
             >
                 Unforma®Club

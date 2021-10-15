@@ -1,85 +1,23 @@
 [
   {
-    "fileName": "PlusJakarta Sans",
-    "fileSize": 100,
+    "fileName": "ClashGrotesk-Variable.ttf",
+    "fileSize": 108072,
     "fileType": "font/ttf",
-    "fileUrl": "/font/Plus-Jakarta-Sans/PlusJakartaSans[wght].ttf",
+    "fileUrl": "/font/Clash-Grotesk/ClashGrotesk-Variable.ttf",
     "fileDestination": "",
-    "typefaceFamily": "Plus Jakarta Sans",
-    "typefaceFeatures": [
-      "aalt",
-      "calt",
-      "case",
-      "ccmp",
-      "dnom",
-      "frac",
-      "liga",
-      "locl",
-      "numr",
-      "ordn",
-      "salt",
-      "sinf",
-      "ss01",
-      "ss02",
-      "ss03",
-      "subs",
-      "sups"
-    ],
-    "typefaceFullName": "Plus Jakarta Sans ExtraLight Variable",
-    "typefaceInfo": {
-      "copyright": "Copyright 2020 The Plus Jakarta Sans Project Authors (https://github.com/tokotype/PlusJakartaSans)",
-      "trademark": "",
-      "version": "Version 2.005",
-      "designer": {
-        "value": "Gumpita Rahayu",
-        "url": "https://www.tokotype.com"
-      },
-      "license": {
-        "value": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL",
-        "url": "http://scripts.sil.org/OFL"
-      },
-      "manufacturer": {
-        "value": "Tokotype",
-        "url": "https://www.tokotype.com"
-      }
-    },
-    "typefaceMetrics": {
-      "unitsPerEm": 1000,
-      "usWinAscent": 1214,
-      "usWinDescent": 395,
-      "sTypoAscender": 1038,
-      "sTypoDescender": -222,
-      "descender": -222,
-      "ascender": 1038,
-      "xHeight": 526,
-      "capHeight": 745,
-      "baseLine": 0
-    },
-    "typefaceShortName": " ExtraLight",
-    "typefaceStyle": "roman",
+    "typefaceFamily": "Clash Grotesk Variable",
     "typefaceSubFamily": "",
-    "typefaceTables": [
-      "os2",
-      "cmap",
-      "head",
-      "hhea",
-      "maxp",
-      "post",
-      "prep",
-      "name",
-      "gpos",
-      "gsub",
-      "fvar"
-    ],
+    "typefaceFullName": "Clash Grotesk Variable Bold",
+    "typefaceShortName": " Bold",
     "typefaceVariable": {
       "axes": [
         {
           "tag": "wght",
           "name": "Weight",
-          "value": 200,
-          "defaultValue": 200,
+          "value": 700,
+          "defaultValue": 700,
           "min": 200,
-          "max": 800,
+          "max": 700,
           "step": 1
         }
       ],
@@ -88,7 +26,7 @@
           "coordinates": {
             "wght": 200
           },
-          "name": "ExtraLight"
+          "name": "Extralight"
         },
         {
           "coordinates": {
@@ -110,79 +48,49 @@
         },
         {
           "coordinates": {
-            "wght": 700
+            "wght": 600
           },
-          "name": "Bold"
+          "name": "Semibold"
         },
         {
           "coordinates": {
-            "wght": 800
+            "wght": 700
           },
-          "name": "ExtraBold"
+          "name": "Bold"
         }
       ]
     },
-    "typefaceWeight": 200
-  },
-  {
-    "fileName": "PlusJakarta Sans",
-    "fileSize": 100,
-    "fileType": "font/ttf",
-    "fileUrl": "/font/Plus-Jakarta-Sans/PlusJakartaSans-Italic[wght].ttf",
-    "fileDestination": "",
-    "typefaceFamily": "Plus Jakarta Sans",
+    "typefaceStyle": "roman",
+    "typefaceWeight": 700,
     "typefaceFeatures": [
       "aalt",
-      "calt",
       "case",
       "ccmp",
-      "dnom",
+      "dlig",
       "frac",
       "liga",
       "locl",
-      "numr",
       "ordn",
       "salt",
-      "sinf",
-      "ss01",
-      "ss02",
-      "ss03",
-      "subs",
       "sups"
     ],
-    "typefaceFullName": "Plus Jakarta Sans ExtraLight Italic Variable",
     "typefaceInfo": {
-      "copyright": "Copyright 2020 The Plus Jakarta Sans Project Authors (https://github.com/tokotype/PlusJakartaSans)",
-      "trademark": "",
-      "version": "Version 2.005",
+      "copyright": "Copyright 2017-2021 Indian Type Foundry. All rights reserved.",
+      "trademark": "Clash is a trademark of the Indian Type Foundry.",
+      "version": "Version 1.001",
       "designer": {
-        "value": "Gumpita Rahayu",
-        "url": "https://www.tokotype.com"
+        "value": "Shiva Nallaperumal",
+        "url": "www.fontstore.com/designers/shiva-nallaperumal"
       },
       "license": {
-        "value": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: http://scripts.sil.org/OFL",
-        "url": "http://scripts.sil.org/OFL"
+        "value": "This Font Software is protected under domestic and international trademark and copyright law. You agree to identify the ITF fonts by name and credit the ITF's ownership of the trademarks and copyrights in any design or production credits.",
+        "url": "https://fontshare.com/terms"
       },
       "manufacturer": {
-        "value": "Tokotype",
-        "url": "https://www.tokotype.com"
+        "value": "Indian Type Foundry",
+        "url": "https://indiantypefoundry.com"
       }
     },
-    "typefaceMetrics": {
-      "unitsPerEm": 1000,
-      "usWinAscent": 1214,
-      "usWinDescent": 395,
-      "sTypoAscender": 1038,
-      "sTypoDescender": -222,
-      "descender": -222,
-      "ascender": 1038,
-      "xHeight": 526,
-      "capHeight": 745,
-      "baseLine": 0
-    },
-    "typefaceShortName": " ExtraLight Italic",
-    "typefaceStyle": "italic",
-    "typefaceSubFamily": "",
     "typefaceTables": [
       "os2",
       "cmap",
@@ -190,21 +98,43 @@
       "hhea",
       "maxp",
       "post",
-      "prep",
       "name",
       "gpos",
       "gsub",
       "fvar"
     ],
+    "typefaceMetrics": {
+      "unitsPerEm": 1000,
+      "usWinAscent": 890,
+      "usWinDescent": 250,
+      "sTypoAscender": 890,
+      "sTypoDescender": -250,
+      "descender": -250,
+      "ascender": 890,
+      "xHeight": 514,
+      "capHeight": 670,
+      "baseLine": 0
+    }
+  },
+  {
+    "fileName": "GeneralSans-Variable.ttf",
+    "fileSize": 110820,
+    "fileType": "font/ttf",
+    "fileUrl": "/font/General-Sans/GeneralSans-Variable.ttf",
+    "fileDestination": "",
+    "typefaceFamily": "General Sans Variable",
+    "typefaceSubFamily": "",
+    "typefaceFullName": "General Sans Variable Bold",
+    "typefaceShortName": " Bold",
     "typefaceVariable": {
       "axes": [
         {
           "tag": "wght",
           "name": "Weight",
-          "value": 200,
-          "defaultValue": 200,
+          "value": 700,
+          "defaultValue": 700,
           "min": 200,
-          "max": 800,
+          "max": 700,
           "step": 1
         }
       ],
@@ -213,113 +143,7 @@
           "coordinates": {
             "wght": 200
           },
-          "name": "ExtraLight Italic"
-        },
-        {
-          "coordinates": {
-            "wght": 300
-          },
-          "name": "Light Italic"
-        },
-        {
-          "coordinates": {
-            "wght": 400
-          },
-          "name": "Italic"
-        },
-        {
-          "coordinates": {
-            "wght": 500
-          },
-          "name": "Medium Italic"
-        },
-        {
-          "coordinates": {
-            "wght": 700
-          },
-          "name": "Bold Italic"
-        },
-        {
-          "coordinates": {
-            "wght": 800
-          },
-          "name": "ExtraBold Italic"
-        }
-      ]
-    },
-    "typefaceWeight": 200
-  },
-  {
-    "fileName": "Roboto Mono",
-    "fileSize": 100,
-    "fileType": "font/ttf",
-    "fileUrl": "/font/Roboto-Mono/RobotoMono[wght].ttf",
-    "fileDestination": "",
-    "typefaceFamily": "Roboto Mono",
-    "typefaceFeatures": ["smcp"],
-    "typefaceFullName": "Roboto Mono Regular Variable",
-    "typefaceInfo": {
-      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
-      "trademark": "Roboto Mono is a trademark of Google.",
-      "version": "Version 3.000",
-      "designer": {
-        "value": "Google",
-        "url": "Christian Robertson"
-      },
-      "license": {
-        "value": "Licensed under the Apache License, Version 2.0",
-        "url": "http://www.apache.org/licenses/LICENSE-2.0"
-      },
-      "manufacturer": {
-        "value": "",
-        "url": "Google.com"
-      }
-    },
-    "typefaceMetrics": {
-      "unitsPerEm": 2048,
-      "usWinAscent": 2146,
-      "usWinDescent": 555,
-      "sTypoAscender": 2146,
-      "sTypoDescender": -555,
-      "descender": -555,
-      "ascender": 2146,
-      "xHeight": 1082,
-      "capHeight": 1456,
-      "baseLine": 0
-    },
-    "typefaceShortName": " Regular",
-    "typefaceStyle": "roman",
-    "typefaceSubFamily": "",
-    "typefaceTables": [
-      "os2",
-      "cmap",
-      "head",
-      "hhea",
-      "maxp",
-      "post",
-      "prep",
-      "name",
-      "gsub",
-      "fvar"
-    ],
-    "typefaceVariable": {
-      "axes": [
-        {
-          "tag": "wght",
-          "name": "Weight",
-          "value": 400,
-          "defaultValue": 400,
-          "min": 100,
-          "max": 700,
-          "step": 1
-        }
-      ],
-      "instances": [
-        {
-          "coordinates": {
-            "wght": 100
-          },
-          "name": "Thin"
+          "name": "Extralight"
         },
         {
           "coordinates": {
@@ -341,55 +165,55 @@
         },
         {
           "coordinates": {
+            "wght": 600
+          },
+          "name": "Semibold"
+        },
+        {
+          "coordinates": {
             "wght": 700
           },
           "name": "Bold"
         }
       ]
     },
-    "typefaceWeight": 400
-  },
-  {
-    "fileName": "Roboto Mono",
-    "fileSize": 100,
-    "fileType": "font/ttf",
-    "fileUrl": "/font/Roboto-Mono/RobotoMono-Italic[wght].ttf",
-    "fileDestination": "",
-    "typefaceFamily": "Roboto Mono",
-    "typefaceFeatures": ["smcp"],
-    "typefaceFullName": "Roboto Mono Italic Variable",
+    "typefaceStyle": "roman",
+    "typefaceWeight": 700,
+    "typefaceFeatures": [
+      "aalt",
+      "case",
+      "ccmp",
+      "dnom",
+      "frac",
+      "liga",
+      "locl",
+      "numr",
+      "ordn",
+      "salt",
+      "sinf",
+      "ss01",
+      "ss02",
+      "ss03",
+      "subs",
+      "sups"
+    ],
     "typefaceInfo": {
-      "copyright": "Copyright 2015 The Roboto Mono Project Authors (https://github.com/googlefonts/robotomono)",
-      "trademark": "Roboto Mono is a trademark of Google.",
-      "version": "Version 3.000",
+      "copyright": "Copyright 2017-2021 Indian Type Foundry. All rights reserved.",
+      "trademark": "General is a trademark of the Indian Type Foundry.",
+      "version": "Version 2.000",
       "designer": {
-        "value": "Google",
-        "url": "Christian Robertson"
+        "value": "Frode Helland",
+        "url": "https://www.indiantypefoundry.com"
       },
       "license": {
-        "value": "Licensed under the Apache License, Version 2.0",
-        "url": "http://www.apache.org/licenses/LICENSE-2.0"
+        "value": "This Font Software is protected under domestic and international trademark and copyright law. You agree to identify the ITF fonts by name and credit the ITF's ownership of the trademarks and copyrights in any design or production credits.",
+        "url": "https://fontshare.com/terms"
       },
       "manufacturer": {
-        "value": "",
-        "url": "Google.com"
+        "value": "Indian Type Foundry",
+        "url": "https://indiantypefoundry.com"
       }
     },
-    "typefaceMetrics": {
-      "unitsPerEm": 2048,
-      "usWinAscent": 2146,
-      "usWinDescent": 555,
-      "sTypoAscender": 2146,
-      "sTypoDescender": -555,
-      "descender": -555,
-      "ascender": 2146,
-      "xHeight": 1082,
-      "capHeight": 1456,
-      "baseLine": 0
-    },
-    "typefaceShortName": " Italic",
-    "typefaceStyle": "italic",
-    "typefaceSubFamily": "",
     "typefaceTables": [
       "os2",
       "cmap",
@@ -397,56 +221,22 @@
       "hhea",
       "maxp",
       "post",
-      "prep",
       "name",
+      "gpos",
       "gsub",
       "fvar"
     ],
-    "typefaceVariable": {
-      "axes": [
-        {
-          "tag": "wght",
-          "name": "Weight",
-          "value": 400,
-          "defaultValue": 400,
-          "min": 100,
-          "max": 700,
-          "step": 1
-        }
-      ],
-      "instances": [
-        {
-          "coordinates": {
-            "wght": 100
-          },
-          "name": "Thin Italic"
-        },
-        {
-          "coordinates": {
-            "wght": 300
-          },
-          "name": "Light Italic"
-        },
-        {
-          "coordinates": {
-            "wght": 400
-          },
-          "name": "Italic"
-        },
-        {
-          "coordinates": {
-            "wght": 500
-          },
-          "name": "Medium Italic"
-        },
-        {
-          "coordinates": {
-            "wght": 700
-          },
-          "name": "Bold Italic"
-        }
-      ]
-    },
-    "typefaceWeight": 400
+    "typefaceMetrics": {
+      "unitsPerEm": 1000,
+      "usWinAscent": 1010,
+      "usWinDescent": 240,
+      "sTypoAscender": 1010,
+      "sTypoDescender": -240,
+      "descender": -240,
+      "ascender": 1010,
+      "xHeight": 538,
+      "capHeight": 718,
+      "baseLine": 0
+    }
   }
 ]

@@ -1,9 +1,4 @@
-import {
-    Typetools,
-    BaseTypeface,
-    FileReaderOutput,
-} from "@unforma-club/typetools";
-import { FC } from "react";
+import type { FC } from "react";
 import {
     createContext,
     useCallback,
@@ -11,6 +6,11 @@ import {
     useEffect,
     useState,
 } from "react";
+import {
+    Typetools,
+    BaseTypeface,
+    FileReaderOutput,
+} from "@unforma-club/typetools";
 import dummyFonts from "libs/fonts.json";
 
 interface ContextFontAttr {
@@ -41,14 +41,20 @@ const readOpentype = async (files: FileReaderOutput[]) => {
 export const ProviderFonts: FC = ({ children }) => {
     const unknownFonts = dummyFonts as unknown;
     const initFonts = unknownFonts as Array<BaseTypeface>;
+    const sortedInitFonts = initFonts.sort((a, b) => {
+        if (a.typefaceFullName < b.typefaceFullName) return 1;
+        if (a.typefaceFullName > b.typefaceFullName) return -1;
+        return 0;
+    });
 
-    const [fonts, setFonts] = useState<Array<BaseTypeface>>(initFonts);
+    const [fonts, setFonts] = useState<Array<BaseTypeface>>(sortedInitFonts);
     const [selectedFont, setSelectedFont] = useState<BaseTypeface>(
         initFonts[0]
     );
 
     const generateInitFonts = (files: Array<FileReaderOutput>) => {
         readOpentype(files).then((res) => {
+            console.log(res);
             setFonts(res);
             setSelectedFont(res[0]);
         });
@@ -61,6 +67,7 @@ export const ProviderFonts: FC = ({ children }) => {
             );
             setFonts((prev) => [...prev, ...newFonts]);
             setSelectedFont(newFonts[0]);
+            // console.log(JSON.stringify(newFonts, null, 2));
         });
     };
 
@@ -81,13 +88,15 @@ export const ProviderFonts: FC = ({ children }) => {
         /**
          * Update `fonts state` once on the browser, so we have the `opentype` object.
          */
-        const newFiles: Array<FileReaderOutput> = initFonts.map((item) => ({
-            fileName: item.fileName,
-            fileSize: item.fileSize,
-            fileDestination: item.fileDestination,
-            fileUrl: item.fileUrl,
-            fileType: item.fileType,
-        }));
+        const newFiles: Array<FileReaderOutput> = sortedInitFonts.map(
+            (item) => ({
+                fileName: item.fileName,
+                fileSize: item.fileSize,
+                fileDestination: item.fileDestination,
+                fileUrl: item.fileUrl,
+                fileType: item.fileType,
+            })
+        );
         generateInitFonts(newFiles);
     }, []);
 

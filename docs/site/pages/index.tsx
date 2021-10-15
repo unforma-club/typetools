@@ -10,6 +10,7 @@ import { AccordionMetrics } from "components/AccordionMetrics";
 import { AccordionTypetester } from "components/AccordionTypetester";
 import { AccordionButton } from "components/AccordionButton";
 import { useFonts } from "libs/context/ContextFonts";
+import { AccordionIndex } from "components/AccordionIndex";
 
 const AccordionGlyphs = NextDynamic(
     () => import("components/AccordionGlyphs"),
@@ -17,7 +18,7 @@ const AccordionGlyphs = NextDynamic(
 );
 
 interface Accordion {
-    label: "Typetester" | "Glyphs" | "Metrics";
+    label: "Typetester" | "Glyphs" | "Metrics" | "Info";
     isActive: boolean;
     component: ComponentType<BaseAccordion>;
 }
@@ -28,6 +29,11 @@ export default function Page() {
         description: "Typetools by Unforma™Club",
     };
     const [accordion, setAccordion] = useState<Array<Accordion>>([
+        {
+            label: "Info",
+            isActive: false,
+            component: (props: BaseAccordion) => <AccordionIndex {...props} />,
+        },
         {
             label: "Typetester",
             isActive: true,
@@ -93,8 +99,8 @@ export default function Page() {
                 <ul className={styles.container}>
                     {accordion
                         .sort((a, b) => {
-                            if (a.label < b.label) return -1;
-                            if (a.label > b.label) return 1;
+                            if (a.label.length < b.label.length) return -1;
+                            if (a.label.length > b.label.length) return 1;
                             else return 0;
                         })
                         .map((item, i) => {

@@ -19,9 +19,9 @@
     border: none;
 
     font-size: inherit;
-    font-family: inherit;
-    font-feature-settings: "ss04", "tnum";
-    font-variation-settings: "wght" 800;
+    font-family: var(--font-display);
+    // font-feature-settings: "ss04", "tnum";
+    font-variation-settings: "wght" 700;
 
     cursor: pointer;
 
@@ -40,7 +40,8 @@
 
     user-select: none;
     transition: color var(--main-transition),
-        font-variation-settings var(--main-transition);
+        font-variation-settings var(--main-transition),
+        font-weight var(--main-transition);
 
     &::after {
         content: "";
@@ -65,7 +66,7 @@
     &[data-active="false"] {
         &:hover {
             color: var(--geist-ufc-color);
-            font-variation-settings: "wght" 400;
+            font-variation-settings: "wght" 600;
         }
         &::after {
             opacity: 0;
@@ -74,7 +75,7 @@
 
     .button_text {
         font-size: 4em;
-        text-transform: uppercase;
+        // text-transform: uppercase;
         line-height: 0.8;
         @include media("screen", "<tablet") {
             font-size: 3em;

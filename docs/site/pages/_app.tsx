@@ -9,7 +9,7 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             <ThemeProvider
                 defaultTheme="system"
                 disableTransitionOnChange
-                themes={["light", "dark", "gray", "blue", "red"]}
+                themes={["light", "dark", "gray"]}
             >
                 <ProviderFonts>
                     <Component {...pageProps} />

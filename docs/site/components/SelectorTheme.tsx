@@ -35,23 +35,28 @@ export const SelectorTheme = () => {
             </button>
             {state && (
                 <ul className={styles.dropdown}>
-                    {themes.sort().map((item, i) => {
-                        return (
-                            <li key={i} className={styles.list}>
-                                <button
-                                    onClick={() => setTheme(item)}
-                                    data-active={item === theme}
-                                    style={{
-                                        textTransform: "capitalize",
-                                        fontFeatureSettings: `"ss04", "tnum"`,
-                                        textAlign: "center",
-                                    }}
-                                >
-                                    {item}
-                                </button>
-                            </li>
-                        );
-                    })}
+                    {themes
+                        .sort()
+                        .reverse()
+                        .map((item, i) => {
+                            return (
+                                <li key={i} className={styles.list}>
+                                    <button
+                                        onClick={() => setTheme(item)}
+                                        data-active={item === theme}
+                                        title={item}
+                                        style={{
+                                            textTransform: "capitalize",
+                                            fontFeatureSettings: `"ss04", "tnum"`,
+                                            textAlign: "center",
+                                            userSelect: "none",
+                                        }}
+                                    >
+                                        {item}
+                                    </button>
+                                </li>
+                            );
+                        })}
                 </ul>
             )}
         </div>

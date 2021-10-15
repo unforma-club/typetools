@@ -1,39 +1,18 @@
-/* Space Grotesk Variable */
 @font-face {
-    font-family: "Space Grotesk";
+    font-family: "Clash Grotesk";
     font-style: normal;
-    font-weight: 300 700;
+    font-weight: 200 700;
     font-display: block;
-    src: url("/font/Space-Grotesk/SpaceGrotesk-VariableFont_wght.ttf");
+    src: url("/font/Clash-Grotesk/ClashGrotesk-Variable.woff2")
+        format("woff2-variations");
 }
-
 @font-face {
-    font-family: "Roboto Mono Regular Variable";
+    font-family: "General Sans";
     font-style: normal;
-    font-weight: 100 700;
+    font-weight: 200 700;
     font-display: block;
-    src: url("/font/Roboto-Mono/RobotoMono[wght].ttf");
-}
-@font-face {
-    font-family: "Roboto Mono Italic Variable";
-    font-style: italic;
-    font-weight: 100 700;
-    font-display: block;
-    src: url("/font/Roboto-Mono/RobotoMono-Italic[wght].ttf");
-}
-@font-face {
-    font-family: "Plus Jakarta Sans ExtraLight Variable";
-    font-style: normal;
-    font-weight: 200 800;
-    font-display: block;
-    src: url("/font/Plus-Jakarta-Sans/PlusJakartaSans[wght].ttf");
-}
-@font-face {
-    font-family: "Plus Jakarta Sans ExtraLight Italic Variable";
-    font-style: italic;
-    font-weight: 200 800;
-    font-display: block;
-    src: url("/font/Plus-Jakarta-Sans/PlusJakartaSans-Italic[wght].ttf");
+    src: url("/font/General-Sans/GeneralSans-Variable.woff2")
+        format("woff2-variations");
 }
 
 :root {
@@ -43,8 +22,9 @@
     --main-transition: 300ms ease;
     --bezier-transition: 300ms cubic-bezier(1, 0, 0, 1);
 
-    --font-sans: "Space Grotesk", sans-serif;
+    --font-sans: "General Sans", sans-serif;
     --font-monospace: "JetBrains Mono", monospace;
+    --font-display: "Clash Grotesk", sans-serif;
 
     --grid-gap: 0.5em;
     --geist-ufc-color: #ff5eab;
@@ -105,7 +85,7 @@
 }
 
 [data-theme="light"] {
-    --geist-ufc-color: #ff0067;
+    --geist-ufc-color: #0000ff;
     --geist-error: #ff0000;
 
     --accents-1: var(--A1);
@@ -127,7 +107,9 @@
 }
 
 [data-theme="dark"] {
-    --geist-ufc-color: #78ff00;
+    /* --geist-ufc-color: #78ff00; */
+    --geist-ufc-color: #ff0067;
+
     --geist-error: #3d0000;
 
     --accents-1: var(--A16);
@@ -211,21 +193,21 @@
 [data-theme="gray"] {
     --geist-ufc-color: #78ff00;
 
-    --accents-1: #2d2d2d;
-    --accents-2: #2a2a2a;
-    --accents-3: #272727;
-    --accents-4: #242424;
-    --accents-5: #212121;
-    --accents-6: #1e1e1e;
-    --accents-7: #1b1b1b;
-    --accents-8: #181818;
-    --accents-9: #151515;
-    --accents-10: #121212;
-    --accents-11: #0f0f0f;
-    --accents-12: #0c0c0c;
-    --accents-13: #090909;
-    --accents-14: #060606;
-    --accents-15: #030303;
+    --accents-1: #777777;
+    --accents-2: #6f6f6f;
+    --accents-3: #666666;
+    --accents-4: #5e5e5e;
+    --accents-5: #565656;
+    --accents-6: #4e4e4e;
+    --accents-7: #474747;
+    --accents-8: #3f3f3f;
+    --accents-9: #383838;
+    --accents-10: #303030;
+    --accents-11: #292929;
+    --accents-12: #222222;
+    --accents-13: #1b1b1b;
+    --accents-14: #151515;
+    --accents-15: #0c0c0c;
     --accents-16: #000000;
 }
 [data-theme="random"] {
@@ -257,10 +239,10 @@
     -webkit-font-smoothing: antialiased;
 }
 
-/* *::selection {
+*::selection {
     background-color: var(--geist-ufc-color);
     color: var(--accents-1);
-} */
+}
 
 body {
     padding: 0;

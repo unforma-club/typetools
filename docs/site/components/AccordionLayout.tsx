@@ -47,7 +47,7 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
                 // @ts-ignore
                 ref={ref}
                 style={{
-                    minHeight: "calc(100vh - calc(var(--header-height) * 5))",
+                    minHeight: "calc(100vh - calc(var(--header-height) * 6))",
                     position: "relative",
                     ...style,
                     ...child,
