@@ -6,7 +6,7 @@
     font-family: inherit;
 
     border: 1px solid;
-    border-radius: calc(var(--grid-gap) / 2);
+    // border-radius: calc(var(--grid-gap) / 2);
     width: var(--aside-width);
     height: 1.75em;
     // height: var(--aside-width);
@@ -19,7 +19,7 @@
 
     &[data-drag="true"],
     &:hover {
-        border-color: var(--accents-2) !important;
+        // border-color: var(--accents-2) !important;
         background-color: var(--accents-2);
 
         // > label {

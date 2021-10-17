@@ -1,7 +1,7 @@
 import styles from "./accordion.module.scss";
 import type { CSSProperties, FC } from "react";
 import { animated, useSpring } from "react-spring";
-import { useElementSize } from "libs/hooks";
+import { useMeasure } from "libs/hooks";
 
 export interface BaseAccordion {
     label: string;
@@ -15,10 +15,7 @@ export interface AccordionLayoutProps extends BaseAccordion {
 
 export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
     const { children, isActive, style } = props;
-    const {
-        ref,
-        bounds: { height },
-    } = useElementSize();
+    const [ref, { height }] = useMeasure();
 
     const parent = useSpring({
         from: { height: 0, opacity: 0 },
@@ -44,7 +41,6 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
             style={{ ...parent }}
         >
             <animated.div
-                // @ts-ignore
                 ref={ref}
                 style={{
                     minHeight: "calc(100vh - calc(var(--header-height) * 6))",

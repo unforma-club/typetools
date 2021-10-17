@@ -1,10 +1,9 @@
 import { generateAlphabet, VariableAxes } from "@unforma-club/typetools";
-import { AccordionLayout, BaseAccordion } from "components/AccordionLayout";
 import { useFonts } from "libs/context/ContextFonts";
 import { CSSProperties, useCallback, useEffect, useState } from "react";
 import { Slider } from "./Slider";
 
-export const AccordionTypetester = (props: BaseAccordion) => {
+export const AccordionTypetester = () => {
     const { selectedFont } = useFonts();
 
     const [vf, setVf] = useState<Array<VariableAxes>>([]);
@@ -42,7 +41,7 @@ export const AccordionTypetester = (props: BaseAccordion) => {
     }, [selectedFont]);
 
     return (
-        <AccordionLayout {...props}>
+        <>
             {vf.length !== 0 && (
                 <form style={{ display: "flex" }}>
                     {vf.map((item, i) => (
@@ -90,6 +89,6 @@ export const AccordionTypetester = (props: BaseAccordion) => {
                     {generateAlphabet()}
                 </p>
             )}
-        </AccordionLayout>
+        </>
     );
 };

@@ -24,7 +24,7 @@
     &[data-active="true"],
     &:hover {
         background-color: var(--accents-2);
-        border-color: var(--accents-2) !important;
+        // border-color: var(--accents-2) !important;
     }
 }
 
@@ -35,7 +35,7 @@
 .toggle {
     @include baseButton();
     border: 1px solid;
-    border-radius: calc(var(--grid-gap) / 2);
+    // border-radius: calc(var(--grid-gap) / 2);
     position: relative;
     width: 100%;
     max-width: var(--aside-width);
@@ -47,6 +47,10 @@
     align-items: center;
     overflow: hidden;
     background-color: var(--accents-1);
+
+    &:hover {
+        box-shadow: var(--shadow-button);
+    }
 
     > span {
         &:first-child {
@@ -63,7 +67,7 @@
             justify-content: center;
 
             > svg {
-                fill: var(--accents-8);
+                fill: var(--accents-6);
             }
         }
     }
@@ -75,17 +79,18 @@
     margin: 0;
 
     position: absolute;
-    bottom: calc(0px - var(--grid-gap));
+    // bottom: calc(0px - var(--grid-gap));
+    bottom: 1px;
     left: 50%;
     transform: translate(-50%, 100%);
 
-    width: calc(100% + 2em);
+    width: 100%;
 
     border: 1px solid;
-    border-radius: calc(var(--grid-gap) / 1);
+    // border-radius: calc(var(--grid-gap) / 1);
 
-    background-color: var(--accents-1);
-    box-shadow: var(--shadow-large);
+    background-color: var(--accents-2);
+    box-shadow: var(--shadow-sticky);
 
     overflow: hidden;
 
@@ -104,8 +109,10 @@
         @include baseButton();
 
         color: var(--accents-8);
+        background-color: var(--accents-1);
         &:hover,
         &[data-active="true"] {
+            background-color: var(--accents-2);
             color: currentColor;
         }
 

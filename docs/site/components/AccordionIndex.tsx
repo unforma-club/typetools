@@ -1,4 +1,3 @@
-import { AccordionLayout, BaseAccordion } from "components/AccordionLayout";
 import { useFonts } from "libs/context/ContextFonts";
 
 interface InfoProps {
@@ -25,10 +24,10 @@ const Info = ({ label, value }: InfoProps) => {
     );
 };
 
-export const AccordionIndex = (props: BaseAccordion) => {
+export const AccordionIndex = () => {
     const { selectedFont } = useFonts();
     return (
-        <AccordionLayout {...props}>
+        <>
             {selectedFont && (
                 <>
                     <ul
@@ -86,6 +85,6 @@ export const AccordionIndex = (props: BaseAccordion) => {
                     </ul>
                 </>
             )}
-        </AccordionLayout>
+        </>
     );
 };

@@ -1,6 +1,6 @@
 import styles from "components/accordion.module.scss";
-import type { ComponentType } from "react";
-import type { BaseAccordion } from "components/AccordionLayout";
+import { ComponentType } from "react";
+import { AccordionLayout } from "components/AccordionLayout";
 import NextHead from "next/head";
 import NextDynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
@@ -14,13 +14,13 @@ import { AccordionIndex } from "components/AccordionIndex";
 
 const AccordionGlyphs = NextDynamic(
     () => import("components/AccordionGlyphs"),
-    { ssr: false }
+    { ssr: false, loading: () => <div>Loading Glyphs...</div> }
 );
 
 interface Accordion {
-    label: "Typetester" | "Glyphs" | "Metrics" | "Info";
+    label: "Typetester" | "Glyph" | "Metric" | "Info";
     isActive: boolean;
-    component: ComponentType<BaseAccordion>;
+    component: ComponentType;
 }
 
 export default function Page() {
@@ -32,26 +32,22 @@ export default function Page() {
         {
             label: "Info",
             isActive: false,
-            component: (props: BaseAccordion) => <AccordionIndex {...props} />,
+            component: () => <AccordionIndex />,
+        },
+        {
+            label: "Glyph",
+            isActive: false,
+            component: () => <AccordionGlyphs />,
+        },
+        {
+            label: "Metric",
+            isActive: false,
+            component: () => <AccordionMetrics />,
         },
         {
             label: "Typetester",
             isActive: true,
-            component: (props: BaseAccordion) => (
-                <AccordionTypetester {...props} />
-            ),
-        },
-        {
-            label: "Glyphs",
-            isActive: false,
-            component: (props: BaseAccordion) => <AccordionGlyphs {...props} />,
-        },
-        {
-            label: "Metrics",
-            isActive: false,
-            component: (props: BaseAccordion) => (
-                <AccordionMetrics {...props} />
-            ),
+            component: () => <AccordionTypetester />,
         },
     ]);
 
@@ -132,10 +128,12 @@ export default function Page() {
                                         }}
                                     />
 
-                                    <Component
+                                    <AccordionLayout
                                         isActive={isActive}
                                         label={label}
-                                    />
+                                    >
+                                        <Component />
+                                    </AccordionLayout>
                                 </li>
                             );
                         })}

@@ -21,7 +21,7 @@ export const SelectorFont = () => {
                     fontFeatureSettings: `"ss04", "tnum"`,
                 }}
             >
-                <span>{selectedFont?.typefaceFullName}</span>
+                <span>{selectedFont.typefaceFullName}</span>
                 <span>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -36,7 +36,13 @@ export const SelectorFont = () => {
                 </span>
             </button>
             {state && fonts.length !== 0 && (
-                <ul className={styles.dropdown}>
+                <ul
+                    className={styles.dropdown}
+                    onMouseLeave={() => {
+                        if (!state) return;
+                        setState(false);
+                    }}
+                >
                     {fonts.map((item, i) => {
                         const familyName = item.typefaceFamily;
                         const fullName = item.typefaceFullName;

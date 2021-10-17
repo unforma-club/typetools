@@ -1,16 +1,15 @@
 import styles from "./accordion-metrics.module.scss";
-import { AccordionLayout, BaseAccordion } from "components/AccordionLayout";
 import { useFonts } from "libs/context/ContextFonts";
 import { TextMetrics } from "components/TextMetrics";
 import { useState } from "react";
 import { Slider } from "./Slider";
 
-export const AccordionMetrics = (props: BaseAccordion) => {
+export const AccordionMetrics = () => {
     const { selectedFont } = useFonts();
     const [fontSize, setFontSize] = useState(180);
     const [lineHeight, setLineHeight] = useState(1.5);
     return (
-        <AccordionLayout {...props}>
+        <>
             {selectedFont && (
                 <>
                     <ul
@@ -85,6 +84,6 @@ export const AccordionMetrics = (props: BaseAccordion) => {
                     </div>
                 </>
             )}
-        </AccordionLayout>
+        </>
     );
 };
