@@ -10,80 +10,76 @@ export const AccordionMetrics = () => {
     const [lineHeight, setLineHeight] = useState(1.5);
     return (
         <>
-            {selectedFont && (
-                <>
-                    <ul
-                        style={{
-                            display: "grid",
-                            gridTemplateColumns: "repeat(6, 1fr)",
-                            gap: "var(--grid-gap)",
-                            fontFeatureSettings: `"ss04", "tnum"`,
-                            listStyle: "none",
-                            padding: 0,
-                            margin: 0,
-                            position: "absolute",
-                            top: 0,
-                            left: "calc(var(--grid-gap) * 2)",
-                            right: "calc(var(--grid-gap) * 2)",
-                            zIndex: 10,
-                        }}
-                    >
-                        <li>
-                            <Slider
-                                label="Font Size"
-                                min={90}
-                                max={200}
-                                step={1}
-                                value={fontSize}
-                                defaultValue={180}
-                                onChange={(e) => setFontSize(e)}
-                                onDoubleClick={(e) => setFontSize(e)}
-                            />
-                        </li>
-                        <li>
-                            <Slider
-                                label="Line Height"
-                                min={0.8}
-                                max={3}
-                                step={0.1}
-                                value={lineHeight}
-                                defaultValue={1.5}
-                                onChange={(e) => setLineHeight(e)}
-                                onDoubleClick={(e) => setLineHeight(e)}
-                            />
-                        </li>
-                    </ul>
-                    <div className={styles.metrics}>
-                        <TextMetrics
-                            font={selectedFont}
-                            fontSize={fontSize}
-                            lineHeight={lineHeight}
-                            title
-                            info
-                            guideBar
-                            use="hhea"
-                        />
-                        <TextMetrics
-                            font={selectedFont}
-                            fontSize={fontSize}
-                            lineHeight={lineHeight}
-                            title
-                            info
-                            guideBar
-                            use="win"
-                        />
-                        <TextMetrics
-                            font={selectedFont}
-                            fontSize={fontSize}
-                            lineHeight={lineHeight}
-                            title
-                            info
-                            guideBar
-                            use="typo"
-                        />
-                    </div>
-                </>
-            )}
+            <ul
+                style={{
+                    display: "grid",
+                    gridTemplateColumns: "repeat(6, 1fr)",
+                    gap: "var(--grid-gap)",
+                    fontFeatureSettings: `"ss04", "tnum"`,
+                    listStyle: "none",
+                    padding: 0,
+                    margin: 0,
+                    position: "absolute",
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    zIndex: 10,
+                }}
+            >
+                <li>
+                    <Slider
+                        label="Font Size"
+                        min={90}
+                        max={200}
+                        step={1}
+                        value={fontSize}
+                        defaultValue={180}
+                        onChange={(e) => setFontSize(e)}
+                        onDoubleClick={(e) => setFontSize(e)}
+                    />
+                </li>
+                <li>
+                    <Slider
+                        label="Line Height"
+                        min={0.8}
+                        max={3}
+                        step={0.1}
+                        value={lineHeight}
+                        defaultValue={1.5}
+                        onChange={(e) => setLineHeight(e)}
+                        onDoubleClick={(e) => setLineHeight(e)}
+                    />
+                </li>
+            </ul>
+            <div className={styles.metrics}>
+                <TextMetrics
+                    font={selectedFont}
+                    fontSize={fontSize}
+                    lineHeight={lineHeight}
+                    title
+                    info
+                    guideBar
+                    use="hhea"
+                />
+                <TextMetrics
+                    font={selectedFont}
+                    fontSize={fontSize}
+                    lineHeight={lineHeight}
+                    title
+                    info
+                    guideBar
+                    use="win"
+                />
+                <TextMetrics
+                    font={selectedFont}
+                    fontSize={fontSize}
+                    lineHeight={lineHeight}
+                    title
+                    info
+                    guideBar
+                    use="typo"
+                />
+            </div>
         </>
     );
 };

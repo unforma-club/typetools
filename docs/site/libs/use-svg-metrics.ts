@@ -9,7 +9,8 @@ export const useSVGMetrics = (props: useSVGMetricsProps) => {
     const { width, height, advanceWidth, yMax, yMin, xMax, xMin, unitsPerEm } =
         props;
 
-    const pixelRatio = window.devicePixelRatio;
+    // const pixelRatio = window.devicePixelRatio;
+    const pixelRatio = 1;
     const parentWidth = width / pixelRatio;
     const parentHeight = height / pixelRatio;
     const maxHeight = yMax - yMin;

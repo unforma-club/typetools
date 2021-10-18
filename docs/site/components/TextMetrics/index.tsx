@@ -59,7 +59,6 @@ export const TextMetrics = (props: TextMetricsProps) => {
         <div
             style={{
                 position: "relative",
-                height: "calc(var(--accordion-height) - 2px)",
                 overflow: "hidden",
             }}
         >
@@ -172,8 +171,8 @@ export const TextMetrics = (props: TextMetricsProps) => {
                         margin: 0,
                         fontFeatureSettings: `"ss04", "tnum"`,
                         fontSize: "0.8em",
-                        position: "absolute",
-                        bottom: 0,
+                        // position: "absolute",
+                        // bottom: 0,
                         color: "var(--accents-8)",
                     }}
                 >

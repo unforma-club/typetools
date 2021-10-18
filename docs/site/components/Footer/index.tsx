@@ -23,7 +23,7 @@ export const Footer = () => {
                         lineHeight: 1,
                     }}
                 >
-                    &copy;{year}{" "}
+                    &copy;2020-{year}{" "}
                     <a
                         href="https://unforma.club"
                         target="_blank"
