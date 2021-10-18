@@ -2,6 +2,7 @@ import styles from "./header.module.scss";
 import NextDynamic from "next/dynamic";
 import { SelectorFont } from "components/SelectorFont";
 import { InputFont } from "components/InputFont";
+import { SITE_DATA } from "libs/constants";
 
 const SelectorTheme = NextDynamic(() => import("components/SelectorTheme"), {
     ssr: false,
@@ -11,7 +12,7 @@ export const Header = () => {
     return (
         <header className={styles.container}>
             <a
-                href="https://unforma.club"
+                href={SITE_DATA.author.url}
                 target="_blank"
                 rel="noopener"
                 style={{
@@ -20,7 +21,7 @@ export const Header = () => {
                     fontFamily: "var(--font-display)",
                 }}
             >
-                Unforma®Club
+                {SITE_DATA.author.name}
             </a>
             <div className={styles.selector}>
                 <SelectorTheme />

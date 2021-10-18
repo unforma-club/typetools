@@ -68,7 +68,7 @@ export const TextMetrics = (props: TextMetricsProps) => {
                         fontWeight: "bold",
                         fontSize: "2em",
                         textTransform: "capitalize",
-                        marginTop: "calc(var(--header-height) / 2)",
+                        // marginTop: "calc(var(--header-height) / 2)",
                         zIndex: 10,
                         position: "relative",
                     }}

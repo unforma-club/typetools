@@ -1,20 +1,22 @@
 import styles from "./accordion.module.scss";
 import type { CSSProperties, FC } from "react";
-import { animated, useSpring } from "react-spring";
+import { animated, useSpring, useTransition } from "react-spring";
 import { useMeasure } from "libs/hooks";
+import { AccordionButton } from "./AccordionButton";
 
 export interface BaseAccordion {
     label: string;
     style?: CSSProperties;
     isActive: boolean;
+    onClick: () => void;
 }
 
 export interface AccordionLayoutProps extends BaseAccordion {
-    height?: number;
+    navigation: JSX.Element;
 }
 
 export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
-    const { children, isActive, style } = props;
+    const { children, isActive, style, onClick, label, navigation } = props;
     const [ref, { height }] = useMeasure();
 
     const parent = useSpring({
@@ -34,23 +36,58 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
         reverse: !isActive,
     });
 
+    const transitions = useTransition(isActive, {
+        from: { opacity: 0 },
+        enter: { opacity: 1 },
+        leave: { opacity: 0 },
+        reverse: isActive,
+        config: { mass: 3, tension: 2000, friction: 200 },
+    });
+
     return (
-        <animated.div
-            data-active={isActive}
-            className={styles.layout}
-            style={{ ...parent }}
-        >
-            <animated.div
-                ref={ref}
+        <>
+            <div
                 style={{
-                    minHeight: "calc(100vh - calc(var(--header-height) * 6))",
-                    position: "relative",
-                    ...style,
-                    ...child,
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "calc(var(--grid-gap) * 8)",
+                    position: "sticky",
+                    top: 0,
+                    zIndex: 1000,
                 }}
             >
-                {children}
+                <AccordionButton
+                    active={isActive}
+                    label={label}
+                    onClick={onClick}
+                />
+                {transitions(
+                    (styles, item) =>
+                        item && (
+                            <animated.div style={styles}>
+                                {navigation}
+                            </animated.div>
+                        )
+                )}
+            </div>
+            <animated.div
+                data-active={isActive}
+                className={styles.layout}
+                style={{ ...parent }}
+            >
+                <animated.div
+                    ref={ref}
+                    style={{
+                        minHeight:
+                            "calc(100vh - calc(var(--header-height) * 6))",
+                        position: "relative",
+                        ...style,
+                        ...child,
+                    }}
+                >
+                    {children}
+                </animated.div>
             </animated.div>
-        </animated.div>
+        </>
     );
 };

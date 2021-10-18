@@ -1,47 +1,12 @@
 import type { NewGlyph, TypefaceMetrics } from "@unforma-club/typetools";
-import { CSSProperties, useEffect, useMemo, useState } from "react";
+import type { CSSProperties } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useFonts } from "libs/context/ContextFonts";
-import {
-    ProviderGlyphs,
-    useGlyphs,
-    ConsumerGlyph,
-} from "libs/context/ContextGlyphs";
+import { ProviderGlyphs, useGlyphs } from "libs/context/ContextGlyphs";
 import { GlyphsAside } from "./Glyphs/Aside";
 import { useMeasure } from "libs/hooks";
-
-interface useSVGMetricsProps extends TypefaceMetrics {
-    width: number;
-    height: number;
-    advanceWidth: number;
-}
-const useSVGMetrics = (props: useSVGMetricsProps) => {
-    const { width, height, advanceWidth, yMax, yMin, xMax, xMin, unitsPerEm } =
-        props;
-
-    const pixelRatio = window.devicePixelRatio;
-    const parentWidth = width / pixelRatio;
-    const parentHeight = height / pixelRatio;
-    const maxHeight = yMax - yMin;
-    const maxWidth = xMax - xMin;
-    const glyphScale = Math.min(
-        parentWidth / maxWidth,
-        parentHeight / maxHeight
-    );
-    const glyphSize = glyphScale * unitsPerEm;
-    const glyphBaseline = (parentHeight * yMax) / maxHeight;
-    const glyphWidth = advanceWidth * glyphScale;
-    const xmin = (parentWidth - glyphWidth) / 2; // Glyph position, divide by two mean horizontally centered from parent
-
-    return {
-        parentHeight,
-        parentWidth,
-        maxHeight,
-        glyphSize,
-        glyphBaseline,
-        xmin,
-        glyphScale,
-    };
-};
+import { useSVGMetrics } from "libs/use-svg-metrics";
+import { AccordionLayout, BaseAccordion } from "./AccordionLayout";
 
 interface CellProps {
     glyph: NewGlyph;
@@ -53,7 +18,7 @@ const Cell = (props: CellProps) => {
 
     const { glyph, metrics, parentWidth: width } = props;
 
-    const divide = 18;
+    const divide = 24;
     const newParentWidth = width / divide + 0.95;
     const newParentHeight = width / divide + 0.95;
 
@@ -65,28 +30,19 @@ const Cell = (props: CellProps) => {
             ...metrics,
         });
 
-    // @ts-ignore
-    const [hover, setHover] = useState(false);
-
     // Grid for glyph inspector
     // @ts-ignore
     const ypx = (val: number) => glyphBaseline - val * glyphScale;
     const isActive = glyph === selectedGlyph;
     return (
         <li
-            onMouseEnter={() => {
-                chooseGlyph(glyph);
-                // setHover(true);
-            }}
+            onMouseEnter={() => chooseGlyph(glyph)}
             style={{
                 position: "relative",
                 border: "1px solid",
                 width: parentWidth,
-                // height: parentHeight,
                 overflow: "hidden",
                 margin: "0 -1px -1px 0",
-                // transform: `scale(${hover ? 2 : 1})`,
-                zIndex: hover ? 10 : 1,
                 fontSize: "inherit",
                 display: "flex",
                 flexDirection: "column",
@@ -109,7 +65,6 @@ const Cell = (props: CellProps) => {
             </div>
             <div
                 style={{
-                    padding: "calc(var(--grid-gap) / 1)",
                     position: "relative",
                     display: "flex",
                     alignItems: "center",
@@ -127,7 +82,6 @@ const Cell = (props: CellProps) => {
                         backgroundColor: isActive
                             ? "var(--accents-3)"
                             : "inherit",
-                        // border: "1px solid",
                     }}
                 >
                     <path
@@ -192,13 +146,13 @@ const buttonStyle: CSSProperties = {
     marginLeft: -1,
 };
 
-const BSide = () => {
+const GlyphWrapper = (props: BaseAccordion) => {
     const { selectedFont } = useFonts();
-    const { glyphs, chooseGlyph } = useGlyphs();
+    const { selectedGlyph, glyphsLength, charLength, glyphs, chooseGlyph } =
+        useGlyphs();
     const [currentPage, setCurrentPage] = useState(1);
     // @ts-ignore
-    const [postsPerPage, setPostsPerPage] = useState(108);
-
+    const [postsPerPage, setPostsPerPage] = useState(158);
     const [search, setSearch] = useState("");
     const finalGlyphs = useMemo(() => {
         if (!search) return glyphs;
@@ -246,97 +200,99 @@ const BSide = () => {
             return chooseGlyph(currentPosts.find((item) => item.name === "A")!);
         chooseGlyph(currentPosts[0]);
     }, [currentPage]);
-    return (
-        <div>
-            <header
-                style={{
-                    marginBottom: -1,
-                    display: "grid",
-                    gridTemplateColumns: "repeat(2, 1fr)",
-                }}
-            >
-                <div>
-                    <input
-                        type="text"
-                        value={search}
-                        placeholder="Search..."
-                        onChange={(e) => setSearch(e.target.value)}
-                        style={{
-                            background: "none",
-                            border: "1px solid",
-                            height: "1.75em",
-                            fontSize: "inherit",
-                            fontFamily: "inherit",
-                            padding: "0 var(--grid-gap)",
-                            outline: "none",
-                            width: "100%",
-                        }}
-                    />
-                </div>
 
-                <div>
-                    <button
-                        disabled={currentPage === 1}
-                        onClick={() => setCurrentPage((prev) => (prev -= 1))}
-                        style={{ ...buttonStyle }}
-                    >
-                        Prev
-                    </button>
-                    {getPageNumber().map((number) => (
-                        <button
-                            key={number}
-                            onClick={() => paginate(number)}
+    return (
+        <AccordionLayout
+            {...props}
+            style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 3fr",
+                gap: "var(--grid-gap)",
+                alignItems: "flex-start",
+            }}
+            navigation={
+                <header
+                    style={{
+                        marginBottom: -1,
+                        display: "grid",
+                        gridTemplateColumns: "repeat(2, 1fr)",
+                    }}
+                >
+                    <div>
+                        <input
+                            type="text"
+                            value={search}
+                            placeholder="Search..."
+                            onChange={(e) => setSearch(e.target.value)}
                             style={{
-                                ...buttonStyle,
-                                backgroundColor:
-                                    number === currentPage
-                                        ? "var(--accents-3)"
-                                        : "inherit",
+                                background: "none",
+                                border: "1px solid",
+                                height: "1.75em",
+                                fontSize: "inherit",
+                                fontFamily: "inherit",
+                                padding: "0 var(--grid-gap)",
+                                outline: "none",
+                                width: "100%",
                             }}
+                        />
+                    </div>
+
+                    <div>
+                        <button
+                            disabled={currentPage === 1}
+                            onClick={() =>
+                                setCurrentPage((prev) => (prev -= 1))
+                            }
+                            style={{ ...buttonStyle }}
                         >
-                            {number}
+                            Prev
                         </button>
-                    ))}
-                    <button
-                        disabled={currentPage === getPageNumber().length}
-                        onClick={() => setCurrentPage((prev) => (prev += 1))}
-                        style={{ ...buttonStyle }}
-                    >
-                        Next
-                    </button>
-                </div>
-            </header>
-            <CustomUl glyphs={currentPosts} />
-        </div>
+                        {getPageNumber().map((number) => (
+                            <button
+                                key={number}
+                                onClick={() => paginate(number)}
+                                style={{
+                                    ...buttonStyle,
+                                    backgroundColor:
+                                        number === currentPage
+                                            ? "var(--accents-3)"
+                                            : "inherit",
+                                }}
+                            >
+                                {number}
+                            </button>
+                        ))}
+                        <button
+                            disabled={currentPage === getPageNumber().length}
+                            onClick={() =>
+                                setCurrentPage((prev) => (prev += 1))
+                            }
+                            style={{ ...buttonStyle }}
+                        >
+                            Next
+                        </button>
+                    </div>
+                </header>
+            }
+        >
+            {selectedGlyph && (
+                <>
+                    <GlyphsAside
+                        glyph={selectedGlyph}
+                        glyphsLength={glyphsLength}
+                        charsLength={charLength}
+                    />
+                    <CustomUl glyphs={currentPosts} />
+                </>
+            )}
+        </AccordionLayout>
     );
 };
 
-export const AccordionGlyphs = () => {
+export const AccordionGlyphs = (props: BaseAccordion) => {
     return (
         <ProviderGlyphs>
-            <ConsumerGlyph>
-                {({ selectedGlyph, glyphsLength, charLength }) =>
-                    selectedGlyph && (
-                        <>
-                            <div
-                                style={{
-                                    display: "grid",
-                                    gridTemplateColumns: "1fr 3fr",
-                                    gap: "var(--grid-gap)",
-                                    alignItems: "flex-start",
-                                }}
-                            >
-                                <GlyphsAside
-                                    glyph={selectedGlyph!}
-                                    glyphsLength={glyphsLength}
-                                    charsLength={charLength}
-                                />
-                                <BSide />
-                            </div>
-                        </>
-                    )
-                }
-            </ConsumerGlyph>
+            <GlyphWrapper {...props} />
         </ProviderGlyphs>
     );
 };

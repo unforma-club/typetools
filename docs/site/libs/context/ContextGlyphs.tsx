@@ -38,10 +38,7 @@ export const ProviderGlyphs: FC = (props) => {
     const readOpentype = async (url: string) => {
         const tt = new Typetools();
         const glyphs = await tt.generateGlyphs(url);
-        setGlyphs(glyphs);
-        setSelectedGlyph(glyphs.find((item) => item.name === "A")!);
-        setGlyphsLength(glyphs.length);
-        setCharLength(() => glyphs.filter((item) => item.character).length);
+        return glyphs;
     };
 
     const chooseGlyph = useCallback(
@@ -54,7 +51,12 @@ export const ProviderGlyphs: FC = (props) => {
 
     useEffect(() => {
         const fileUrl = selectedFont.fileUrl;
-        readOpentype(fileUrl);
+        readOpentype(fileUrl).then((glyphs) => {
+            setGlyphs(glyphs);
+            setSelectedGlyph(glyphs.find((item) => item.name === "A")!);
+            setGlyphsLength(glyphs.length);
+            setCharLength(() => glyphs.filter((item) => item.character).length);
+        });
     }, [selectedFont]);
 
     return (

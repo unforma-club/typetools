@@ -20,7 +20,6 @@
 
     font-size: inherit;
     font-family: var(--font-display);
-    // font-feature-settings: "ss04", "tnum";
     font-variation-settings: "wght" 700;
 
     cursor: pointer;
@@ -57,7 +56,7 @@
     }
 
     &[data-active="true"] {
-        // font-variation-settings: "wght" 600;
+        font-variation-settings: "wght" 600;
         color: var(--geist-ufc-color);
         &::after {
             opacity: 1;
@@ -76,11 +75,7 @@
 
     .button_text {
         font-size: 4em;
-        // text-transform: uppercase;
         line-height: 0.8;
-        @include media("screen", "<tablet") {
-            font-size: 3em;
-        }
     }
 }
 

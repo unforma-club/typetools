@@ -1,9 +1,8 @@
 import styles from "./footer.module.scss";
 import pJson from "../../package.json";
+import { SITE_DATA } from "libs/constants";
 
 export const Footer = () => {
-    const date = new Date();
-    const year = date.getFullYear();
     return (
         <footer className={styles.container}>
             <div>
@@ -23,15 +22,15 @@ export const Footer = () => {
                         lineHeight: 1,
                     }}
                 >
-                    &copy;2020-{year}{" "}
+                    &copy;{SITE_DATA.years.join("-")}{" "}
                     <a
-                        href="https://unforma.club"
+                        href={SITE_DATA.author.url}
                         target="_blank"
                         rel="noopener"
                     >
-                        Unforma®Club
+                        {SITE_DATA.author.name}
                     </a>
-                    . All rights reserved.
+                    .
                 </div>
             </div>
         </footer>

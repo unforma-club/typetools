@@ -1,9 +1,10 @@
 import { generateAlphabet, VariableAxes } from "@unforma-club/typetools";
 import { useFonts } from "libs/context/ContextFonts";
 import { CSSProperties, useCallback, useEffect, useState } from "react";
+import { AccordionLayout, BaseAccordion } from "./AccordionLayout";
 import { Slider } from "./Slider";
 
-export const AccordionTypetester = () => {
+export const AccordionTypetester = (props: BaseAccordion) => {
     const { selectedFont } = useFonts();
 
     const [vf, setVf] = useState<Array<VariableAxes>>([]);
@@ -41,9 +42,14 @@ export const AccordionTypetester = () => {
     }, [selectedFont]);
 
     return (
-        <>
-            {vf.length !== 0 && (
-                <form style={{ display: "flex" }}>
+        <AccordionLayout
+            {...props}
+            navigation={
+                <form
+                    style={{
+                        display: "flex",
+                    }}
+                >
                     {vf.map((item, i) => (
                         <Slider
                             key={i}
@@ -68,18 +74,15 @@ export const AccordionTypetester = () => {
                         />
                     ))}
                 </form>
-            )}
-
+            }
+        >
             {selectedFont && (
                 <p
                     style={{
-                        position: "absolute",
-                        top: "50%",
-                        left: "50%",
-                        transform: "translate(-50%, -50%)",
-                        textAlign: "center",
+                        textAlign: "left",
                         margin: 0,
                         fontFamily: selectedFont.typefaceFullName,
+                        maxWidth: 1200,
                         fontSize: "4em",
                         ...customFontStyle(),
                         transition:
@@ -89,6 +92,6 @@ export const AccordionTypetester = () => {
                     {generateAlphabet()}
                 </p>
             )}
-        </>
+        </AccordionLayout>
     );
 };

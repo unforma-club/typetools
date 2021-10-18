@@ -12,7 +12,7 @@ export const useSVGMetrics = (props: useSVGMetricsProps) => {
     // const pixelRatio = window.devicePixelRatio;
     const pixelRatio = 1;
     const parentWidth = width / pixelRatio;
-    const parentHeight = height / pixelRatio;
+    const parentHeight = height / pixelRatio / 1.1;
     const maxHeight = yMax - yMin;
     const maxWidth = xMax - xMin;
     const glyphScale = Math.min(

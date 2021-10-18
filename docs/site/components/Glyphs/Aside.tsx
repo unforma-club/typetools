@@ -9,11 +9,7 @@ interface GlyphsAsideProps {
     charsLength: number;
 }
 
-export const GlyphsAside = ({
-    glyph,
-    glyphsLength,
-    charsLength,
-}: GlyphsAsideProps) => {
+export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
     const { selectedFont } = useFonts();
     const { typefaceMetrics } = selectedFont;
 
@@ -37,104 +33,153 @@ export const GlyphsAside = ({
     return (
         <aside>
             <div
-                ref={ref}
-                style={{ width: "calc(33.33vw - 4em)", position: "relative" }}
+                style={{
+                    position: "relative",
+                    width: "calc(33.33vw - 4em - var(--grid-gap))",
+                    border: "1px solid",
+                    padding: "calc(var(--grid-gap) * 4) 0",
+                }}
             >
                 <div
+                    ref={ref}
                     style={{
-                        border: "1px solid",
-                        // borderRadius: "var(--grid-gap)",
                         height: "calc(100vh - calc(var(--header-height) * 10))",
-                        overflow: "hidden",
+                        position: "relative",
                     }}
                 >
                     <svg
-                        width={parentWidth}
-                        height={parentHeight}
+                        width="100%"
+                        height="100%"
                         viewBox={`0 0 ${parentWidth} ${parentHeight}`}
                         fill="currentColor"
                         style={{ userSelect: "none" }}
                     >
-                        <line
-                            x1={0}
-                            x2={parentWidth}
-                            y1={ypx(typefaceMetrics.ascender).toString()}
-                            y2={ypx(typefaceMetrics.ascender).toString()}
-                            stroke="var(--accents-3)"
-                            strokeWidth="1"
-                        />
-                        <line
-                            x1={0}
-                            x2={parentWidth}
-                            y1={ypx(typefaceMetrics.capHeight).toString()}
-                            y2={ypx(typefaceMetrics.capHeight).toString()}
-                            stroke="var(--accents-3)"
-                            strokeWidth="1"
-                        />
-                        <line
-                            x1={0}
-                            x2={parentWidth}
-                            y1={ypx(typefaceMetrics.xHeight).toString()}
-                            y2={ypx(typefaceMetrics.xHeight).toString()}
-                            stroke="var(--accents-3)"
-                            strokeWidth="1"
-                        />
-                        <line
-                            x1={0}
-                            x2={parentWidth}
-                            y1={ypx(typefaceMetrics.baseLine).toString()}
-                            y2={ypx(typefaceMetrics.baseLine).toString()}
-                            stroke="var(--accents-3)"
-                            strokeWidth="1"
-                        />
-                        <line
-                            x1={0}
-                            x2={parentWidth}
-                            y1={ypx(typefaceMetrics.descender).toString()}
-                            y2={ypx(typefaceMetrics.descender).toString()}
-                            stroke="var(--accents-3)"
-                            strokeWidth="1"
-                        />
+                        <g>
+                            <line
+                                x1={0}
+                                x2={parentWidth}
+                                y1={ypx(typefaceMetrics.ascender)}
+                                y2={ypx(typefaceMetrics.ascender)}
+                                stroke="var(--accents-3)"
+                                strokeWidth="1"
+                                strokeDasharray="2 2"
+                            />
+                            <line
+                                x1={0}
+                                x2={parentWidth}
+                                y1={ypx(typefaceMetrics.capHeight)}
+                                y2={ypx(typefaceMetrics.capHeight)}
+                                stroke="var(--accents-3)"
+                                strokeWidth="1"
+                                strokeDasharray="2 2"
+                            />
+                            <line
+                                x1={0}
+                                x2={parentWidth}
+                                y1={ypx(typefaceMetrics.xHeight)}
+                                y2={ypx(typefaceMetrics.xHeight)}
+                                stroke="var(--accents-3)"
+                                strokeWidth="1"
+                                strokeDasharray="2 2"
+                            />
+                            <line
+                                x1={0}
+                                x2={parentWidth}
+                                y1={ypx(typefaceMetrics.baseLine)}
+                                y2={ypx(typefaceMetrics.baseLine)}
+                                stroke="var(--accents-3)"
+                                strokeWidth="1"
+                            />
+                            <line
+                                x1={0}
+                                x2={parentWidth}
+                                y1={ypx(typefaceMetrics.descender)}
+                                y2={ypx(typefaceMetrics.descender)}
+                                stroke="var(--accents-3)"
+                                strokeWidth="1"
+                                strokeDasharray="2 2"
+                            />
 
-                        <text
-                            fontSize="0.6em"
-                            fontFamily="var(--font-sans)"
-                            fill="var(--accents-8)"
-                            style={{
-                                fontFeatureSettings: `"tnum"`,
-                            }}
-                        >
-                            <tspan
-                                x="6"
-                                y={ypx(typefaceMetrics.baseLine).toString()}
+                            <text
+                                fontSize="0.6em"
+                                fontFamily="var(--font-sans)"
+                                fill="var(--accents-8)"
+                                style={{
+                                    fontFeatureSettings: `"tnum"`,
+                                }}
                             >
-                                Baseline
-                            </tspan>
-                            <tspan
-                                x="6"
-                                y={ypx(typefaceMetrics.xHeight).toString()}
-                            >
-                                X Height
-                            </tspan>
-                            <tspan
-                                x="6"
-                                y={ypx(typefaceMetrics.capHeight).toString()}
-                            >
-                                Cap Height
-                            </tspan>
-                            <tspan
-                                x="6"
-                                y={ypx(typefaceMetrics.descender).toString()}
-                            >
-                                Descender
-                            </tspan>
-                            <tspan
-                                x="6"
-                                y={ypx(typefaceMetrics.ascender).toString()}
-                            >
-                                Ascender
-                            </tspan>
-                        </text>
+                                <tspan
+                                    x="6"
+                                    y={ypx(typefaceMetrics.baseLine) - 4}
+                                    textAnchor="start"
+                                >
+                                    Baseline
+                                </tspan>
+                                <tspan
+                                    x={parentWidth - 4}
+                                    y={ypx(typefaceMetrics.baseLine) - 4}
+                                    textAnchor="end"
+                                >
+                                    {typefaceMetrics.baseLine}
+                                </tspan>
+
+                                <tspan
+                                    x="6"
+                                    y={ypx(typefaceMetrics.xHeight) - 4}
+                                >
+                                    X Height
+                                </tspan>
+                                <tspan
+                                    x={parentWidth - 4}
+                                    y={ypx(typefaceMetrics.xHeight) - 4}
+                                    textAnchor="end"
+                                >
+                                    {typefaceMetrics.xHeight}
+                                </tspan>
+
+                                <tspan
+                                    x="6"
+                                    y={ypx(typefaceMetrics.capHeight) - 4}
+                                >
+                                    Cap Height
+                                </tspan>
+                                <tspan
+                                    x={parentWidth - 4}
+                                    y={ypx(typefaceMetrics.capHeight) - 4}
+                                    textAnchor="end"
+                                >
+                                    {typefaceMetrics.capHeight}
+                                </tspan>
+
+                                <tspan
+                                    x="6"
+                                    y={ypx(typefaceMetrics.descender) - 4}
+                                >
+                                    Descender
+                                </tspan>
+                                <tspan
+                                    x={parentWidth - 4}
+                                    y={ypx(typefaceMetrics.descender) - 4}
+                                    textAnchor="end"
+                                >
+                                    {typefaceMetrics.descender}
+                                </tspan>
+
+                                <tspan
+                                    x="6"
+                                    y={ypx(typefaceMetrics.ascender) - 4}
+                                >
+                                    Ascender
+                                </tspan>
+                                <tspan
+                                    x={parentWidth - 4}
+                                    y={ypx(typefaceMetrics.ascender) - 4}
+                                    textAnchor="end"
+                                >
+                                    {typefaceMetrics.ascender}
+                                </tspan>
+                            </text>
+                        </g>
                         <path
                             fill="currentColor"
                             d={glyph.glyph
@@ -146,7 +191,7 @@ export const GlyphsAside = ({
             </div>
 
             <div>
-                <table>
+                <table style={{ color: "var(--accents-8)" }}>
                     <tbody>
                         <tr>
                             <td>Character</td>
@@ -173,14 +218,6 @@ export const GlyphsAside = ({
                         <tr>
                             <td>HTML</td>
                             <td>{glyph.html ?? "-"}</td>
-                        </tr>
-                        <tr>
-                            <td>Glyphs</td>
-                            <td>{glyphsLength}</td>
-                        </tr>
-                        <tr>
-                            <td>Characters</td>
-                            <td>{charsLength}</td>
                         </tr>
                     </tbody>
                 </table>

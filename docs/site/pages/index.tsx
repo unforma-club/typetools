@@ -1,58 +1,57 @@
 import styles from "components/accordion.module.scss";
 import type { GetServerSideProps, InferGetServerSidePropsType } from "next";
-import { ComponentType } from "react";
-import { AccordionLayout } from "components/AccordionLayout";
+import type { ComponentType } from "react";
+import type { BaseAccordion } from "components/AccordionLayout";
 import NextHead from "next/head";
-import NextDynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
+import { SITE_DATA } from "libs/constants";
 import { useMediaQuery } from "libs/hooks";
+import { useFonts } from "libs/context/ContextFonts";
 import { Footer } from "components/Footer";
 import { Header } from "components/Header";
+import { AccordionIndex } from "components/AccordionIndex";
+import { AccordionGlyphs } from "components/AccordionGlyphs";
 import { AccordionMetrics } from "components/AccordionMetrics";
 import { AccordionTypetester } from "components/AccordionTypetester";
-import { AccordionButton } from "components/AccordionButton";
-import { useFonts } from "libs/context/ContextFonts";
-import { AccordionIndex } from "components/AccordionIndex";
-
-const AccordionGlyphs = NextDynamic(
-    () => import("components/AccordionGlyphs"),
-    { ssr: false, loading: () => <div>Loading Glyphs...</div> }
-);
 
 interface Accordion {
     label: "Typetester" | "Glyph" | "Metric" | "Info";
     isActive: boolean;
-    component: ComponentType;
+    component: ComponentType<BaseAccordion>;
 }
 
 type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function Page({ deviceType }: PageProps) {
     const meta = {
-        title: "Typetools by Unforma™Club",
-        description: "Typetools by Unforma™Club",
+        title: `${SITE_DATA.name} by ${SITE_DATA.author.name}`,
+        description: `${SITE_DATA.name} by ${SITE_DATA.author.name}`,
     };
     const { active: activeMedia } = useMediaQuery();
     const [accordion, setAccordion] = useState<Array<Accordion>>([
         {
             label: "Info",
             isActive: false,
-            component: () => <AccordionIndex />,
+            component: (props: BaseAccordion) => <AccordionIndex {...props} />,
         },
         {
             label: "Glyph",
             isActive: false,
-            component: () => <AccordionGlyphs />,
+            component: (props: BaseAccordion) => <AccordionGlyphs {...props} />,
         },
         {
             label: "Metric",
             isActive: false,
-            component: () => <AccordionMetrics />,
+            component: (props: BaseAccordion) => (
+                <AccordionMetrics {...props} />
+            ),
         },
         {
             label: "Typetester",
             isActive: true,
-            component: () => <AccordionTypetester />,
+            component: (props: BaseAccordion) => (
+                <AccordionTypetester {...props} />
+            ),
         },
     ]);
 
@@ -74,6 +73,8 @@ export default function Page({ deviceType }: PageProps) {
         return () => clearTimeout(timeout);
     }, [accordion, selectedFont]);
 
+    const isMobile = deviceType === "mobile" || activeMedia === "mobile";
+
     return (
         <>
             <NextHead>
@@ -82,109 +83,94 @@ export default function Page({ deviceType }: PageProps) {
                 <meta name="description" content={meta.description} />
             </NextHead>
 
-            {deviceType === "mobile" || activeMedia === "mobile" ? (
-                <>
-                    <div
+            {isMobile && (
+                <div
+                    style={{
+                        padding: "calc(var(--grid-gap) * 2)",
+                        fontFamily: "var(--font-display)",
+                        lineHeight: 1.1,
+                    }}
+                >
+                    <p
                         style={{
-                            padding: "var(--grid-gap)",
-                            fontFamily: "var(--font-display)",
-                            lineHeight: 1.1,
+                            fontSize: "1.5em",
+                            hyphens: "auto",
+                            margin: 0,
+                            fontWeight: 500,
                         }}
                     >
-                        <p
-                            style={{
-                                fontSize: "1.5em",
-                                hyphens: "auto",
-                                margin: 0,
-                                fontWeight: 500,
-                            }}
+                        Dear,
+                        <br />
+                        Our Beloved User.
+                        <br />
+                        <br />
+                        The mobile version is still on progress and we don't
+                        know when it will be done. We are sorry, our developers
+                        team are too busy.
+                        <br />
+                        <br />
+                        Please visit the website on a bigger screen, so you can
+                        get fully experience of our {SITE_DATA.name}.
+                        <br />
+                        <br />
+                        Thanks,
+                        <br />
+                        <a
+                            href={SITE_DATA.author.url}
+                            rel="noopener"
+                            target="_blank"
                         >
-                            Dear,
-                            <br />
-                            Our Beloved User.
-                            <br />
-                            <br />
-                            The mobile version is still on progress and we don't
-                            know when it will be done. We are sorry, our
-                            developers team are too busy.
-                            <br />
-                            <br />
-                            Please visit the website on a bigger screen, so you
-                            can get fully experience of our Typetools.
-                            <br />
-                            <br />
-                            Thanks,
-                            <br />
-                            <a
-                                href="https://unforma.club"
-                                rel="noopener"
-                                target="_blank"
-                            >
-                                Unforma®Club Team.
-                            </a>
-                        </p>
-                    </div>
-                </>
-            ) : (
-                <>
-                    <Header />
-                    <main>
-                        <ul className={styles.container}>
-                            {accordion
-                                .sort((a, b) => {
-                                    if (a.label.length < b.label.length)
-                                        return -1;
-                                    if (a.label.length > b.label.length)
-                                        return 1;
-                                    else return 0;
-                                })
-                                .map((item, i) => {
-                                    const {
-                                        label,
-                                        component: Component,
-                                        isActive,
-                                    } = item;
-                                    return (
-                                        <li
-                                            key={i}
-                                            ref={isActive ? refParent : null}
-                                            className={styles.list}
-                                            data-active={isActive}
-                                        >
-                                            <AccordionButton
-                                                label={label}
-                                                active={isActive}
-                                                onClick={() => {
-                                                    setAccordion((prev) => {
-                                                        const prevActive =
-                                                            prev.find(
-                                                                (item) =>
-                                                                    item.isActive
-                                                            );
-                                                        if (!prevActive)
-                                                            return prev;
-                                                        prevActive.isActive =
-                                                            false;
-                                                        prev[i].isActive = true;
-                                                        return [...prev];
-                                                    });
-                                                }}
-                                            />
-
-                                            <AccordionLayout
-                                                isActive={isActive}
-                                                label={label}
-                                            >
-                                                <Component />
-                                            </AccordionLayout>
-                                        </li>
-                                    );
-                                })}
-                        </ul>
-                    </main>
-                    <Footer />
-                </>
+                            {SITE_DATA.author.name} Team.
+                        </a>
+                    </p>
+                </div>
             )}
+
+            {!isMobile && <Header />}
+            {!isMobile && (
+                <main>
+                    <ul className={styles.container}>
+                        {accordion
+                            // Sorting by label length for ladder ui looks
+                            .sort((a, b) => {
+                                if (a.label.length < b.label.length) return -1;
+                                if (a.label.length > b.label.length) return 1;
+                                else return 0;
+                            })
+                            .map((item, i) => {
+                                const { component: Component, isActive } = item;
+                                return (
+                                    <li
+                                        key={i}
+                                        ref={isActive ? refParent : null}
+                                        className={styles.list}
+                                        data-active={isActive}
+                                    >
+                                        <Component
+                                            {...item}
+                                            onClick={() => {
+                                                setAccordion((prev) => {
+                                                    const prevActive =
+                                                        prev.find(
+                                                            (item) =>
+                                                                item.isActive
+                                                        );
+                                                    if (!prevActive)
+                                                        return prev;
+                                                    prevActive.isActive = false;
+                                                    prev[i].isActive = true;
+                                                    return [...prev];
+                                                });
+                                            }}
+                                        />
+                                    </li>
+                                );
+                            })}
+                    </ul>
+                </main>
+            )}
+
+            <Footer />
         </>
     );
 }
