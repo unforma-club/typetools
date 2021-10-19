@@ -54,7 +54,8 @@ const Cell = (props: CellProps) => {
                 style={{
                     borderBottom: "1px solid",
                     fontSize: "0.65em",
-                    padding: "calc(var(--grid-gap) / 2)",
+                    padding:
+                        "calc(var(--grid-gap) / 4) calc(var(--grid-gap) / 2)",
                     display: "block",
                     overflow: "hidden",
                     whiteSpace: "nowrap",
@@ -121,14 +122,20 @@ const CustomUl = ({ glyphs }: CustomUlProps) => {
             }}
         >
             {memoizedGlyphs &&
-                memoizedGlyphs.map((item, i) => (
-                    <Cell
-                        key={i}
-                        glyph={item}
-                        metrics={selectedFont.typefaceMetrics}
-                        parentWidth={width}
-                    />
-                ))}
+                memoizedGlyphs
+                    .sort((a, b) => {
+                        if (a.id < b.id) return -1;
+                        if (a.id > b.id) return 1;
+                        else return 0;
+                    })
+                    .map((item, i) => (
+                        <Cell
+                            key={i}
+                            glyph={item}
+                            metrics={selectedFont.typefaceMetrics}
+                            parentWidth={width}
+                        />
+                    ))}
         </ul>
     );
 };
@@ -144,6 +151,7 @@ const buttonStyle: CSSProperties = {
     fontSize: "inherit",
     fontFamily: "inherit",
     marginLeft: -1,
+    fontFeatureSettings: `"tnum"`,
 };
 
 const GlyphWrapper = (props: BaseAccordion) => {

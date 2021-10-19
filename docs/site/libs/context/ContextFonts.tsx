@@ -1,11 +1,5 @@
 import type { FC } from "react";
-import {
-    createContext,
-    useCallback,
-    useContext,
-    useEffect,
-    useState,
-} from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 import {
     Typetools,
     BaseTypeface,
@@ -19,17 +13,21 @@ interface ContextFontAttr {
     chooseFont: (fullName: string) => void;
     selectedFont: BaseTypeface;
 }
+const unknownFonts = dummyFonts as unknown;
+const initFonts = unknownFonts as Array<BaseTypeface>;
+
+const sortedInitFonts = initFonts.sort((a, b) => {
+    if (a.typefaceFullName < b.typefaceFullName) return 1;
+    if (a.typefaceFullName > b.typefaceFullName) return -1;
+    return 0;
+});
 
 const init: ContextFontAttr = {
-    fonts: [],
+    fonts: sortedInitFonts,
+    selectedFont: sortedInitFonts[0],
     addFontFiles: () => ({}),
     chooseFont: () => ({}),
-    // @ts-ignore
-    selectedFont: {},
 };
-
-const ContextFont = createContext<ContextFontAttr>(init);
-export const useFonts = () => useContext(ContextFont);
 
 const readOpentype = async (files: FileReaderOutput[]) => {
     const tt = new Typetools();
@@ -38,27 +36,14 @@ const readOpentype = async (files: FileReaderOutput[]) => {
     return fontFace;
 };
 
+const ContextFont = createContext<ContextFontAttr>(init);
+export const useFonts = () => useContext(ContextFont);
+
 export const ProviderFonts: FC = ({ children }) => {
-    const unknownFonts = dummyFonts as unknown;
-    const initFonts = unknownFonts as Array<BaseTypeface>;
-    const sortedInitFonts = initFonts.sort((a, b) => {
-        if (a.typefaceFullName < b.typefaceFullName) return 1;
-        if (a.typefaceFullName > b.typefaceFullName) return -1;
-        return 0;
-    });
-
-    const [fonts, setFonts] = useState<Array<BaseTypeface>>(sortedInitFonts);
+    const [fonts, setFonts] = useState<Array<BaseTypeface>>(init.fonts);
     const [selectedFont, setSelectedFont] = useState<BaseTypeface>(
-        initFonts[0]
+        init.selectedFont
     );
-
-    const generateInitFonts = (files: Array<FileReaderOutput>) => {
-        readOpentype(files).then((res) => {
-            console.log(res);
-            setFonts(res);
-            setSelectedFont(res[0]);
-        });
-    };
 
     const addFontFiles = (files: Array<FileReaderOutput>) => {
         readOpentype(files).then((res) => {
@@ -67,7 +52,6 @@ export const ProviderFonts: FC = ({ children }) => {
             );
             setFonts((prev) => [...prev, ...newFonts]);
             setSelectedFont(newFonts[0]);
-            // console.log(JSON.stringify(newFonts, null, 2));
         });
     };
 
@@ -83,22 +67,6 @@ export const ProviderFonts: FC = ({ children }) => {
         },
         [fonts]
     );
-
-    useEffect(() => {
-        /**
-         * Update `fonts state` once on the browser, so we have the `opentype` object.
-         */
-        const newFiles: Array<FileReaderOutput> = sortedInitFonts.map(
-            (item) => ({
-                fileName: item.fileName,
-                fileSize: item.fileSize,
-                fileDestination: item.fileDestination,
-                fileUrl: item.fileUrl,
-                fileType: item.fileType,
-            })
-        );
-        generateInitFonts(newFiles);
-    }, []);
 
     return (
         <ContextFont.Provider

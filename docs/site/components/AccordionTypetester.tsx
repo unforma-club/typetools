@@ -4,8 +4,21 @@ import { CSSProperties, useCallback, useEffect, useState } from "react";
 import { AccordionLayout, BaseAccordion } from "./AccordionLayout";
 import { Slider } from "./Slider";
 
+const buttonStyle: CSSProperties = {
+    appearance: "none",
+    background: "none",
+    border: "1px solid",
+    fontSize: "inherit",
+    fontFamily: "inherit",
+    height: "1.75em",
+    cursor: "pointer",
+};
+
 export const AccordionTypetester = (props: BaseAccordion) => {
     const { selectedFont } = useFonts();
+    const { typefaceFeatures } = selectedFont;
+
+    const [fontSize, setFontSize] = useState(30);
 
     const [vf, setVf] = useState<Array<VariableAxes>>([]);
 
@@ -44,12 +57,31 @@ export const AccordionTypetester = (props: BaseAccordion) => {
     return (
         <AccordionLayout
             {...props}
+            style={{
+                overflow: "hidden",
+                height: "calc(100vh - calc(var(--header-height) * 6) - 1px)",
+            }}
             navigation={
                 <form
                     style={{
                         display: "flex",
                     }}
                 >
+                    <Slider
+                        label="Font Size"
+                        min={10}
+                        max={200}
+                        step={1}
+                        value={fontSize}
+                        defaultValue={30}
+                        onChange={(e) => {
+                            setFontSize(e);
+                        }}
+                        onDoubleClick={(e) => {
+                            setFontSize(e);
+                        }}
+                    />
+
                     {vf.map((item, i) => (
                         <Slider
                             key={i}
@@ -73,25 +105,48 @@ export const AccordionTypetester = (props: BaseAccordion) => {
                             }}
                         />
                     ))}
+                    {typefaceFeatures.length !== 0 && (
+                        <ul
+                            style={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                listStyle: "none",
+                                padding: 0,
+                                margin: 0,
+                                // gap: "var(--grid-gap)",
+                            }}
+                        >
+                            {typefaceFeatures.map((item, i) => (
+                                <li key={i}>
+                                    <button
+                                        onClick={(e) => e.preventDefault()}
+                                        style={{ ...buttonStyle }}
+                                    >
+                                        {item.tag}
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    )}
                 </form>
             }
         >
-            {selectedFont && (
-                <p
-                    style={{
-                        textAlign: "left",
-                        margin: 0,
-                        fontFamily: selectedFont.typefaceFullName,
-                        maxWidth: 1200,
-                        fontSize: "4em",
-                        ...customFontStyle(),
-                        transition:
-                            "font-variation-settings var(--main-transition)",
-                    }}
-                >
-                    {generateAlphabet()}
-                </p>
-            )}
+            <p
+                lang="en-US"
+                style={{
+                    textAlign: "center",
+                    margin: "0 auto",
+                    maxWidth: 1440,
+                    fontSize: fontSize,
+                    height: "100%",
+                    padding: "calc(var(--grid-gap) * 2)",
+                    transition:
+                        "font-variation-settings var(--main-transition)",
+                    ...customFontStyle(),
+                }}
+            >
+                {generateAlphabet()}
+            </p>
         </AccordionLayout>
     );
 };

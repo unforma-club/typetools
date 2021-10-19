@@ -219,6 +219,10 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                             <td>HTML</td>
                             <td>{glyph.html ?? "-"}</td>
                         </tr>
+                        <tr>
+                            <td>ID</td>
+                            <td>{glyph.id ?? "-"}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

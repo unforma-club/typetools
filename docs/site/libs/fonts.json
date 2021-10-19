@@ -1,33 +1,27 @@
 [
   {
-    "fileName": "ClashGrotesk-Variable.ttf",
-    "fileSize": 108072,
+    "fileName": "SpaceGrotesk-VariableFont_wght.ttf",
+    "fileSize": 134112,
     "fileType": "font/ttf",
-    "fileUrl": "/font/Clash-Grotesk/ClashGrotesk-Variable.ttf",
+    "fileUrl": "/font/Space-Grotesk/SpaceGrotesk-VariableFont_wght.ttf",
     "fileDestination": "",
-    "typefaceFamily": "Clash Grotesk Variable",
+    "typefaceFamily": "Space Grotesk",
     "typefaceSubFamily": "",
-    "typefaceFullName": "Clash Grotesk Variable Bold",
-    "typefaceShortName": " Bold",
+    "typefaceFullName": "Space Grotesk Light Variable",
+    "typefaceShortName": " Light",
     "typefaceVariable": {
       "axes": [
         {
           "tag": "wght",
           "name": "Weight",
-          "value": 700,
-          "defaultValue": 700,
-          "min": 200,
+          "value": 300,
+          "defaultValue": 300,
+          "min": 300,
           "max": 700,
           "step": 1
         }
       ],
       "instances": [
-        {
-          "coordinates": {
-            "wght": 200
-          },
-          "name": "Extralight"
-        },
         {
           "coordinates": {
             "wght": 300
@@ -48,12 +42,6 @@
         },
         {
           "coordinates": {
-            "wght": 600
-          },
-          "name": "Semibold"
-        },
-        {
-          "coordinates": {
             "wght": 700
           },
           "name": "Bold"
@@ -61,157 +49,1799 @@
       ]
     },
     "typefaceStyle": "roman",
-    "typefaceWeight": 700,
+    "typefaceWeight": 300,
     "typefaceFeatures": [
-      "aalt",
-      "case",
-      "ccmp",
-      "dlig",
-      "frac",
-      "liga",
-      "locl",
-      "ordn",
-      "salt",
-      "sups"
-    ],
-    "typefaceInfo": {
-      "copyright": "Copyright 2017-2021 Indian Type Foundry. All rights reserved.",
-      "trademark": "Clash is a trademark of the Indian Type Foundry.",
-      "version": "Version 1.001",
-      "designer": {
-        "value": "Shiva Nallaperumal",
-        "url": "www.fontstore.com/designers/shiva-nallaperumal"
+      {
+        "tag": "aalt",
+        "features": [
+          {
+            "sub": 5,
+            "by": 382
+          },
+          {
+            "sub": 7,
+            "by": 386
+          },
+          {
+            "sub": 12,
+            "by": 417
+          },
+          {
+            "sub": 13,
+            "by": 441
+          },
+          {
+            "sub": 30,
+            "by": 529
+          },
+          {
+            "sub": 36,
+            "by": 695
+          },
+          {
+            "sub": 54,
+            "by": 933
+          },
+          {
+            "sub": 119,
+            "by": 409
+          },
+          {
+            "sub": 120,
+            "by": 389
+          },
+          {
+            "sub": 121,
+            "by": 390
+          },
+          {
+            "sub": 136,
+            "by": 433
+          },
+          {
+            "sub": 137,
+            "by": 420
+          },
+          {
+            "sub": 138,
+            "by": 424
+          },
+          {
+            "sub": 139,
+            "by": 440
+          },
+          {
+            "sub": 140,
+            "by": 427
+          },
+          {
+            "sub": 141,
+            "by": 438
+          },
+          {
+            "sub": 142,
+            "by": 430
+          },
+          {
+            "sub": 143,
+            "by": 439
+          },
+          {
+            "sub": 144,
+            "by": 421
+          },
+          {
+            "sub": 145,
+            "by": 444
+          },
+          {
+            "sub": 192,
+            "by": 418
+          },
+          {
+            "sub": 193,
+            "by": 419
+          },
+          {
+            "sub": 194,
+            "by": 564
+          },
+          {
+            "sub": 195,
+            "by": 530
+          },
+          {
+            "sub": 196,
+            "by": 544
+          },
+          {
+            "sub": 197,
+            "by": 577
+          },
+          {
+            "sub": 198,
+            "by": 560
+          },
+          {
+            "sub": 199,
+            "by": 569
+          },
+          {
+            "sub": 200,
+            "by": 531
+          },
+          {
+            "sub": 201,
+            "by": 573
+          },
+          {
+            "sub": 202,
+            "by": 570
+          },
+          {
+            "sub": 221,
+            "by": 699
+          },
+          {
+            "sub": 222,
+            "by": 696
+          },
+          {
+            "sub": 223,
+            "by": 702
+          },
+          {
+            "sub": 277,
+            "by": 934
+          },
+          {
+            "sub": 278,
+            "by": 935
+          },
+          {
+            "sub": 279,
+            "by": 936
+          },
+          {
+            "sub": 289,
+            "by": 814
+          },
+          {
+            "sub": 383,
+            "by": 384
+          },
+          {
+            "sub": 387,
+            "by": 388
+          },
+          {
+            "sub": 391,
+            "by": 392
+          },
+          {
+            "sub": 393,
+            "by": 394
+          },
+          {
+            "sub": 395,
+            "by": 396
+          },
+          {
+            "sub": 422,
+            "by": 423
+          },
+          {
+            "sub": 425,
+            "by": 426
+          },
+          {
+            "sub": 428,
+            "by": 429
+          },
+          {
+            "sub": 431,
+            "by": 432
+          },
+          {
+            "sub": 434,
+            "by": 435
+          },
+          {
+            "sub": 436,
+            "by": 437
+          },
+          {
+            "sub": 442,
+            "by": 443
+          },
+          {
+            "sub": 446,
+            "by": 447
+          },
+          {
+            "sub": 453,
+            "by": 454
+          },
+          {
+            "sub": 532,
+            "by": 533
+          },
+          {
+            "sub": 534,
+            "by": 535
+          },
+          {
+            "sub": 536,
+            "by": 537
+          },
+          {
+            "sub": 538,
+            "by": 539
+          },
+          {
+            "sub": 540,
+            "by": 541
+          },
+          {
+            "sub": 542,
+            "by": 543
+          },
+          {
+            "sub": 545,
+            "by": 546
+          },
+          {
+            "sub": 547,
+            "by": 548
+          },
+          {
+            "sub": 549,
+            "by": 550
+          },
+          {
+            "sub": 551,
+            "by": 552
+          },
+          {
+            "sub": 553,
+            "by": 554
+          },
+          {
+            "sub": 558,
+            "by": 559
+          },
+          {
+            "sub": 561,
+            "by": 562
+          },
+          {
+            "sub": 565,
+            "by": 566
+          },
+          {
+            "sub": 567,
+            "by": 568
+          },
+          {
+            "sub": 574,
+            "by": 575
+          },
+          {
+            "sub": 579,
+            "by": 580
+          },
+          {
+            "sub": 582,
+            "by": 583
+          },
+          {
+            "sub": 697,
+            "by": 698
+          },
+          {
+            "sub": 700,
+            "by": 701
+          },
+          {
+            "sub": 703,
+            "by": 704
+          },
+          {
+            "sub": 937,
+            "by": 938
+          },
+          {
+            "sub": 939,
+            "by": 940
+          },
+          {
+            "sub": 941,
+            "by": 942
+          },
+          {
+            "sub": 943,
+            "by": 944
+          },
+          {
+            "sub": 945,
+            "by": 946
+          },
+          {
+            "sub": 947,
+            "by": 948
+          }
+        ]
       },
-      "license": {
-        "value": "This Font Software is protected under domestic and international trademark and copyright law. You agree to identify the ITF fonts by name and credit the ITF's ownership of the trademarks and copyrights in any design or production credits.",
-        "url": "https://fontshare.com/terms"
+      {
+        "tag": "case",
+        "features": [
+          {
+            "sub": 66,
+            "by": 586
+          },
+          {
+            "sub": 67,
+            "by": 587
+          },
+          {
+            "sub": 68,
+            "by": 584
+          },
+          {
+            "sub": 69,
+            "by": 585
+          },
+          {
+            "sub": 70,
+            "by": 819
+          },
+          {
+            "sub": 71,
+            "by": 822
+          },
+          {
+            "sub": 72,
+            "by": 875
+          },
+          {
+            "sub": 73,
+            "by": 581
+          },
+          {
+            "sub": 74,
+            "by": 600
+          },
+          {
+            "sub": 75,
+            "by": 578
+          },
+          {
+            "sub": 90,
+            "by": 666
+          },
+          {
+            "sub": 92,
+            "by": 832
+          },
+          {
+            "sub": 93,
+            "by": 714
+          },
+          {
+            "sub": 94,
+            "by": 715
+          },
+          {
+            "sub": 95,
+            "by": 729
+          },
+          {
+            "sub": 96,
+            "by": 662
+          },
+          {
+            "sub": 97,
+            "by": 660
+          },
+          {
+            "sub": 98,
+            "by": 825
+          },
+          {
+            "sub": 99,
+            "by": 602
+          },
+          {
+            "sub": 101,
+            "by": 576
+          },
+          {
+            "sub": 358,
+            "by": 555
+          },
+          {
+            "sub": 589,
+            "by": 590
+          },
+          {
+            "sub": 591,
+            "by": 592
+          },
+          {
+            "sub": 593,
+            "by": 594
+          },
+          {
+            "sub": 595,
+            "by": 596
+          },
+          {
+            "sub": 597,
+            "by": 598
+          },
+          {
+            "sub": 604,
+            "by": 606
+          },
+          {
+            "sub": 610,
+            "by": 611
+          },
+          {
+            "sub": 612,
+            "by": 613
+          },
+          {
+            "sub": 614,
+            "by": 615
+          },
+          {
+            "sub": 616,
+            "by": 617
+          },
+          {
+            "sub": 618,
+            "by": 619
+          },
+          {
+            "sub": 625,
+            "by": 626
+          },
+          {
+            "sub": 629,
+            "by": 630
+          },
+          {
+            "sub": 634,
+            "by": 635
+          },
+          {
+            "sub": 652,
+            "by": 650
+          },
+          {
+            "sub": 653,
+            "by": 650
+          },
+          {
+            "sub": 654,
+            "by": 650
+          },
+          {
+            "sub": 673,
+            "by": 674
+          },
+          {
+            "sub": 680,
+            "by": 678
+          },
+          {
+            "sub": 681,
+            "by": 678
+          },
+          {
+            "sub": 682,
+            "by": 678
+          },
+          {
+            "sub": 688,
+            "by": 686
+          },
+          {
+            "sub": 689,
+            "by": 686
+          },
+          {
+            "sub": 690,
+            "by": 686
+          },
+          {
+            "sub": 705,
+            "by": 706
+          },
+          {
+            "sub": 710,
+            "by": 711
+          },
+          {
+            "sub": 712,
+            "by": 713
+          },
+          {
+            "sub": 719,
+            "by": 720
+          },
+          {
+            "sub": 723,
+            "by": 724
+          },
+          {
+            "sub": 727,
+            "by": 728
+          },
+          {
+            "sub": 730,
+            "by": 731
+          },
+          {
+            "sub": 747,
+            "by": 748
+          },
+          {
+            "sub": 749,
+            "by": 750
+          },
+          {
+            "sub": 751,
+            "by": 752
+          },
+          {
+            "sub": 759,
+            "by": 760
+          },
+          {
+            "sub": 773,
+            "by": 771
+          },
+          {
+            "sub": 774,
+            "by": 771
+          },
+          {
+            "sub": 775,
+            "by": 771
+          },
+          {
+            "sub": 780,
+            "by": 781
+          },
+          {
+            "sub": 782,
+            "by": 783
+          },
+          {
+            "sub": 809,
+            "by": 807
+          },
+          {
+            "sub": 810,
+            "by": 807
+          },
+          {
+            "sub": 811,
+            "by": 807
+          },
+          {
+            "sub": 826,
+            "by": 827
+          },
+          {
+            "sub": 836,
+            "by": 837
+          },
+          {
+            "sub": 838,
+            "by": 839
+          },
+          {
+            "sub": 842,
+            "by": 843
+          },
+          {
+            "sub": 862,
+            "by": 860
+          },
+          {
+            "sub": 863,
+            "by": 860
+          },
+          {
+            "sub": 864,
+            "by": 860
+          },
+          {
+            "sub": 870,
+            "by": 868
+          },
+          {
+            "sub": 871,
+            "by": 868
+          },
+          {
+            "sub": 872,
+            "by": 868
+          },
+          {
+            "sub": 878,
+            "by": 879
+          },
+          {
+            "sub": 894,
+            "by": 892
+          },
+          {
+            "sub": 895,
+            "by": 892
+          },
+          {
+            "sub": 896,
+            "by": 892
+          },
+          {
+            "sub": 898,
+            "by": 899
+          },
+          {
+            "sub": 904,
+            "by": 902
+          },
+          {
+            "sub": 905,
+            "by": 902
+          },
+          {
+            "sub": 906,
+            "by": 902
+          },
+          {
+            "sub": 956,
+            "by": 952
+          },
+          {
+            "sub": 958,
+            "by": 952
+          },
+          {
+            "sub": 960,
+            "by": 952
+          }
+        ]
       },
-      "manufacturer": {
-        "value": "Indian Type Foundry",
-        "url": "https://indiantypefoundry.com"
+      {
+        "tag": "ccmp",
+        "features": []
+      },
+      {
+        "tag": "dnom",
+        "features": [
+          {
+            "sub": 56,
+            "by": 950
+          },
+          {
+            "sub": 57,
+            "by": 806
+          },
+          {
+            "sub": 58,
+            "by": 901
+          },
+          {
+            "sub": 59,
+            "by": 891
+          },
+          {
+            "sub": 60,
+            "by": 685
+          },
+          {
+            "sub": 61,
+            "by": 677
+          },
+          {
+            "sub": 62,
+            "by": 867
+          },
+          {
+            "sub": 63,
+            "by": 859
+          },
+          {
+            "sub": 64,
+            "by": 649
+          },
+          {
+            "sub": 65,
+            "by": 770
+          }
+        ]
+      },
+      {
+        "tag": "frac",
+        "features": [
+          {
+            "sub": 72,
+            "by": 305
+          },
+          {
+            "sub": 56,
+            "by": 954
+          },
+          {
+            "sub": 57,
+            "by": 808
+          },
+          {
+            "sub": 58,
+            "by": 903
+          },
+          {
+            "sub": 59,
+            "by": 893
+          },
+          {
+            "sub": 60,
+            "by": 687
+          },
+          {
+            "sub": 61,
+            "by": 679
+          },
+          {
+            "sub": 62,
+            "by": 869
+          },
+          {
+            "sub": 63,
+            "by": 861
+          },
+          {
+            "sub": 64,
+            "by": 651
+          },
+          {
+            "sub": 65,
+            "by": 772
+          }
+        ]
+      },
+      {
+        "tag": "liga",
+        "features": []
+      },
+      {
+        "tag": "lnum",
+        "features": [
+          {
+            "sub": 652,
+            "by": 64
+          },
+          {
+            "sub": 680,
+            "by": 61
+          },
+          {
+            "sub": 688,
+            "by": 60
+          },
+          {
+            "sub": 773,
+            "by": 65
+          },
+          {
+            "sub": 809,
+            "by": 57
+          },
+          {
+            "sub": 862,
+            "by": 63
+          },
+          {
+            "sub": 870,
+            "by": 62
+          },
+          {
+            "sub": 894,
+            "by": 59
+          },
+          {
+            "sub": 904,
+            "by": 58
+          },
+          {
+            "sub": 956,
+            "by": 56
+          }
+        ]
+      },
+      {
+        "tag": "locl",
+        "features": []
+      },
+      {
+        "tag": "numr",
+        "features": [
+          {
+            "sub": 56,
+            "by": 954
+          },
+          {
+            "sub": 57,
+            "by": 808
+          },
+          {
+            "sub": 58,
+            "by": 903
+          },
+          {
+            "sub": 59,
+            "by": 893
+          },
+          {
+            "sub": 60,
+            "by": 687
+          },
+          {
+            "sub": 61,
+            "by": 679
+          },
+          {
+            "sub": 62,
+            "by": 869
+          },
+          {
+            "sub": 63,
+            "by": 861
+          },
+          {
+            "sub": 64,
+            "by": 651
+          },
+          {
+            "sub": 65,
+            "by": 772
+          }
+        ]
+      },
+      {
+        "tag": "onum",
+        "features": [
+          {
+            "sub": 56,
+            "by": 956
+          },
+          {
+            "sub": 57,
+            "by": 809
+          },
+          {
+            "sub": 58,
+            "by": 904
+          },
+          {
+            "sub": 59,
+            "by": 894
+          },
+          {
+            "sub": 60,
+            "by": 688
+          },
+          {
+            "sub": 61,
+            "by": 680
+          },
+          {
+            "sub": 62,
+            "by": 870
+          },
+          {
+            "sub": 63,
+            "by": 862
+          },
+          {
+            "sub": 64,
+            "by": 652
+          },
+          {
+            "sub": 65,
+            "by": 773
+          },
+          {
+            "sub": 653,
+            "by": 654
+          },
+          {
+            "sub": 681,
+            "by": 682
+          },
+          {
+            "sub": 689,
+            "by": 690
+          },
+          {
+            "sub": 774,
+            "by": 775
+          },
+          {
+            "sub": 810,
+            "by": 811
+          },
+          {
+            "sub": 863,
+            "by": 864
+          },
+          {
+            "sub": 871,
+            "by": 872
+          },
+          {
+            "sub": 895,
+            "by": 896
+          },
+          {
+            "sub": 905,
+            "by": 906
+          },
+          {
+            "sub": 958,
+            "by": 960
+          }
+        ]
+      },
+      {
+        "tag": "ordn",
+        "features": []
+      },
+      {
+        "tag": "pnum",
+        "features": [
+          {
+            "sub": 653,
+            "by": 64
+          },
+          {
+            "sub": 654,
+            "by": 652
+          },
+          {
+            "sub": 681,
+            "by": 61
+          },
+          {
+            "sub": 682,
+            "by": 680
+          },
+          {
+            "sub": 689,
+            "by": 60
+          },
+          {
+            "sub": 690,
+            "by": 688
+          },
+          {
+            "sub": 774,
+            "by": 65
+          },
+          {
+            "sub": 775,
+            "by": 773
+          },
+          {
+            "sub": 810,
+            "by": 57
+          },
+          {
+            "sub": 811,
+            "by": 809
+          },
+          {
+            "sub": 863,
+            "by": 63
+          },
+          {
+            "sub": 864,
+            "by": 862
+          },
+          {
+            "sub": 871,
+            "by": 62
+          },
+          {
+            "sub": 872,
+            "by": 870
+          },
+          {
+            "sub": 895,
+            "by": 59
+          },
+          {
+            "sub": 896,
+            "by": 894
+          },
+          {
+            "sub": 905,
+            "by": 58
+          },
+          {
+            "sub": 906,
+            "by": 904
+          },
+          {
+            "sub": 958,
+            "by": 56
+          },
+          {
+            "sub": 960,
+            "by": 956
+          }
+        ]
+      },
+      {
+        "tag": "salt",
+        "features": [
+          {
+            "sub": 30,
+            "by": 529
+          },
+          {
+            "sub": 194,
+            "by": 564
+          },
+          {
+            "sub": 195,
+            "by": 530
+          },
+          {
+            "sub": 196,
+            "by": 544
+          },
+          {
+            "sub": 197,
+            "by": 577
+          },
+          {
+            "sub": 198,
+            "by": 560
+          },
+          {
+            "sub": 199,
+            "by": 569
+          },
+          {
+            "sub": 200,
+            "by": 531
+          },
+          {
+            "sub": 201,
+            "by": 573
+          },
+          {
+            "sub": 202,
+            "by": 570
+          },
+          {
+            "sub": 289,
+            "by": 814
+          },
+          {
+            "sub": 532,
+            "by": 533
+          },
+          {
+            "sub": 534,
+            "by": 535
+          },
+          {
+            "sub": 536,
+            "by": 537
+          },
+          {
+            "sub": 538,
+            "by": 539
+          },
+          {
+            "sub": 540,
+            "by": 541
+          },
+          {
+            "sub": 542,
+            "by": 543
+          },
+          {
+            "sub": 545,
+            "by": 546
+          },
+          {
+            "sub": 547,
+            "by": 548
+          },
+          {
+            "sub": 549,
+            "by": 550
+          },
+          {
+            "sub": 551,
+            "by": 552
+          },
+          {
+            "sub": 553,
+            "by": 554
+          },
+          {
+            "sub": 558,
+            "by": 559
+          },
+          {
+            "sub": 561,
+            "by": 562
+          },
+          {
+            "sub": 565,
+            "by": 566
+          },
+          {
+            "sub": 567,
+            "by": 568
+          },
+          {
+            "sub": 574,
+            "by": 575
+          }
+        ]
+      },
+      {
+        "tag": "sinf",
+        "features": [
+          {
+            "sub": 56,
+            "by": 963
+          },
+          {
+            "sub": 57,
+            "by": 812
+          },
+          {
+            "sub": 58,
+            "by": 907
+          },
+          {
+            "sub": 59,
+            "by": 897
+          },
+          {
+            "sub": 60,
+            "by": 691
+          },
+          {
+            "sub": 61,
+            "by": 683
+          },
+          {
+            "sub": 62,
+            "by": 873
+          },
+          {
+            "sub": 63,
+            "by": 865
+          },
+          {
+            "sub": 64,
+            "by": 655
+          },
+          {
+            "sub": 65,
+            "by": 776
+          },
+          {
+            "sub": 70,
+            "by": 820
+          },
+          {
+            "sub": 71,
+            "by": 823
+          }
+        ]
+      },
+      {
+        "tag": "ss01",
+        "features": [
+          {
+            "sub": 30,
+            "by": 529
+          },
+          {
+            "sub": 194,
+            "by": 564
+          },
+          {
+            "sub": 195,
+            "by": 530
+          },
+          {
+            "sub": 196,
+            "by": 544
+          },
+          {
+            "sub": 197,
+            "by": 577
+          },
+          {
+            "sub": 198,
+            "by": 560
+          },
+          {
+            "sub": 199,
+            "by": 569
+          },
+          {
+            "sub": 200,
+            "by": 531
+          },
+          {
+            "sub": 201,
+            "by": 573
+          },
+          {
+            "sub": 202,
+            "by": 570
+          },
+          {
+            "sub": 289,
+            "by": 814
+          },
+          {
+            "sub": 532,
+            "by": 533
+          },
+          {
+            "sub": 534,
+            "by": 535
+          },
+          {
+            "sub": 536,
+            "by": 537
+          },
+          {
+            "sub": 538,
+            "by": 539
+          },
+          {
+            "sub": 540,
+            "by": 541
+          },
+          {
+            "sub": 542,
+            "by": 543
+          },
+          {
+            "sub": 545,
+            "by": 546
+          },
+          {
+            "sub": 547,
+            "by": 548
+          },
+          {
+            "sub": 549,
+            "by": 550
+          },
+          {
+            "sub": 551,
+            "by": 552
+          },
+          {
+            "sub": 553,
+            "by": 554
+          },
+          {
+            "sub": 558,
+            "by": 559
+          },
+          {
+            "sub": 561,
+            "by": 562
+          },
+          {
+            "sub": 565,
+            "by": 566
+          },
+          {
+            "sub": 567,
+            "by": 568
+          },
+          {
+            "sub": 574,
+            "by": 575
+          }
+        ]
+      },
+      {
+        "tag": "ss02",
+        "features": [
+          {
+            "sub": 36,
+            "by": 695
+          },
+          {
+            "sub": 221,
+            "by": 699
+          },
+          {
+            "sub": 222,
+            "by": 696
+          },
+          {
+            "sub": 223,
+            "by": 702
+          },
+          {
+            "sub": 697,
+            "by": 698
+          },
+          {
+            "sub": 700,
+            "by": 701
+          },
+          {
+            "sub": 703,
+            "by": 704
+          }
+        ]
+      },
+      {
+        "tag": "ss03",
+        "features": [
+          {
+            "sub": 54,
+            "by": 933
+          },
+          {
+            "sub": 277,
+            "by": 934
+          },
+          {
+            "sub": 278,
+            "by": 935
+          },
+          {
+            "sub": 279,
+            "by": 936
+          },
+          {
+            "sub": 937,
+            "by": 938
+          },
+          {
+            "sub": 939,
+            "by": 940
+          },
+          {
+            "sub": 941,
+            "by": 942
+          },
+          {
+            "sub": 943,
+            "by": 944
+          },
+          {
+            "sub": 945,
+            "by": 946
+          },
+          {
+            "sub": 947,
+            "by": 948
+          }
+        ]
+      },
+      {
+        "tag": "ss04",
+        "features": [
+          {
+            "sub": 5,
+            "by": 382
+          },
+          {
+            "sub": 7,
+            "by": 386
+          },
+          {
+            "sub": 13,
+            "by": 441
+          },
+          {
+            "sub": 119,
+            "by": 409
+          },
+          {
+            "sub": 120,
+            "by": 389
+          },
+          {
+            "sub": 121,
+            "by": 390
+          },
+          {
+            "sub": 145,
+            "by": 444
+          },
+          {
+            "sub": 192,
+            "by": 418
+          },
+          {
+            "sub": 193,
+            "by": 419
+          },
+          {
+            "sub": 383,
+            "by": 384
+          },
+          {
+            "sub": 387,
+            "by": 388
+          },
+          {
+            "sub": 391,
+            "by": 392
+          },
+          {
+            "sub": 393,
+            "by": 394
+          },
+          {
+            "sub": 395,
+            "by": 396
+          },
+          {
+            "sub": 442,
+            "by": 443
+          },
+          {
+            "sub": 446,
+            "by": 447
+          },
+          {
+            "sub": 453,
+            "by": 454
+          },
+          {
+            "sub": 579,
+            "by": 580
+          },
+          {
+            "sub": 582,
+            "by": 583
+          }
+        ]
+      },
+      {
+        "tag": "ss05",
+        "features": [
+          {
+            "sub": 12,
+            "by": 417
+          },
+          {
+            "sub": 136,
+            "by": 433
+          },
+          {
+            "sub": 137,
+            "by": 420
+          },
+          {
+            "sub": 138,
+            "by": 424
+          },
+          {
+            "sub": 139,
+            "by": 440
+          },
+          {
+            "sub": 140,
+            "by": 427
+          },
+          {
+            "sub": 141,
+            "by": 438
+          },
+          {
+            "sub": 142,
+            "by": 430
+          },
+          {
+            "sub": 143,
+            "by": 439
+          },
+          {
+            "sub": 144,
+            "by": 421
+          },
+          {
+            "sub": 422,
+            "by": 423
+          },
+          {
+            "sub": 425,
+            "by": 426
+          },
+          {
+            "sub": 428,
+            "by": 429
+          },
+          {
+            "sub": 431,
+            "by": 432
+          },
+          {
+            "sub": 434,
+            "by": 435
+          },
+          {
+            "sub": 436,
+            "by": 437
+          }
+        ]
+      },
+      {
+        "tag": "subs",
+        "features": [
+          {
+            "sub": 56,
+            "by": 963
+          },
+          {
+            "sub": 57,
+            "by": 812
+          },
+          {
+            "sub": 58,
+            "by": 907
+          },
+          {
+            "sub": 59,
+            "by": 897
+          },
+          {
+            "sub": 60,
+            "by": 691
+          },
+          {
+            "sub": 61,
+            "by": 683
+          },
+          {
+            "sub": 62,
+            "by": 873
+          },
+          {
+            "sub": 63,
+            "by": 865
+          },
+          {
+            "sub": 64,
+            "by": 655
+          },
+          {
+            "sub": 65,
+            "by": 776
+          },
+          {
+            "sub": 70,
+            "by": 820
+          },
+          {
+            "sub": 71,
+            "by": 823
+          }
+        ]
+      },
+      {
+        "tag": "sups",
+        "features": [
+          {
+            "sub": 56,
+            "by": 965
+          },
+          {
+            "sub": 57,
+            "by": 359
+          },
+          {
+            "sub": 58,
+            "by": 360
+          },
+          {
+            "sub": 59,
+            "by": 361
+          },
+          {
+            "sub": 60,
+            "by": 692
+          },
+          {
+            "sub": 61,
+            "by": 684
+          },
+          {
+            "sub": 62,
+            "by": 874
+          },
+          {
+            "sub": 63,
+            "by": 866
+          },
+          {
+            "sub": 64,
+            "by": 656
+          },
+          {
+            "sub": 65,
+            "by": 777
+          },
+          {
+            "sub": 70,
+            "by": 821
+          },
+          {
+            "sub": 71,
+            "by": 824
+          }
+        ]
+      },
+      {
+        "tag": "tnum",
+        "features": [
+          {
+            "sub": 56,
+            "by": 958
+          },
+          {
+            "sub": 57,
+            "by": 810
+          },
+          {
+            "sub": 58,
+            "by": 905
+          },
+          {
+            "sub": 59,
+            "by": 895
+          },
+          {
+            "sub": 60,
+            "by": 689
+          },
+          {
+            "sub": 61,
+            "by": 681
+          },
+          {
+            "sub": 62,
+            "by": 871
+          },
+          {
+            "sub": 63,
+            "by": 863
+          },
+          {
+            "sub": 64,
+            "by": 653
+          },
+          {
+            "sub": 65,
+            "by": 774
+          },
+          {
+            "sub": 652,
+            "by": 654
+          },
+          {
+            "sub": 680,
+            "by": 682
+          },
+          {
+            "sub": 688,
+            "by": 690
+          },
+          {
+            "sub": 773,
+            "by": 775
+          },
+          {
+            "sub": 809,
+            "by": 811
+          },
+          {
+            "sub": 862,
+            "by": 864
+          },
+          {
+            "sub": 870,
+            "by": 872
+          },
+          {
+            "sub": 894,
+            "by": 896
+          },
+          {
+            "sub": 904,
+            "by": 906
+          },
+          {
+            "sub": 956,
+            "by": 960
+          }
+        ]
+      },
+      {
+        "tag": "zero",
+        "features": [
+          {
+            "sub": 56,
+            "by": 962
+          },
+          {
+            "sub": 950,
+            "by": 951
+          },
+          {
+            "sub": 952,
+            "by": 953
+          },
+          {
+            "sub": 954,
+            "by": 955
+          },
+          {
+            "sub": 956,
+            "by": 957
+          },
+          {
+            "sub": 958,
+            "by": 959
+          },
+          {
+            "sub": 960,
+            "by": 961
+          },
+          {
+            "sub": 963,
+            "by": 964
+          },
+          {
+            "sub": 965,
+            "by": 966
+          }
+        ]
       }
-    },
-    "typefaceTables": [
-      "os2",
-      "cmap",
-      "head",
-      "hhea",
-      "maxp",
-      "post",
-      "name",
-      "gpos",
-      "gsub",
-      "fvar"
-    ],
-    "typefaceMetrics": {
-      "unitsPerEm": 1000,
-      "usWinAscent": 890,
-      "usWinDescent": 250,
-      "sTypoAscender": 890,
-      "sTypoDescender": -250,
-      "descender": -250,
-      "ascender": 890,
-      "xHeight": 514,
-      "capHeight": 670,
-      "baseLine": 0
-    }
-  },
-  {
-    "fileName": "GeneralSans-Variable.ttf",
-    "fileSize": 110820,
-    "fileType": "font/ttf",
-    "fileUrl": "/font/General-Sans/GeneralSans-Variable.ttf",
-    "fileDestination": "",
-    "typefaceFamily": "General Sans Variable",
-    "typefaceSubFamily": "",
-    "typefaceFullName": "General Sans Variable Bold",
-    "typefaceShortName": " Bold",
-    "typefaceVariable": {
-      "axes": [
-        {
-          "tag": "wght",
-          "name": "Weight",
-          "value": 700,
-          "defaultValue": 700,
-          "min": 200,
-          "max": 700,
-          "step": 1
-        }
-      ],
-      "instances": [
-        {
-          "coordinates": {
-            "wght": 200
-          },
-          "name": "Extralight"
-        },
-        {
-          "coordinates": {
-            "wght": 300
-          },
-          "name": "Light"
-        },
-        {
-          "coordinates": {
-            "wght": 400
-          },
-          "name": "Regular"
-        },
-        {
-          "coordinates": {
-            "wght": 500
-          },
-          "name": "Medium"
-        },
-        {
-          "coordinates": {
-            "wght": 600
-          },
-          "name": "Semibold"
-        },
-        {
-          "coordinates": {
-            "wght": 700
-          },
-          "name": "Bold"
-        }
-      ]
-    },
-    "typefaceStyle": "roman",
-    "typefaceWeight": 700,
-    "typefaceFeatures": [
-      "aalt",
-      "case",
-      "ccmp",
-      "dnom",
-      "frac",
-      "liga",
-      "locl",
-      "numr",
-      "ordn",
-      "salt",
-      "sinf",
-      "ss01",
-      "ss02",
-      "ss03",
-      "subs",
-      "sups"
     ],
     "typefaceInfo": {
-      "copyright": "Copyright 2017-2021 Indian Type Foundry. All rights reserved.",
-      "trademark": "General is a trademark of the Indian Type Foundry.",
+      "copyright": "Copyright 2020 The Space Grotesk Project Authors (https://github.com/floriankarsten/space-grotesk)",
+      "trademark": "",
       "version": "Version 2.000",
       "designer": {
-        "value": "Frode Helland",
-        "url": "https://www.indiantypefoundry.com"
+        "value": "Florian Karsten",
+        "url": "https://fonts.floriankarsten.com"
       },
       "license": {
-        "value": "This Font Software is protected under domestic and international trademark and copyright law. You agree to identify the ITF fonts by name and credit the ITF's ownership of the trademarks and copyrights in any design or production credits.",
-        "url": "https://fontshare.com/terms"
+        "value": "This Font Software is licensed under the SIL Open Font License, Version 1.1. This license is available with a FAQ at: https://scripts.sil.org/OFL",
+        "url": "https://scripts.sil.org/OFL"
       },
       "manufacturer": {
-        "value": "Indian Type Foundry",
-        "url": "https://indiantypefoundry.com"
+        "value": "Florian Karsten",
+        "url": "https://fonts.floriankarsten.com"
       }
     },
     "typefaceTables": [
@@ -221,6 +1851,7 @@
       "hhea",
       "maxp",
       "post",
+      "prep",
       "name",
       "gpos",
       "gsub",
@@ -228,15 +1859,19 @@
     ],
     "typefaceMetrics": {
       "unitsPerEm": 1000,
-      "usWinAscent": 1010,
-      "usWinDescent": 240,
-      "sTypoAscender": 1010,
-      "sTypoDescender": -240,
-      "descender": -240,
-      "ascender": 1010,
-      "xHeight": 538,
-      "capHeight": 718,
-      "baseLine": 0
+      "usWinAscent": 1150,
+      "usWinDescent": 292,
+      "sTypoAscender": 984,
+      "sTypoDescender": -292,
+      "descender": -292,
+      "ascender": 984,
+      "xHeight": 486,
+      "capHeight": 700,
+      "baseLine": 0,
+      "xMax": 1203,
+      "xMin": -49,
+      "yMax": 1081,
+      "yMin": -274
     }
   }
 ]

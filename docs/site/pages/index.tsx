@@ -15,7 +15,7 @@ import { AccordionMetrics } from "components/AccordionMetrics";
 import { AccordionTypetester } from "components/AccordionTypetester";
 
 interface Accordion {
-    label: "Typetester" | "Glyph" | "Metric" | "Info";
+    label: "Typewriter" | "Glyph" | "Vertical Metric" | "Info";
     isActive: boolean;
     component: ComponentType<BaseAccordion>;
 }
@@ -40,15 +40,15 @@ export default function Page({ deviceType }: PageProps) {
             component: (props: BaseAccordion) => <AccordionGlyphs {...props} />,
         },
         {
-            label: "Metric",
-            isActive: false,
+            label: "Vertical Metric",
+            isActive: true,
             component: (props: BaseAccordion) => (
                 <AccordionMetrics {...props} />
             ),
         },
         {
-            label: "Typetester",
-            isActive: true,
+            label: "Typewriter",
+            isActive: false,
             component: (props: BaseAccordion) => (
                 <AccordionTypetester {...props} />
             ),
@@ -148,6 +148,11 @@ export default function Page({ deviceType }: PageProps) {
                                     >
                                         <Component
                                             {...item}
+                                            // buttonStyle={{
+                                            //     backgroundColor: `var(--accents-${
+                                            //         i + 2
+                                            //     })`,
+                                            // }}
                                             onClick={() => {
                                                 setAccordion((prev) => {
                                                     const prevActive =

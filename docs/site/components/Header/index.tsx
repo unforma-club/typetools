@@ -17,10 +17,13 @@ export const Header = () => {
                 rel="noopener"
                 style={{
                     fontSize: "1em",
-                    fontVariationSettings: `"wght" 500`,
+                    fontWeight: "bold",
                     fontFamily: "var(--font-display)",
+                    fontFeatureSettings: `"ss01", "ss04"`,
+                    lineHeight: 1,
                 }}
             >
+                {SITE_DATA.name} by <br />
                 {SITE_DATA.author.name}
             </a>
             <div className={styles.selector}>

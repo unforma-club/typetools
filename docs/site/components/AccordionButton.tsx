@@ -1,4 +1,4 @@
-import { CSSProperties } from "react";
+import { CSSProperties, forwardRef } from "react";
 import styles from "./accordion.module.scss";
 
 interface AccordionButtonProps {
@@ -8,10 +8,14 @@ interface AccordionButtonProps {
     style?: CSSProperties;
 }
 
-export const AccordionButton = (props: AccordionButtonProps) => {
+export const AccordionButton = forwardRef<
+    HTMLButtonElement,
+    AccordionButtonProps
+>((props: AccordionButtonProps, ref) => {
     const { label, onClick, active, style } = props;
     return (
         <button
+            ref={ref}
             name={label}
             title={label}
             onClick={onClick}
@@ -25,4 +29,4 @@ export const AccordionButton = (props: AccordionButtonProps) => {
             </span>
         </button>
     );
-};
+});

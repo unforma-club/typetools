@@ -1,18 +1,9 @@
 @font-face {
-    font-family: "Clash Grotesk";
+    font-family: "Space Grotesk Light Variable";
     font-style: normal;
-    font-weight: 200 700;
+    font-weight: 300 700;
     font-display: block;
-    src: url("/font/Clash-Grotesk/ClashGrotesk-Variable.woff2")
-        format("woff2-variations");
-}
-@font-face {
-    font-family: "General Sans";
-    font-style: normal;
-    font-weight: 200 700;
-    font-display: block;
-    src: url("/font/General-Sans/GeneralSans-Variable.woff2")
-        format("woff2-variations");
+    src: url("/font/Space-Grotesk/SpaceGrotesk-VariableFont_wght.ttf");
 }
 
 :root {
@@ -22,9 +13,9 @@
     --main-transition: 300ms ease;
     --bezier-transition: 300ms cubic-bezier(1, 0, 0, 1);
 
-    --font-sans: "General Sans", sans-serif;
     --font-monospace: "JetBrains Mono", monospace;
-    --font-display: "Clash Grotesk", sans-serif;
+    --font-sans: "Space Grotesk Light Variable", var(--DEFAULT-FONT);
+    --font-display: "Space Grotesk Light Variable", var(--DEFAULT-FONT);
 
     --grid-gap: 0.5em;
     --geist-ufc-color: #ff5eab;

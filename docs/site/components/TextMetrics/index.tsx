@@ -59,7 +59,7 @@ export const TextMetrics = (props: TextMetricsProps) => {
         <div
             style={{
                 position: "relative",
-                overflow: "hidden",
+                // overflow: "hidden",
             }}
         >
             {title && (
@@ -68,7 +68,6 @@ export const TextMetrics = (props: TextMetricsProps) => {
                         fontWeight: "bold",
                         fontSize: "2em",
                         textTransform: "capitalize",
-                        // marginTop: "calc(var(--header-height) / 2)",
                         zIndex: 10,
                         position: "relative",
                     }}
@@ -150,7 +149,7 @@ export const TextMetrics = (props: TextMetricsProps) => {
                     data-scrollbar="hide"
                     style={{
                         ...style,
-                        fontFamily: typefaceFullName,
+                        fontFamily: `${typefaceFullName}, var(--font-sans)`,
                         fontStyle:
                             typefaceStyle === "italic" ? "italic" : "normal",
                         fontSize,
