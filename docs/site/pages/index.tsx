@@ -4,7 +4,7 @@ import type { ComponentType } from "react";
 import type { BaseAccordion } from "components/AccordionLayout";
 import NextHead from "next/head";
 import { useEffect, useRef, useState } from "react";
-import { SITE_DATA } from "libs/constants";
+import { SITE_DATA, META_DATA } from "libs/constants";
 import { useMediaQuery } from "libs/hooks";
 import { useFonts } from "libs/context/ContextFonts";
 import { Footer } from "components/Footer";
@@ -23,12 +23,6 @@ interface Accordion {
 type PageProps = InferGetServerSidePropsType<typeof getServerSideProps>;
 
 export default function Page({ deviceType }: PageProps) {
-    const meta = {
-        title: `${SITE_DATA.name} by ${SITE_DATA.author.name}`,
-        description: `${SITE_DATA.name} by ${SITE_DATA.author.name}`,
-        url: "https://typetools.unforma.club",
-        image: `/image/social_card/twitter.png`,
-    };
     const { active: activeMedia } = useMediaQuery();
     const [accordion, setAccordion] = useState<Array<Accordion>>([
         {
@@ -80,27 +74,27 @@ export default function Page({ deviceType }: PageProps) {
     return (
         <>
             <NextHead>
-                <title>{meta.title}</title>
-                <meta name="title" content={meta.title} />
-                <meta name="description" content={meta.description} />
+                <title>{META_DATA.title}</title>
+                <meta name="title" content={META_DATA.title} />
+                <meta name="description" content={META_DATA.description} />
 
                 <meta property="og:type" content="website" />
-                <meta property="og:url" content={meta.url} />
-                <meta property="og:title" content={meta.title} />
-                <meta property="og:description" content={meta.title} />
+                <meta property="og:url" content={META_DATA.url} />
+                <meta property="og:title" content={META_DATA.title} />
                 <meta
-                    property="og:image"
-                    content={`${meta.url}${meta.image}`}
+                    property="og:description"
+                    content={META_DATA.description}
                 />
+                <meta property="og:image" content={META_DATA.image} />
 
                 <meta property="twitter:card" content="summary_large_image" />
-                <meta property="twitter:url" content={meta.url} />
-                <meta property="twitter:title" content={meta.title} />
-                <meta property="twitter:description" content={meta.title} />
+                <meta property="twitter:url" content={META_DATA.url} />
+                <meta property="twitter:title" content={META_DATA.title} />
                 <meta
-                    property="twitter:image"
-                    content={`${meta.url}${meta.image}`}
+                    property="twitter:description"
+                    content={META_DATA.description}
                 />
+                <meta property="twitter:image" content={META_DATA.image} />
             </NextHead>
 
             {isMobile && (
