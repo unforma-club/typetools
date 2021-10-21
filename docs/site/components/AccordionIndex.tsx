@@ -52,6 +52,7 @@ const Info = ({ label, value }: InfoProps) => {
                             WebkitBoxOrient: "vertical",
                             hyphens: "auto",
                             minHeight: "calc(var(--header-height) / 1.5)",
+                            wordBreak: "break-word",
                         }}
                     >
                         {value ? value : "-"}
@@ -64,88 +65,67 @@ const Info = ({ label, value }: InfoProps) => {
 
 export const AccordionIndex = (props: BaseAccordion) => {
     const { selectedFont } = useFonts();
+
+    const infos: Array<InfoProps> = [
+        { label: "Family", value: selectedFont.typefaceFamily },
+        { label: "Full Name", value: selectedFont.typefaceFullName },
+        { label: "File Name", value: selectedFont.fileName },
+        { label: "File Type", value: selectedFont.fileType },
+        {
+            label: "File Size",
+            value: `${Math.round(selectedFont.fileSize / 1000)} kb`,
+        },
+        { label: "Version", value: selectedFont.typefaceInfo.version },
+        { label: "Style", value: selectedFont.typefaceStyle },
+        { label: "Weight", value: selectedFont.typefaceWeight.toString() },
+        {
+            label: "Variable",
+            value: selectedFont.typefaceVariable ? "Support" : "-",
+        },
+        { label: "Short Name", value: selectedFont.typefaceShortName },
+        {
+            label: "Features",
+            value: selectedFont.typefaceFeatures
+                .map((item) => item.tag)
+                .join(", "),
+        },
+        { label: "Tables", value: selectedFont.typefaceTables.join(", ") },
+        { label: "Designer", value: selectedFont.typefaceInfo.designer.value },
+        {
+            label: "Designer URL",
+            value: selectedFont.typefaceInfo.designer.url,
+        },
+        {
+            label: "Manufacturer",
+            value: selectedFont.typefaceInfo.manufacturer.value,
+        },
+        {
+            label: "Manufacturer URL",
+            value: selectedFont.typefaceInfo.manufacturer.url,
+        },
+        { label: "License", value: selectedFont.typefaceInfo.license.value },
+        { label: "License URL", value: selectedFont.typefaceInfo.license.url },
+        { label: "Trademark", value: selectedFont.typefaceInfo.trademark },
+        { label: "Copyright", value: selectedFont.typefaceInfo.copyright },
+    ];
     return (
         <AccordionLayout {...props} navigation={<div>Navigation</div>}>
             <ul
                 style={{
                     listStyle: "none",
-                    padding: 0,
+                    padding: "calc(var(--grid-gap) * 2) 0",
                     margin: 0,
                     position: "relative",
                     display: "grid",
-                    gridTemplateColumns: "repeat(4, 1fr)",
+                    gridTemplateColumns: "repeat(6, 1fr)",
                     gap: "var(--grid-gap)",
                     alignItems: "flex-start",
-                    maxWidth: 1440,
+                    // maxWidth: 1440,
                 }}
             >
-                <Info label="File Name" value={selectedFont.fileName} />
-                <Info label="File Type" value={selectedFont.fileType} />
-                <Info
-                    label="File Size"
-                    value={`${Math.round(selectedFont.fileSize / 1000)} kb`}
-                />
-                <Info
-                    label="Version"
-                    value={selectedFont.typefaceInfo.version}
-                />
-                <Info label="Family" value={selectedFont.typefaceFamily} />
-                <Info label="Full Name" value={selectedFont.typefaceFullName} />
-                <Info label="Style" value={selectedFont.typefaceStyle} />
-                <Info
-                    label="Weight"
-                    value={selectedFont.typefaceWeight.toString()}
-                />
-                <Info
-                    label="Font Variable"
-                    value={selectedFont.typefaceVariable ? "Support" : "-"}
-                />
-                <Info
-                    label="Font Features"
-                    value={`${selectedFont.typefaceFeatures
-                        .map((item) => item.tag)
-                        .join(", ")}.`}
-                />
-                <Info
-                    label="Font Tables"
-                    value={`${selectedFont.typefaceTables.join(", ")}.`}
-                />
-                <Info
-                    label="Font Tables"
-                    value={selectedFont.typefaceShortName}
-                />
-                <Info
-                    label="Designer"
-                    value={selectedFont.typefaceInfo.designer.value}
-                />
-                <Info
-                    label="Designer Url"
-                    value={selectedFont.typefaceInfo.designer.url}
-                />
-                <Info
-                    label="Manufacturer"
-                    value={selectedFont.typefaceInfo.manufacturer.value}
-                />
-                <Info
-                    label="Manufacturer Url"
-                    value={selectedFont.typefaceInfo.manufacturer.url}
-                />
-                <Info
-                    label="License"
-                    value={selectedFont.typefaceInfo.license.value}
-                />
-                <Info
-                    label="License Url"
-                    value={selectedFont.typefaceInfo.license.url}
-                />
-                <Info
-                    label="Trademark"
-                    value={selectedFont.typefaceInfo.trademark}
-                />
-                <Info
-                    label="Copyright"
-                    value={selectedFont.typefaceInfo.copyright}
-                />
+                {infos.map((item, i) => (
+                    <Info key={i} {...item} />
+                ))}
             </ul>
         </AccordionLayout>
     );

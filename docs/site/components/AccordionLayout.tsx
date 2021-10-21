@@ -30,58 +30,49 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
     const [refButton, { height: heightButton }] = useMeasure();
 
     const parent = useSpring({
-        from: { height: 0, opacity: 0, y: -heightButton },
-        to: {
-            height: isActive ? heightContent : 0,
-            opacity: isActive ? 1 : 0,
-            y: isActive ? 0 : -heightButton,
-        },
+        opacity: isActive ? 1 : 0,
+        height: isActive ? heightContent : 0,
+        y: isActive ? 0 : -heightButton,
         config: { mass: 3, tension: 2000, friction: 200 },
-        reverse: !isActive,
     });
 
     const child = useSpring({
-        from: { y: -(heightContent / 8) },
-        to: { y: isActive ? 0 : heightContent },
-        config: { mass: 5, tension: 2000, friction: 400 },
-        reverse: !isActive,
+        y: isActive ? 0 : -(heightContent / 8),
+        config: { mass: 5, tension: 1500, friction: 400 },
+        delay: 100,
     });
 
     const transitions = useTransition(isActive, {
-        from: { opacity: 0 },
-        enter: { opacity: 1 },
-        leave: { opacity: 0 },
-        reverse: isActive,
-        config: { mass: 3, tension: 2000, friction: 200 },
+        from: { opacity: 0, y: -heightButton },
+        enter: { opacity: 1, y: 0 },
+        leave: { opacity: 0, y: heightButton },
+        config: { mass: 5, tension: 2000, friction: 400 },
+        delay: 400,
     });
 
     return (
         <>
-            <div
-                style={{
-                    display: "flex",
-                    alignItems: "flex-end",
-                    gap: "calc(var(--grid-gap) * 8)",
-                    position: "sticky",
-                    top: 0,
-                    zIndex: 1000,
-                    overflow: "hidden",
-                    height: "var(--header-height)",
-                }}
-            >
+            <div className={styles.navigation}>
                 <AccordionButton
                     ref={refButton}
                     active={isActive}
                     label={label}
                     onClick={onClick}
-                    style={buttonStyle}
+                    style={{ ...buttonStyle }}
                 />
                 {transitions(
                     (styles, item) =>
                         item && (
                             <animated.div
                                 style={{
-                                    padding: "calc(var(--grid-gap) * 1.25) 0",
+                                    padding: "calc(var(--grid-gap) * 1.75) 0",
+                                    // borderBottom: "1px solid",
+                                    height: "100%",
+                                    // overflow: "hidden",
+                                    display: "flex",
+                                    alignItems: "flex-end",
+                                    // backgroundColor: "maroon",
+                                    width: "100%",
                                     ...styles,
                                 }}
                             >
@@ -90,6 +81,7 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
                         )
                 )}
             </div>
+
             <animated.div
                 data-active={isActive}
                 className={styles.layout}
@@ -99,7 +91,7 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
                     ref={refContent}
                     style={{
                         minHeight:
-                            "calc(100vh - calc(var(--header-height) * 6) - 1px)",
+                            "calc(100vh - calc(var(--header-height) * 6) - 0px)",
                         position: "relative",
                         ...style,
                         ...child,

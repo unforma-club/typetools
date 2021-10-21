@@ -1,3 +1,4 @@
+import styles from "./glyph.module.scss";
 import { NewGlyph } from "@unforma-club/typetools";
 import { useFonts } from "libs/context/ContextFonts";
 import { useMeasure } from "libs/hooks";
@@ -31,15 +32,8 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
 
     const ypx = (val: number) => glyphBaseline - val * glyphScale;
     return (
-        <aside>
-            <div
-                style={{
-                    position: "relative",
-                    width: "calc(33.33vw - 4em - var(--grid-gap))",
-                    border: "1px solid",
-                    padding: "calc(var(--grid-gap) * 4) 0",
-                }}
-            >
+        <aside className={styles.aside}>
+            <div className={styles.glyph_inspector}>
                 <div
                     ref={ref}
                     style={{

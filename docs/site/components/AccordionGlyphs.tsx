@@ -1,144 +1,10 @@
-import type { NewGlyph, TypefaceMetrics } from "@unforma-club/typetools";
-import type { CSSProperties } from "react";
+import { CSSProperties, useCallback } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { useFonts } from "libs/context/ContextFonts";
 import { ProviderGlyphs, useGlyphs } from "libs/context/ContextGlyphs";
-import { GlyphsAside } from "./Glyphs/Aside";
-import { useMeasure } from "libs/hooks";
-import { useSVGMetrics } from "libs/use-svg-metrics";
 import { AccordionLayout, BaseAccordion } from "./AccordionLayout";
-
-interface CellProps {
-    glyph: NewGlyph;
-    metrics: TypefaceMetrics;
-    parentWidth: number;
-}
-const Cell = (props: CellProps) => {
-    const { chooseGlyph, selectedGlyph } = useGlyphs();
-
-    const { glyph, metrics, parentWidth: width } = props;
-
-    const divide = 24;
-    const newParentWidth = width / divide + 0.95;
-    const newParentHeight = width / divide + 0.95;
-
-    const { glyphBaseline, glyphSize, xmin, parentWidth, glyphScale } =
-        useSVGMetrics({
-            width: newParentWidth,
-            height: newParentHeight,
-            advanceWidth: glyph.glyph.advanceWidth,
-            ...metrics,
-        });
-
-    // Grid for glyph inspector
-    // @ts-ignore
-    const ypx = (val: number) => glyphBaseline - val * glyphScale;
-    const isActive = glyph === selectedGlyph;
-    return (
-        <li
-            onMouseEnter={() => chooseGlyph(glyph)}
-            style={{
-                position: "relative",
-                border: "1px solid",
-                width: parentWidth,
-                overflow: "hidden",
-                margin: "0 -1px -1px 0",
-                fontSize: "inherit",
-                display: "flex",
-                flexDirection: "column",
-                transition:
-                    "background-color var(--main-transition), transform var(--main-transition), z-index var(--main-transition)",
-            }}
-        >
-            <div
-                style={{
-                    borderBottom: "1px solid",
-                    fontSize: "0.65em",
-                    padding:
-                        "calc(var(--grid-gap) / 4) calc(var(--grid-gap) / 2)",
-                    display: "block",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    textOverflow: "ellipsis",
-                }}
-            >
-                {glyph.name}
-            </div>
-            <div
-                style={{
-                    position: "relative",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                }}
-            >
-                <svg
-                    width="100%"
-                    height="100%"
-                    viewBox={`0 0 ${newParentWidth} ${newParentWidth}`}
-                    fill="currentColor"
-                    style={{
-                        position: "relative",
-                        userSelect: "none",
-                        backgroundColor: isActive
-                            ? "var(--accents-3)"
-                            : "inherit",
-                    }}
-                >
-                    <path
-                        fill="currentColor"
-                        d={glyph.glyph
-                            .getPath(xmin, glyphBaseline, glyphSize)
-                            .toPathData(10)}
-                    />
-                </svg>
-            </div>
-        </li>
-    );
-};
-
-interface CustomUlProps {
-    glyphs: Array<NewGlyph>;
-}
-
-const CustomUl = ({ glyphs }: CustomUlProps) => {
-    const memoizedGlyphs = useMemo(() => glyphs, [glyphs]);
-    const { selectedFont } = useFonts();
-
-    const [ref, { width }] = useMeasure();
-
-    return (
-        <ul
-            ref={ref}
-            style={{
-                listStyle: "none",
-                padding: 0,
-                margin: 0,
-                display: "flex",
-                flexWrap: "wrap",
-                alignItems: "flex-start",
-                position: "relative",
-                width: "100%",
-            }}
-        >
-            {memoizedGlyphs &&
-                memoizedGlyphs
-                    .sort((a, b) => {
-                        if (a.id < b.id) return -1;
-                        if (a.id > b.id) return 1;
-                        else return 0;
-                    })
-                    .map((item, i) => (
-                        <Cell
-                            key={i}
-                            glyph={item}
-                            metrics={selectedFont.typefaceMetrics}
-                            parentWidth={width}
-                        />
-                    ))}
-        </ul>
-    );
-};
+import { GlyphsAside } from "./Glyphs/Aside";
+import { GlyphBside } from "./Glyphs/Bside";
 
 const buttonStyle: CSSProperties = {
     appearance: "none",
@@ -160,7 +26,8 @@ const GlyphWrapper = (props: BaseAccordion) => {
         useGlyphs();
     const [currentPage, setCurrentPage] = useState(1);
     // @ts-ignore
-    const [postsPerPage, setPostsPerPage] = useState(158);
+    // const [postsPerPage, setPostsPerPage] = useState(158);
+    const [postsPerPage, setPostsPerPage] = useState(100);
     const [search, setSearch] = useState("");
     const finalGlyphs = useMemo(() => {
         if (!search) return glyphs;
@@ -184,7 +51,7 @@ const GlyphWrapper = (props: BaseAccordion) => {
         setCurrentPage(pageNumber);
     };
 
-    const getPageNumber = () => {
+    const getPageNumber = useCallback(() => {
         let pageNumbers: Array<number> = [];
         for (
             let i = 1;
@@ -194,7 +61,8 @@ const GlyphWrapper = (props: BaseAccordion) => {
             pageNumbers.push(i);
         }
         return pageNumbers;
-    };
+    }, [postsPerPage]);
+
     useEffect(() => {
         setCurrentPage(1);
     }, [selectedFont]);
@@ -212,12 +80,6 @@ const GlyphWrapper = (props: BaseAccordion) => {
     return (
         <AccordionLayout
             {...props}
-            style={{
-                display: "grid",
-                gridTemplateColumns: "1fr 3fr",
-                gap: "var(--grid-gap)",
-                alignItems: "flex-start",
-            }}
             navigation={
                 <header
                     style={{
@@ -284,14 +146,22 @@ const GlyphWrapper = (props: BaseAccordion) => {
             }
         >
             {selectedGlyph && (
-                <>
+                <div
+                    style={{
+                        padding: "calc(var(--grid-gap) * 2) 0",
+                        display: "grid",
+                        gridTemplateColumns: "1fr 2fr",
+                        gap: "var(--grid-gap)",
+                        alignItems: "flex-start",
+                    }}
+                >
                     <GlyphsAside
                         glyph={selectedGlyph}
                         glyphsLength={glyphsLength}
                         charsLength={charLength}
                     />
-                    <CustomUl glyphs={currentPosts} />
-                </>
+                    <GlyphBside glyphs={currentPosts} />
+                </div>
             )}
         </AccordionLayout>
     );

@@ -1,0 +1,35 @@
+@import "styles/media.scss";
+
+.aside {
+    position: sticky;
+    top: var(--header-height);
+
+    .glyph_inspector {
+        position: relative;
+        // width: calc(33.33vw - calc(var(--grid-gap) * 5));
+
+        border: 1px solid;
+        padding: calc(var(--grid-gap) * 4) 0;
+    }
+}
+
+.bside {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    display: grid;
+    grid-template-columns: repeat(18, 1fr);
+    align-items: flex-start;
+    gap: var(--grid-gap);
+
+    position: relative;
+    width: 100%;
+
+    @include media("screen", ">xlMonitor") {
+        grid-template-columns: repeat(18, 1fr);
+    }
+    @include media("screen", "<lgMonitor") {
+        grid-template-columns: repeat(12, 1fr);
+    }
+}

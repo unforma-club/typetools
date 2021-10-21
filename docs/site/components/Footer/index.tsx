@@ -30,7 +30,7 @@ export const Footer = () => {
                     >
                         {SITE_DATA.author.name}
                     </a>
-                    .
+                    . All typefaces rights of their respective owners.
                 </div>
             </div>
         </footer>

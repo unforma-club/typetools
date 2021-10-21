@@ -8,7 +8,7 @@ const buttonStyle: CSSProperties = {
     appearance: "none",
     background: "none",
     border: "1px solid",
-    fontSize: "inherit",
+    fontSize: "0.8em",
     fontFamily: "inherit",
     height: "1.75em",
     cursor: "pointer",
@@ -59,16 +59,18 @@ export const AccordionTypetester = (props: BaseAccordion) => {
             {...props}
             style={{
                 overflow: "hidden",
-                height: "calc(100vh - calc(var(--header-height) * 6) - 1px)",
+                // height: "calc(100vh - calc(var(--header-height) * 6) - 1px)",
             }}
             navigation={
                 <form
                     style={{
                         display: "flex",
+                        gap: "calc(var(--grid-gap) * 4)",
+                        alignItems: "center",
                     }}
                 >
                     <Slider
-                        label="Font Size"
+                        label="Size"
                         min={10}
                         max={200}
                         step={1}

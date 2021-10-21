@@ -39,7 +39,7 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        font-feature-settings: "ss04";
+        font-feature-settings: "ss04", "case";
         font-size: inherit;
         transition: transform var(--main-transition);
 

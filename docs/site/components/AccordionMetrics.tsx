@@ -17,16 +17,19 @@ export const AccordionMetrics = (props: BaseAccordion) => {
                     style={{
                         display: "grid",
                         gridTemplateColumns: "repeat(6, 1fr)",
-                        gap: "var(--grid-gap)",
+                        gap: "calc(var(--grid-gap) * 4)",
                         fontFeatureSettings: `"ss04", "tnum"`,
                         listStyle: "none",
                         padding: 0,
                         margin: 0,
+                        height: "100%",
+                        alignItems: "center",
+                        width: "100%",
                     }}
                 >
                     <li>
                         <Slider
-                            label="Font Size"
+                            label="Size"
                             min={90}
                             max={200}
                             step={1}
@@ -38,7 +41,7 @@ export const AccordionMetrics = (props: BaseAccordion) => {
                     </li>
                     <li>
                         <Slider
-                            label="Line Height"
+                            label="Leading"
                             min={0.8}
                             max={3}
                             step={0.1}
