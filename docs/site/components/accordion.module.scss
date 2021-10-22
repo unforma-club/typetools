@@ -21,12 +21,12 @@
 
     display: grid;
     grid-template-columns: 1fr 2fr;
-    align-items: center;
+    // align-items: center;
     gap: calc(var(--grid-gap) * 1);
 
     height: var(--header-height);
 
-    // overflow: hidden;
+    overflow: hidden;
     z-index: 1000;
 
     .button {
@@ -51,13 +51,14 @@
 
         text-align: left;
 
-        height: 100%;
+        // height: 100%;
         overflow: hidden;
 
-        display: flex;
-        align-items: center;
+        // display: flex;
+        // align-items: center;
 
         z-index: 1000;
+        // background-color: chartreuse;
 
         user-select: none;
         transition: color var(--main-transition),

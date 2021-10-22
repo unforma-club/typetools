@@ -7,8 +7,8 @@ import { useEffect, useRef, useState } from "react";
 import { SITE_DATA, META_DATA } from "libs/constants";
 import { useMediaQuery } from "libs/hooks";
 import { useFonts } from "libs/context/ContextFonts";
-import { Footer } from "components/Footer";
 import { Header } from "components/Header";
+import { Footer } from "components/Footer";
 import { AccordionIndex } from "components/AccordionIndex";
 import { AccordionGlyphs } from "components/AccordionGlyphs";
 import { AccordionMetrics } from "components/AccordionMetrics";
@@ -164,7 +164,7 @@ export default function Page({ deviceType }: PageProps) {
                                             {...item}
                                             // buttonStyle={{
                                             //     backgroundColor: `var(--accents-${
-                                            //         i + 2
+                                            //         i + 4
                                             //     })`,
                                             // }}
                                             onClick={() => {
@@ -188,6 +188,8 @@ export default function Page({ deviceType }: PageProps) {
                     </ul>
                 </main>
             )}
+
+            {/* {!isMobile && <Birds />} */}
 
             <Footer />
         </>

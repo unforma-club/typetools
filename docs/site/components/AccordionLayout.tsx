@@ -34,12 +34,14 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
         height: isActive ? heightContent : 0,
         y: isActive ? 0 : -heightButton,
         config: { mass: 3, tension: 2000, friction: 200 },
+        reset: true,
     });
 
     const child = useSpring({
         y: isActive ? 0 : -(heightContent / 8),
         config: { mass: 5, tension: 1500, friction: 400 },
         delay: 100,
+        reset: true,
     });
 
     const transitions = useTransition(isActive, {
@@ -47,7 +49,8 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
         enter: { opacity: 1, y: 0 },
         leave: { opacity: 0, y: heightButton },
         config: { mass: 5, tension: 2000, friction: 400 },
-        delay: 400,
+        delay: 300,
+        reset: true,
     });
 
     return (
@@ -65,14 +68,14 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
                         item && (
                             <animated.div
                                 style={{
-                                    padding: "calc(var(--grid-gap) * 1.75) 0",
+                                    // padding: "calc(var(--grid-gap) * 1.75) 0",
                                     // borderBottom: "1px solid",
                                     height: "100%",
+                                    width: "100%",
                                     // overflow: "hidden",
                                     display: "flex",
-                                    alignItems: "flex-end",
+                                    alignItems: "center",
                                     // backgroundColor: "maroon",
-                                    width: "100%",
                                     ...styles,
                                 }}
                             >
@@ -91,7 +94,7 @@ export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
                     ref={refContent}
                     style={{
                         minHeight:
-                            "calc(100vh - calc(var(--header-height) * 6) - 0px)",
+                            "calc(100vh - calc(var(--header-height) * 6) - 0px + 1.7em)",
                         position: "relative",
                         ...style,
                         ...child,

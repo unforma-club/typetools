@@ -20,6 +20,8 @@
     "url": "https://github.com/unforma-club/typetools/issues"
   },
   "dependencies": {
+    "@react-three/drei": "^7.17.1",
+    "@react-three/fiber": "^7.0.17",
     "@unforma-club/hooks": "^1.0.6",
     "@unforma-club/typetools": "^1.0.4",
     "debounce": "^1.2.1",
@@ -30,7 +32,8 @@
     "react-dom": "^17.0.2",
     "react-spring": "^9.3.0",
     "resize-observer-polyfill": "^1.5.1",
-    "sass": "^1.42.1"
+    "sass": "^1.42.1",
+    "three": "^0.133.1"
   },
   "devDependencies": {
     "@types/debounce": "^1.2.1",

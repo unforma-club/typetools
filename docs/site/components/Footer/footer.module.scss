@@ -1,14 +1,32 @@
 @import "styles/mixin.scss";
+@import "styles/media.scss";
 
 .container {
     @include basePadding();
-    position: relative;
+    position: fixed;
 
-    height: var(--header-height);
+    right: calc(var(--grid-gap) * 2);
+    bottom: calc(var(--grid-gap) * 2);
+    left: calc(var(--grid-gap) * 2);
 
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    gap: var(--grid-gap);
 
-    // background-color: inherit;
     z-index: 1001;
+
+    @include media("screen", ">tablet") {
+        background-color: var(--geist-ufc-color);
+        color: var(--accents-1);
+
+        padding: calc(var(--grid-gap) / 2);
+    }
+    @include media("screen", "<tablet") {
+        line-height: 1;
+        padding: 0;
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: calc(var(--grid-gap) * 2);
+    }
 }

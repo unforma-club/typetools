@@ -1,4 +1,4 @@
-import { CSSProperties, useCallback } from "react";
+import type { CSSProperties } from "react";
 import { useEffect, useMemo, useState } from "react";
 import { useFonts } from "libs/context/ContextFonts";
 import { ProviderGlyphs, useGlyphs } from "libs/context/ContextGlyphs";
@@ -26,8 +26,7 @@ const GlyphWrapper = (props: BaseAccordion) => {
         useGlyphs();
     const [currentPage, setCurrentPage] = useState(1);
     // @ts-ignore
-    // const [postsPerPage, setPostsPerPage] = useState(158);
-    const [postsPerPage, setPostsPerPage] = useState(100);
+    const [postsPerPage, setPostsPerPage] = useState(126);
     const [search, setSearch] = useState("");
     const finalGlyphs = useMemo(() => {
         if (!search) return glyphs;
@@ -51,7 +50,7 @@ const GlyphWrapper = (props: BaseAccordion) => {
         setCurrentPage(pageNumber);
     };
 
-    const getPageNumber = useCallback(() => {
+    const getPageNumber = () => {
         let pageNumbers: Array<number> = [];
         for (
             let i = 1;
@@ -61,7 +60,7 @@ const GlyphWrapper = (props: BaseAccordion) => {
             pageNumbers.push(i);
         }
         return pageNumbers;
-    }, [postsPerPage]);
+    };
 
     useEffect(() => {
         setCurrentPage(1);
