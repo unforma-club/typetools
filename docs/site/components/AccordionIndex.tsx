@@ -1,4 +1,5 @@
 import { useFonts } from "libs/context/ContextFonts";
+import { AccordionButton } from "./AccordionButton";
 import { AccordionLayout, BaseAccordion } from "./AccordionLayout";
 
 const validURL = (str: string) => {
@@ -109,24 +110,32 @@ export const AccordionIndex = (props: BaseAccordion) => {
         { label: "Copyright", value: selectedFont.typefaceInfo.copyright },
     ];
     return (
-        <AccordionLayout {...props} navigation={<div>Navigation</div>}>
-            <ul
-                style={{
-                    listStyle: "none",
-                    padding: "calc(var(--grid-gap) * 2) 0",
-                    margin: 0,
-                    position: "relative",
-                    display: "grid",
-                    gridTemplateColumns: "repeat(6, 1fr)",
-                    gap: "var(--grid-gap)",
-                    alignItems: "flex-start",
-                    // maxWidth: 1440,
-                }}
-            >
-                {infos.map((item, i) => (
-                    <Info key={i} {...item} />
-                ))}
-            </ul>
-        </AccordionLayout>
+        <>
+            <AccordionButton
+                active={props.isActive}
+                label={props.label}
+                onClick={props.onClick}
+                style={{ ...props.buttonStyle }}
+            />
+
+            <AccordionLayout {...props}>
+                <ul
+                    style={{
+                        listStyle: "none",
+                        padding: "calc(var(--grid-gap) * 2) 0",
+                        margin: 0,
+                        position: "relative",
+                        display: "grid",
+                        gridTemplateColumns: "repeat(6, 1fr)",
+                        gap: "var(--grid-gap)",
+                        alignItems: "flex-start",
+                    }}
+                >
+                    {infos.map((item, i) => (
+                        <Info key={i} {...item} />
+                    ))}
+                </ul>
+            </AccordionLayout>
+        </>
     );
 };

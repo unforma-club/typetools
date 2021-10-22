@@ -6,10 +6,16 @@
 
     .glyph_inspector {
         position: relative;
+        height: calc(100vh - calc(var(--header-height) * 5 + 1.2em));
         // width: calc(33.33vw - calc(var(--grid-gap) * 5));
 
         border: 1px solid;
-        padding: calc(var(--grid-gap) * 4) 0;
+        // padding: calc(var(--grid-gap) * 4) 0;
+        // padding: var(--grid-gap);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
     }
 }
 

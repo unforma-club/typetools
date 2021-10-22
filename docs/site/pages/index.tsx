@@ -189,8 +189,6 @@ export default function Page({ deviceType }: PageProps) {
                 </main>
             )}
 
-            {/* {!isMobile && <Birds />} */}
-
             <Footer />
         </>
     );

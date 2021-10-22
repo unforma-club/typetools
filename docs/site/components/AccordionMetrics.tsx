@@ -4,15 +4,20 @@ import { TextMetrics } from "components/TextMetrics";
 import { useState } from "react";
 import { Slider } from "./Slider";
 import { AccordionLayout, BaseAccordion } from "./AccordionLayout";
+import { AccordionButton } from "./AccordionButton";
 
 export const AccordionMetrics = (props: BaseAccordion) => {
     const { selectedFont } = useFonts();
     const [fontSize, setFontSize] = useState(180);
     const [lineHeight, setLineHeight] = useState(1.5);
     return (
-        <AccordionLayout
-            {...props}
-            navigation={
+        <>
+            <AccordionButton
+                active={props.isActive}
+                label={props.label}
+                onClick={props.onClick}
+                style={{ ...props.buttonStyle }}
+            >
                 <ul
                     style={{
                         display: "grid",
@@ -52,37 +57,39 @@ export const AccordionMetrics = (props: BaseAccordion) => {
                         />
                     </li>
                 </ul>
-            }
-        >
-            <div className={styles.metrics}>
-                <TextMetrics
-                    font={selectedFont}
-                    fontSize={fontSize}
-                    lineHeight={lineHeight}
-                    title
-                    info
-                    guideBar
-                    use="hhea"
-                />
-                <TextMetrics
-                    font={selectedFont}
-                    fontSize={fontSize}
-                    lineHeight={lineHeight}
-                    title
-                    info
-                    guideBar
-                    use="win"
-                />
-                <TextMetrics
-                    font={selectedFont}
-                    fontSize={fontSize}
-                    lineHeight={lineHeight}
-                    title
-                    info
-                    guideBar
-                    use="typo"
-                />
-            </div>
-        </AccordionLayout>
+            </AccordionButton>
+
+            <AccordionLayout {...props}>
+                <div className={styles.metrics}>
+                    <TextMetrics
+                        font={selectedFont}
+                        fontSize={fontSize}
+                        lineHeight={lineHeight}
+                        title
+                        info
+                        guideBar
+                        use="hhea"
+                    />
+                    <TextMetrics
+                        font={selectedFont}
+                        fontSize={fontSize}
+                        lineHeight={lineHeight}
+                        title
+                        info
+                        guideBar
+                        use="win"
+                    />
+                    <TextMetrics
+                        font={selectedFont}
+                        fontSize={fontSize}
+                        lineHeight={lineHeight}
+                        title
+                        info
+                        guideBar
+                        use="typo"
+                    />
+                </div>
+            </AccordionLayout>
+        </>
     );
 };

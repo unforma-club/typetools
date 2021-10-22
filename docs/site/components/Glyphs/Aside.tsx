@@ -37,8 +37,13 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                 <div
                     ref={ref}
                     style={{
-                        height: "calc(100vh - calc(var(--header-height) * 10))",
+                        // height: "calc(100vh - calc(var(--header-height) * 10))",
+                        height: "100%",
                         position: "relative",
+                        // backgroundColor: "var(--accents-2)",
+                        // backgroundColor: "var(--accents-12)",
+                        borderBottom: "1px solid",
+                        // color: "var(--accents-1)",
                     }}
                 >
                     <svg
@@ -54,8 +59,8 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                                 x2={parentWidth}
                                 y1={ypx(typefaceMetrics.ascender)}
                                 y2={ypx(typefaceMetrics.ascender)}
-                                stroke="var(--accents-3)"
-                                strokeWidth="1"
+                                stroke="var(--accents-8)"
+                                strokeWidth="0.5"
                                 strokeDasharray="2 2"
                             />
                             <line
@@ -63,8 +68,8 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                                 x2={parentWidth}
                                 y1={ypx(typefaceMetrics.capHeight)}
                                 y2={ypx(typefaceMetrics.capHeight)}
-                                stroke="var(--accents-3)"
-                                strokeWidth="1"
+                                stroke="var(--accents-8)"
+                                strokeWidth="0.5"
                                 strokeDasharray="2 2"
                             />
                             <line
@@ -72,8 +77,8 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                                 x2={parentWidth}
                                 y1={ypx(typefaceMetrics.xHeight)}
                                 y2={ypx(typefaceMetrics.xHeight)}
-                                stroke="var(--accents-3)"
-                                strokeWidth="1"
+                                stroke="var(--accents-8)"
+                                strokeWidth="0.5"
                                 strokeDasharray="2 2"
                             />
                             <line
@@ -81,29 +86,29 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                                 x2={parentWidth}
                                 y1={ypx(typefaceMetrics.baseLine)}
                                 y2={ypx(typefaceMetrics.baseLine)}
-                                stroke="var(--accents-3)"
-                                strokeWidth="1"
+                                stroke="var(--accents-8)"
+                                strokeWidth="0.5"
                             />
                             <line
                                 x1={0}
                                 x2={parentWidth}
                                 y1={ypx(typefaceMetrics.descender)}
                                 y2={ypx(typefaceMetrics.descender)}
-                                stroke="var(--accents-3)"
-                                strokeWidth="1"
+                                stroke="var(--accents-8)"
+                                strokeWidth="0.5"
                                 strokeDasharray="2 2"
                             />
 
                             <text
-                                fontSize="0.6em"
+                                fontSize="0.65em"
                                 fontFamily="var(--font-sans)"
                                 fill="var(--accents-8)"
                                 style={{
-                                    fontFeatureSettings: `"tnum"`,
+                                    fontFeatureSettings: `"tnum", "ss04"`,
                                 }}
                             >
                                 <tspan
-                                    x="6"
+                                    x="1em"
                                     y={ypx(typefaceMetrics.baseLine) - 4}
                                     textAnchor="start"
                                 >
@@ -118,7 +123,7 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                                 </tspan>
 
                                 <tspan
-                                    x="6"
+                                    x="1em"
                                     y={ypx(typefaceMetrics.xHeight) - 4}
                                 >
                                     X Height
@@ -132,7 +137,7 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                                 </tspan>
 
                                 <tspan
-                                    x="6"
+                                    x="1em"
                                     y={ypx(typefaceMetrics.capHeight) - 4}
                                 >
                                     Cap Height
@@ -146,7 +151,7 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                                 </tspan>
 
                                 <tspan
-                                    x="6"
+                                    x="1em"
                                     y={ypx(typefaceMetrics.descender) - 4}
                                 >
                                     Descender
@@ -160,7 +165,7 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                                 </tspan>
 
                                 <tspan
-                                    x="6"
+                                    x="1em"
                                     y={ypx(typefaceMetrics.ascender) - 4}
                                 >
                                     Ascender
@@ -182,43 +187,52 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                         />
                     </svg>
                 </div>
-            </div>
 
-            <div>
-                <table style={{ color: "var(--accents-8)" }}>
-                    <tbody>
-                        <tr>
-                            <td>Character</td>
-                            <td
-                                style={{
-                                    fontFamily: glyph.character
-                                        ? selectedFont.typefaceFullName
-                                        : "var(--font-sans)",
-                                }}
-                            >
-                                {glyph.character ?? "-"}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Name</td>
-                            <td>{glyph.name}</td>
-                        </tr>
-                        <tr>
-                            <td>Unicode</td>
-                            <td style={{ textTransform: "uppercase" }}>
-                                {glyph.unicode ?? "-"}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>HTML</td>
-                            <td>{glyph.html ?? "-"}</td>
-                        </tr>
-                        <tr>
-                            <td>ID</td>
-                            <td>{glyph.id ?? "-"}</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <div
+                    style={{
+                        padding: "var(--grid-gap)",
+                    }}
+                >
+                    <table
+                        style={{
+                            color: "var(--accents-8)",
+                            borderCollapse: "collapse",
+                        }}
+                    >
+                        <tbody>
+                            <tr>
+                                <th>Character</th>
+                                <td
+                                    style={{
+                                        fontFamily: glyph.character
+                                            ? selectedFont.typefaceFullName
+                                            : "var(--font-sans)",
+                                    }}
+                                >
+                                    {glyph.character ?? "-"}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Name</th>
+                                <td>{glyph.name}</td>
+                            </tr>
+                            <tr>
+                                <th>Unicode</th>
+                                <td style={{ textTransform: "uppercase" }}>
+                                    {glyph.unicode ?? "-"}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>HTML</th>
+                                <td>{glyph.html ?? "-"}</td>
+                            </tr>
+                            <tr>
+                                <th>ID</th>
+                                <td>{glyph.id ?? "-"}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </aside>
     );

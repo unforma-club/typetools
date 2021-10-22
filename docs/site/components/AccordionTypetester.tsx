@@ -1,6 +1,7 @@
 import { generateAlphabet, VariableAxes } from "@unforma-club/typetools";
 import { useFonts } from "libs/context/ContextFonts";
 import { CSSProperties, useCallback, useEffect, useState } from "react";
+import { AccordionButton } from "./AccordionButton";
 import { AccordionLayout, BaseAccordion } from "./AccordionLayout";
 import { Slider } from "./Slider";
 
@@ -55,14 +56,14 @@ export const AccordionTypetester = (props: BaseAccordion) => {
     }, [selectedFont]);
 
     return (
-        <AccordionLayout
-            {...props}
-            style={{
-                overflow: "hidden",
-                // height: "calc(100vh - calc(var(--header-height) * 6) - 1px)",
-            }}
-            navigation={
-                <form
+        <>
+            <AccordionButton
+                active={props.isActive}
+                label={props.label}
+                onClick={props.onClick}
+                style={{ ...props.buttonStyle }}
+            >
+                <div
                     style={{
                         display: "flex",
                         gap: "calc(var(--grid-gap) * 4)",
@@ -130,25 +131,27 @@ export const AccordionTypetester = (props: BaseAccordion) => {
                             ))}
                         </ul>
                     )}
-                </form>
-            }
-        >
-            <p
-                lang="en-US"
-                style={{
-                    textAlign: "center",
-                    margin: "0 auto",
-                    maxWidth: 1440,
-                    fontSize: fontSize,
-                    height: "100%",
-                    padding: "calc(var(--grid-gap) * 2)",
-                    transition:
-                        "font-variation-settings var(--main-transition)",
-                    ...customFontStyle(),
-                }}
-            >
-                {generateAlphabet()}
-            </p>
-        </AccordionLayout>
+                </div>
+            </AccordionButton>
+
+            <AccordionLayout {...props}>
+                <p
+                    lang="en-US"
+                    style={{
+                        textAlign: "center",
+                        margin: "0 auto",
+                        maxWidth: 1440,
+                        fontSize: fontSize,
+                        height: "100%",
+                        padding: "calc(var(--grid-gap) * 2)",
+                        transition:
+                            "font-variation-settings var(--main-transition)",
+                        ...customFontStyle(),
+                    }}
+                >
+                    {generateAlphabet()}
+                </p>
+            </AccordionLayout>
+        </>
     );
 };

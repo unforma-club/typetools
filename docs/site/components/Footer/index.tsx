@@ -7,7 +7,7 @@ export const Footer = () => {
         <footer className={styles.container}>
             <div
                 style={{
-                    fontSize: "0.65em",
+                    fontSize: "0.7em",
                 }}
             >
                 &copy;{SITE_DATA.years.join("-")}{" "}
@@ -19,7 +19,7 @@ export const Footer = () => {
 
             <div
                 style={{
-                    fontSize: "0.65em",
+                    fontSize: "0.7em",
                 }}
             >
                 Version {pJson.version}

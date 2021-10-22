@@ -1,8 +1,7 @@
 import styles from "./accordion.module.scss";
-import type { CSSProperties, FC } from "react";
-import { animated, useSpring, useTransition } from "react-spring";
-import { useMeasure } from "libs/hooks";
-import { AccordionButton } from "./AccordionButton";
+import { CSSProperties, FC } from "react";
+import { animated, useSpring } from "react-spring";
+import { useMeasure, usePrevious } from "libs/hooks";
 
 export interface BaseAccordion {
     label: string;
@@ -12,96 +11,54 @@ export interface BaseAccordion {
     buttonStyle?: CSSProperties;
 }
 
-export interface AccordionLayoutProps extends BaseAccordion {
-    navigation: JSX.Element;
-}
+export interface AccordionLayoutProps extends BaseAccordion {}
 
 export const AccordionLayout: FC<AccordionLayoutProps> = (props) => {
-    const {
-        children,
-        isActive,
-        style,
-        onClick,
-        label,
-        navigation,
-        buttonStyle,
-    } = props;
-    const [refContent, { height: heightContent }] = useMeasure();
-    const [refButton, { height: heightButton }] = useMeasure();
+    const { children, isActive, style } = props;
+
+    const previous = usePrevious(isActive);
+    const [ref, { height: viewHeight }] = useMeasure();
 
     const parent = useSpring({
         opacity: isActive ? 1 : 0,
-        height: isActive ? heightContent : 0,
-        y: isActive ? 0 : -heightButton,
+        height: isActive ? viewHeight : 0,
+        y: isActive ? 0 : -200,
         config: { mass: 3, tension: 2000, friction: 200 },
-        reset: true,
+        reset: isActive && previous !== isActive,
     });
 
     const child = useSpring({
-        y: isActive ? 0 : -(heightContent / 8),
+        y: isActive ? 0 : -(viewHeight / 8),
         config: { mass: 5, tension: 1500, friction: 400 },
         delay: 100,
-        reset: true,
-    });
-
-    const transitions = useTransition(isActive, {
-        from: { opacity: 0, y: -heightButton },
-        enter: { opacity: 1, y: 0 },
-        leave: { opacity: 0, y: heightButton },
-        config: { mass: 5, tension: 2000, friction: 400 },
-        delay: 300,
-        reset: true,
+        reset: isActive && previous !== isActive,
     });
 
     return (
         <>
-            <div className={styles.navigation}>
-                <AccordionButton
-                    ref={refButton}
-                    active={isActive}
-                    label={label}
-                    onClick={onClick}
-                    style={{ ...buttonStyle }}
-                />
-                {transitions(
-                    (styles, item) =>
-                        item && (
-                            <animated.div
-                                style={{
-                                    // padding: "calc(var(--grid-gap) * 1.75) 0",
-                                    // borderBottom: "1px solid",
-                                    height: "100%",
-                                    width: "100%",
-                                    // overflow: "hidden",
-                                    display: "flex",
-                                    alignItems: "center",
-                                    // backgroundColor: "maroon",
-                                    ...styles,
-                                }}
-                            >
-                                {navigation}
-                            </animated.div>
-                        )
-                )}
-            </div>
-
             <animated.div
                 data-active={isActive}
                 className={styles.layout}
-                style={{ ...parent }}
+                style={{
+                    ...parent,
+                    // opacity: parent.opacity,
+                    // height:
+                    //     isActive && previous === isActive
+                    //         ? "auto"
+                    //         : parent.height,
+                }}
             >
                 <animated.div
-                    ref={refContent}
+                    ref={ref}
+                    children={children}
                     style={{
                         minHeight:
-                            "calc(100vh - calc(var(--header-height) * 6) - 0px + 1.7em)",
+                            "calc(100vh - calc(var(--header-height) * 5) - 1.2em)",
                         position: "relative",
                         ...style,
                         ...child,
                     }}
-                >
-                    {children}
-                </animated.div>
+                />
             </animated.div>
         </>
     );

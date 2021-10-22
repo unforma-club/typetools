@@ -5,6 +5,7 @@ import { ProviderGlyphs, useGlyphs } from "libs/context/ContextGlyphs";
 import { AccordionLayout, BaseAccordion } from "./AccordionLayout";
 import { GlyphsAside } from "./Glyphs/Aside";
 import { GlyphBside } from "./Glyphs/Bside";
+import { AccordionButton } from "./AccordionButton";
 
 const buttonStyle: CSSProperties = {
     appearance: "none",
@@ -77,10 +78,14 @@ const GlyphWrapper = (props: BaseAccordion) => {
     }, [currentPage]);
 
     return (
-        <AccordionLayout
-            {...props}
-            navigation={
-                <header
+        <>
+            <AccordionButton
+                active={props.isActive}
+                label={props.label}
+                onClick={props.onClick}
+                style={{ ...props.buttonStyle }}
+            >
+                <div
                     style={{
                         marginBottom: -1,
                         display: "grid",
@@ -141,28 +146,30 @@ const GlyphWrapper = (props: BaseAccordion) => {
                             Next
                         </button>
                     </div>
-                </header>
-            }
-        >
-            {selectedGlyph && (
-                <div
-                    style={{
-                        padding: "calc(var(--grid-gap) * 2) 0",
-                        display: "grid",
-                        gridTemplateColumns: "1fr 2fr",
-                        gap: "var(--grid-gap)",
-                        alignItems: "flex-start",
-                    }}
-                >
-                    <GlyphsAside
-                        glyph={selectedGlyph}
-                        glyphsLength={glyphsLength}
-                        charsLength={charLength}
-                    />
-                    <GlyphBside glyphs={currentPosts} />
                 </div>
-            )}
-        </AccordionLayout>
+            </AccordionButton>
+
+            <AccordionLayout {...props}>
+                {selectedGlyph && (
+                    <div
+                        style={{
+                            // padding: "calc(var(--grid-gap) * 2) 0",
+                            display: "grid",
+                            gridTemplateColumns: "1fr 2fr",
+                            gap: "var(--grid-gap)",
+                            alignItems: "flex-start",
+                        }}
+                    >
+                        <GlyphsAside
+                            glyph={selectedGlyph}
+                            glyphsLength={glyphsLength}
+                            charsLength={charLength}
+                        />
+                        <GlyphBside glyphs={currentPosts} />
+                    </div>
+                )}
+            </AccordionLayout>
+        </>
     );
 };
 
