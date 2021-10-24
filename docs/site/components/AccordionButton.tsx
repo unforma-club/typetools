@@ -26,7 +26,7 @@ export const AccordionButton: FC<AccordionButtonProps> = (props) => {
     });
 
     return (
-        <div ref={refButton} className={styles.navigation}>
+        <div ref={refButton} className={styles.navigation} data-active={active}>
             <div style={{ height: "100%" }}>
                 <button
                     name={label}

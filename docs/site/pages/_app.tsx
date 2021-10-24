@@ -16,7 +16,6 @@ export default function MyApp({ Component, pageProps }: AppProps) {
             >
                 <ProviderFonts>
                     <Component {...pageProps} />
-                    {/* <Birds /> */}
                 </ProviderFonts>
             </ThemeProvider>
         </>

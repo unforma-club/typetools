@@ -103,6 +103,7 @@ export default function Page({ deviceType }: PageProps) {
                         padding: "calc(var(--grid-gap) * 2)",
                         fontFamily: "var(--font-display)",
                         lineHeight: 1.1,
+                        fontFeatureSettings: `"ss01", "ss04"`,
                     }}
                 >
                     <p
@@ -134,7 +135,7 @@ export default function Page({ deviceType }: PageProps) {
                             rel="noopener"
                             target="_blank"
                         >
-                            {SITE_DATA.author.name} Team.
+                            {SITE_DATA.author.name}.
                         </a>
                     </p>
                 </div>

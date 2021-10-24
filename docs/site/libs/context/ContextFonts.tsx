@@ -1,5 +1,6 @@
 import type { FC } from "react";
 import { createContext, useCallback, useContext, useState } from "react";
+import nProgress from "nprogress";
 import {
     Typetools,
     BaseTypeface,
@@ -46,17 +47,25 @@ export const ProviderFonts: FC = ({ children }) => {
     );
 
     const addFontFiles = (files: Array<FileReaderOutput>) => {
-        readOpentype(files).then((res) => {
-            const newFonts = res.sort(
-                (a, b) => a.typefaceWeight - b.typefaceWeight
-            );
-            setFonts((prev) => [...prev, ...newFonts]);
-            setSelectedFont(newFonts[0]);
-        });
+        readOpentype(files)
+            .then((res) => {
+                nProgress.start();
+                return res;
+            })
+            .then((res) => {
+                const newFonts = res.sort(
+                    (a, b) => a.typefaceWeight - b.typefaceWeight
+                );
+                setFonts((prev) => [...prev, ...newFonts]);
+                setSelectedFont(newFonts[0]);
+            })
+            .then(() => nProgress.done())
+            .catch((err) => console.log(err));
     };
 
     const chooseFont = useCallback(
         (fullName: string) => {
+            nProgress.start();
             const newSelected = fonts.find(
                 (item) => item.typefaceFullName === fullName
             );
@@ -64,6 +73,7 @@ export const ProviderFonts: FC = ({ children }) => {
                 if (!newSelected) return prev;
                 return newSelected;
             });
+            nProgress.done();
         },
         [fonts]
     );

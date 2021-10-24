@@ -12,55 +12,184 @@ interface InfoProps {
     value: string;
 }
 
-const Info = ({ label, value }: InfoProps) => {
+const Info2 = ({ label, value }: InfoProps) => {
     return (
         <li
             style={{
-                display: "grid",
-                // gridTemplateColumns: "10em 1fr",
-                fontFeatureSettings: `"ss04", "tnum"`,
-                fontFamily: "var(--font-sans)",
-                fontSize: "0.8em",
+                display: "flex",
+                alignItems: "flex-start",
+                position: "relative",
+                gap: "calc(var(--grid-gap) / 2)",
             }}
         >
-            <span style={{ fontSize: "0.8em", color: "var(--accents-8)" }}>
+            <span
+                style={{
+                    width: "6em",
+                    border: "1px solid",
+                    padding:
+                        "calc(var(--grid-gap) / 2) calc(var(--grid-gap) / 1)",
+                    display: "block",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    flexShrink: 0,
+                    fontWeight: "bold",
+                }}
+            >
                 {label}
             </span>
             <span
                 style={{
-                    fontSize: "1.3em",
-                    lineHeight: 1.2,
+                    border: "1px solid",
+                    padding:
+                        "calc(var(--grid-gap) / 2) calc(var(--grid-gap) / 1)",
+                    display: "block",
+                    whiteSpace: "nowrap",
+                    overflow: "hidden",
+                    textOverflow: "ellipsis",
+                    flexShrink: 0,
+                    backgroundColor: "var(--accents-3)",
+                    color: "var(--accents-14)",
                 }}
             >
-                {validURL(value) ? (
-                    <a
-                        href={value}
-                        target="_blank"
-                        rel="noopener noreferer"
-                        style={{ textDecoration: "underline" }}
-                    >
-                        {value}
-                    </a>
+                &rarr;
+            </span>
+
+            <ul
+                style={{
+                    display: "flex",
+                    flexWrap: "wrap",
+                    // flexFlow: "column wrap",
+                    alignItems: "baseline",
+                    alignContent: "baseline",
+                    gap: "calc(var(--grid-gap) / 2)",
+                    position: "relative",
+                    listStyle: "none",
+                    padding: 0,
+                    margin: 0,
+                    // maxHeight: "18em",
+                    // minWidth: "18em",
+                    // maxWidth: "22em",
+                    width: "100%",
+                }}
+            >
+                {value || value !== "-" ? (
+                    value.split(", ").map((v, i) => {
+                        return (
+                            <li
+                                key={i}
+                                style={{
+                                    position: "relative",
+                                    border: "1px solid",
+                                    padding:
+                                        "calc(var(--grid-gap) / 2) calc(var(--grid-gap) / 1)",
+                                    backgroundColor: validURL(v)
+                                        ? "var(--accents-3)"
+                                        : `var(--accents-1)`,
+                                    color: "currentcolor",
+                                    // color: validURL(v)
+                                    //     ? "var(--accents-1)"
+                                    //     : `var(--accents-14)`,
+                                    maxWidth: "50vw",
+                                }}
+                            >
+                                {validURL(v) ? (
+                                    <span>
+                                        <a
+                                            href={v}
+                                            target="_blank"
+                                            rel="noopener noreferer"
+                                        >
+                                            {v}
+                                        </a>
+                                    </span>
+                                ) : (
+                                    <span
+                                        style={{
+                                            display: "block",
+                                            width: "100%",
+                                            hyphens: "auto",
+                                            wordBreak: "break-word",
+                                            overflow: "hidden",
+                                            whiteSpace: "nowrap",
+                                            textOverflow: "ellipsis",
+                                        }}
+                                    >
+                                        {v || "-"}
+                                    </span>
+                                )}
+
+                                {/* <div
+                                    style={{
+                                        position: "absolute",
+                                        top: 0,
+                                        left: 0,
+                                        backgroundColor: "var(--accents-14)",
+                                        color: "var(--accents-1)",
+                                        aspectRatio: "1 / 1",
+                                        width: "calc(var(--grid-gap) * 1.75)",
+                                        display: "flex",
+                                        alignItems: "center",
+                                        justifyContent: "center",
+                                        overflow: "hidden",
+                                        flexShrink: 0,
+                                    }}
+                                >
+                                    <span style={{ fontSize: "0.5em" }}>
+                                        {i + 1}
+                                    </span>
+                                </div> */}
+                            </li>
+                        );
+                    })
                 ) : (
-                    <p
+                    <li
                         style={{
-                            color: validURL(value) ? "red" : "inherit",
-                            margin: 0,
-                            lineHeight: 1.2,
-                            display: "-webkit-box",
-                            overflow: "hidden",
-                            WebkitLineClamp: 5,
-                            WebkitBoxOrient: "vertical",
-                            hyphens: "auto",
-                            minHeight: "calc(var(--header-height) / 1.5)",
-                            wordBreak: "break-word",
+                            display: "inline-block",
+                            border: "1px solid",
+                            padding:
+                                "calc(var(--grid-gap) / 2) calc(var(--grid-gap) / 1)",
+                            margin: "0 -1px -1px 0",
+                            flexShrink: 0,
+                            minWidth: "2em",
+                            textAlign: "center",
                         }}
                     >
-                        {value ? value : "-"}
-                    </p>
+                        -
+                    </li>
                 )}
-            </span>
+            </ul>
         </li>
+    );
+};
+
+interface InfoWrapperProps {
+    list: Array<InfoProps>;
+}
+
+const InfoWrapper = ({ list }: InfoWrapperProps) => {
+    return (
+        <ul
+            style={{
+                listStyle: "none",
+                padding: 0,
+                margin: 0,
+                display: "flex",
+                flexDirection: "column",
+                flexWrap: "wrap",
+                height: "100%",
+                gap: "calc(var(--grid-gap) / 2)",
+                width: "100%",
+                position: "relative",
+                // minWidth: "28em",
+                // maxWidth: "30em",
+                // borderRight: "1px solid",
+            }}
+        >
+            {list.map((item, i) => (
+                <Info2 key={i} {...item} />
+            ))}
+        </ul>
     );
 };
 
@@ -69,11 +198,11 @@ export const AccordionIndex = (props: BaseAccordion) => {
 
     const infos: Array<InfoProps> = [
         { label: "Family", value: selectedFont.typefaceFamily },
-        { label: "Full Name", value: selectedFont.typefaceFullName },
-        { label: "File Name", value: selectedFont.fileName },
-        { label: "File Type", value: selectedFont.fileType },
+        { label: "Name", value: selectedFont.typefaceFullName },
+        { label: "File", value: selectedFont.fileName },
+        { label: "Type", value: selectedFont.fileType },
         {
-            label: "File Size",
+            label: "Size",
             value: `${Math.round(selectedFont.fileSize / 1000)} kb`,
         },
         { label: "Version", value: selectedFont.typefaceInfo.version },
@@ -83,7 +212,16 @@ export const AccordionIndex = (props: BaseAccordion) => {
             label: "Variable",
             value: selectedFont.typefaceVariable ? "Support" : "-",
         },
-        { label: "Short Name", value: selectedFont.typefaceShortName },
+        {
+            label: "Instances",
+            value: selectedFont.typefaceVariable
+                ? selectedFont.typefaceVariable.instances
+                    ? selectedFont.typefaceVariable.instances
+                          .map((item) => `${item.name}`)
+                          .join(", ")
+                    : "-"
+                : "-",
+        },
         {
             label: "Features",
             value: selectedFont.typefaceFeatures
@@ -91,22 +229,32 @@ export const AccordionIndex = (props: BaseAccordion) => {
                 .join(", "),
         },
         { label: "Tables", value: selectedFont.typefaceTables.join(", ") },
-        { label: "Designer", value: selectedFont.typefaceInfo.designer.value },
         {
-            label: "Designer URL",
-            value: selectedFont.typefaceInfo.designer.url,
+            label: "Designer",
+            value: `${selectedFont.typefaceInfo.designer.value}, ${selectedFont.typefaceInfo.designer.url}`,
         },
         {
             label: "Manufacturer",
-            value: selectedFont.typefaceInfo.manufacturer.value,
+            value: `${
+                selectedFont.typefaceInfo.manufacturer.value
+                    ? selectedFont.typefaceInfo.manufacturer.value
+                    : "-"
+            }, ${
+                selectedFont.typefaceInfo.manufacturer.url
+                    ? selectedFont.typefaceInfo.manufacturer.url
+                    : "-"
+            }`,
         },
         {
-            label: "Manufacturer URL",
-            value: selectedFont.typefaceInfo.manufacturer.url,
+            label: "License",
+            value: `${selectedFont.typefaceInfo.license.value}, ${selectedFont.typefaceInfo.license.url}`,
         },
-        { label: "License", value: selectedFont.typefaceInfo.license.value },
-        { label: "License URL", value: selectedFont.typefaceInfo.license.url },
-        { label: "Trademark", value: selectedFont.typefaceInfo.trademark },
+        {
+            label: "Trademark",
+            value: selectedFont.typefaceInfo.trademark
+                ? selectedFont.typefaceInfo.trademark
+                : "-",
+        },
         { label: "Copyright", value: selectedFont.typefaceInfo.copyright },
     ];
     return (
@@ -119,22 +267,18 @@ export const AccordionIndex = (props: BaseAccordion) => {
             />
 
             <AccordionLayout {...props}>
-                <ul
+                <div
                     style={{
-                        listStyle: "none",
-                        padding: "calc(var(--grid-gap) * 2) 0",
-                        margin: 0,
-                        position: "relative",
-                        display: "grid",
-                        gridTemplateColumns: "repeat(6, 1fr)",
-                        gap: "var(--grid-gap)",
-                        alignItems: "flex-start",
+                        // display: "grid",
+                        // gridTemplateColumns: "repeat(4, 1fr)",
+                        // display: "flex",
+                        // flexDirection: "column",
+                        // gap: "calc(var(--grid-gap) / 2)",
+                        fontFeatureSettings: `"ss01", "ss04", "tnum"`,
                     }}
                 >
-                    {infos.map((item, i) => (
-                        <Info key={i} {...item} />
-                    ))}
-                </ul>
+                    <InfoWrapper list={infos} />
+                </div>
             </AccordionLayout>
         </>
     );

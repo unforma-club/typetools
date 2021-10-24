@@ -29,6 +29,10 @@
     overflow: hidden;
     z-index: 1000;
 
+    &[data-active="true"] {
+        background-color: transparent;
+    }
+
     .button {
         appearance: none;
         background: none;
