@@ -90,6 +90,7 @@ const GlyphWrapper = (props: BaseAccordion) => {
                         marginBottom: -1,
                         display: "grid",
                         gridTemplateColumns: "repeat(2, 1fr)",
+                        width: "100%",
                     }}
                 >
                     <div>
