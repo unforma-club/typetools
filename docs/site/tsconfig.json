@@ -23,7 +23,8 @@
       "styles/*": ["styles/*"],
       "types/*": ["types/*"],
       "@unforma-club/*": ["../../packages/*/src"]
-    }
+    },
+    "incremental": true
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules", ".etc"]

@@ -19,7 +19,7 @@ export const AccordionTypetester = (props: BaseAccordion) => {
     const { selectedFont } = useFonts();
     const { typefaceFeatures } = selectedFont;
 
-    const [fontSize, setFontSize] = useState(30);
+    const [fontSize, setFontSize] = useState(80);
 
     const [vf, setVf] = useState<Array<VariableAxes>>([]);
 
@@ -76,7 +76,7 @@ export const AccordionTypetester = (props: BaseAccordion) => {
                         max={200}
                         step={1}
                         value={fontSize}
-                        defaultValue={30}
+                        defaultValue={80}
                         onChange={(e) => {
                             setFontSize(e);
                         }}

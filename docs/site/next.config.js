@@ -6,9 +6,7 @@ const withTM = require("next-transpile-modules")(
 );
 
 module.exports = withTM({
-    images: {
-        domains: ["source.unsplash.com", "images.unsplash.com"],
-    },
+    swcMinify: true,
     async rewrites() {
         return [
             {
