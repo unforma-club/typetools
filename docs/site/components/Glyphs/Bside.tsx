@@ -1,11 +1,9 @@
 import styles from "./glyph.module.scss";
-import { TypefaceMetrics } from "@unforma-club/typetools";
-import { NewGlyph } from "@unforma-club/typetools";
+import { useMemo } from "react";
+import { TypefaceMetrics, NewGlyph } from "@unforma-club/typetools";
 import { useFonts } from "libs/context/ContextFonts";
 import { useGlyphs } from "libs/context/ContextGlyphs";
-import { useMeasure } from "libs/hooks";
-import { useSVGMetrics } from "libs/use-svg-metrics";
-import { useMemo } from "react";
+import { GlyphPath } from "./GlyphPath";
 
 interface GlyphBsideProps {
     glyphs: Array<NewGlyph>;
@@ -14,30 +12,14 @@ interface GlyphBsideProps {
 interface CellProps {
     glyph: NewGlyph;
     metrics: TypefaceMetrics;
-    parentWidth: number;
 }
 const Cell = (props: CellProps) => {
     const { chooseGlyph, selectedGlyph } = useGlyphs();
 
-    const { glyph, metrics, parentWidth: width } = props;
+    const { glyph } = props;
 
-    const divide = 20;
-    // const newParentWidth = width / divide + 0.95;
-    const newParentWidth = width / divide;
-    // const newParentHeight = width / divide + 0.95;
-    const newParentHeight = width / divide;
-
-    const { glyphBaseline, glyphSize, xmin, glyphScale } = useSVGMetrics({
-        width: newParentWidth,
-        height: newParentHeight,
-        advanceWidth: glyph.glyph.advanceWidth,
-        ...metrics,
-    });
-
-    // Grid for glyph inspector
-    // @ts-ignore
-    const ypx = (val: number) => glyphBaseline - val * glyphScale;
     const isActive = glyph === selectedGlyph;
+
     return (
         <li
             onMouseEnter={() => chooseGlyph(glyph)}
@@ -64,8 +46,8 @@ const Cell = (props: CellProps) => {
             >
                 <svg
                     width="100%"
-                    height="100%"
-                    viewBox={`0 0 ${newParentWidth} ${newParentWidth}`}
+                    // height="100%"
+                    viewBox={glyph.svg.viewBox}
                     fill="currentColor"
                     style={{
                         position: "relative",
@@ -75,12 +57,14 @@ const Cell = (props: CellProps) => {
                             : "inherit",
                     }}
                 >
-                    <path
-                        fill="currentColor"
-                        d={glyph.glyph
-                            .getPath(xmin, glyphBaseline, glyphSize)
-                            .toPathData(10)}
-                    />
+                    {/* <g>
+                        <GlyphGuideLine y={glyph.svg.ascender} />
+                        <GlyphGuideLine y={glyph.svg.descender} />
+                        <GlyphGuideLine y={glyph.svg.baseLine} />
+                        <GlyphGuideLine y={glyph.svg.xHeight} />
+                        <GlyphGuideLine y={glyph.svg.capHeight} />
+                    </g> */}
+                    <GlyphPath path={glyph.svg.path} />
                 </svg>
             </div>
             <div
@@ -109,10 +93,8 @@ const Cell = (props: CellProps) => {
 export const GlyphBside = ({ glyphs }: GlyphBsideProps) => {
     const memoizedGlyphs = useMemo(() => glyphs, [glyphs]);
     const { selectedFont } = useFonts();
-
-    const [ref, { width }] = useMeasure();
     return (
-        <ul ref={ref} className={styles.bside}>
+        <ul className={styles.bside}>
             {memoizedGlyphs &&
                 memoizedGlyphs
                     .sort((a, b) => {
@@ -125,7 +107,6 @@ export const GlyphBside = ({ glyphs }: GlyphBsideProps) => {
                             key={i}
                             glyph={item}
                             metrics={selectedFont.typefaceMetrics}
-                            parentWidth={width}
                         />
                     ))}
         </ul>

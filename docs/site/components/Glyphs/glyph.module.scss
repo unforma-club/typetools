@@ -6,7 +6,7 @@
 
     .glyph_inspector {
         position: relative;
-        height: calc(100vh - calc(var(--header-height) * 5 + 1.2em));
+        max-height: calc(100vh - calc(var(--header-height) * 5 + 1.2em));
         // width: calc(33.33vw - calc(var(--grid-gap) * 5));
 
         border: 1px solid;
@@ -15,7 +15,9 @@
 
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        // justify-content: space-between;
+
+        overflow: hidden;
     }
 }
 
@@ -33,9 +35,9 @@
     width: 100%;
 
     @include media("screen", ">xlMonitor") {
-        grid-template-columns: repeat(18, 1fr);
+        grid-template-columns: repeat(20, 1fr);
     }
     @include media("screen", "<lgMonitor") {
-        grid-template-columns: repeat(12, 1fr);
+        grid-template-columns: repeat(18, 1fr);
     }
 }

@@ -182,4 +182,4 @@ export const AccordionGlyphs = (props: BaseAccordion) => {
     );
 };
 
-export default AccordionGlyphs;
+// export default AccordionGlyphs;

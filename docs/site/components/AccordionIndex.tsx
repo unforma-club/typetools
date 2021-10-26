@@ -8,13 +8,15 @@ const validURL = (str: string) => {
         /^https?:\/\/(?:www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)$/gm;
     const isValid = !!urlPattern.exec(str);
     return str && isValid ? (
-        <a
-            href={str}
-            target="_blank"
-            rel="noopener noreferer"
-            style={{ textDecoration: "underline" }}
-        >
-            {str}
+        <a href={str} target="_blank" rel="noopener noreferer">
+            <span
+                style={{
+                    borderBottom: "1px solid",
+                    display: "block",
+                }}
+            >
+                {str}
+            </span>
         </a>
     ) : str ? (
         str
@@ -46,9 +48,7 @@ const Box: FC<BoxProps> = (props) => {
                 alignItems: "center",
                 padding: "0 var(--grid-gap)",
                 maxWidth: "50vw",
-                fontFeatureSettings: !style?.fontFeatureSettings
-                    ? `"ss01", "ss04", "tnum"`
-                    : "",
+                fontFeatureSettings: !style ? `"ss01", "ss04", "tnum"` : "",
                 ...style,
             }}
         >
@@ -185,8 +185,13 @@ export const AccordionIndex = (props: BaseAccordion) => {
                 selectedFont.typefaceVariable.instances ? (
                     selectedFont.typefaceVariable.instances
                         .sort((a, b) => {
-                            const aItalic = a.name.includes("Italic");
-                            const bItalic = b.name.includes("Italic");
+                            if (!a.name || !b.name) return 0;
+                            const aItalic = a.name.includes(
+                                "Italic" || "italic"
+                            );
+                            const bItalic = b.name.includes(
+                                "Italic" || "italic"
+                            );
                             return aItalic === bItalic ? 0 : aItalic ? 1 : -1;
                         })
                         .map((item, i) => {

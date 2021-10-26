@@ -1,4 +1,4 @@
-import { Typetools, NewGlyph } from "@unforma-club/typetools";
+import { NewGlyph } from "@unforma-club/typetools";
 import {
     createContext,
     FC,
@@ -30,16 +30,10 @@ export const ProviderGlyphs: FC = (props) => {
     const { children } = props;
     const { selectedFont } = useFonts();
 
-    const [glyphs, setGlyphs] = useState<Array<NewGlyph>>([]);
+    const [glyphs, setGlyphs] = useState<Array<NewGlyph>>(selectedFont.glyphs);
     const [selectedGlyph, setSelectedGlyph] = useState<NewGlyph | null>(null);
     const [glyphsLength, setGlyphsLength] = useState(0);
     const [charLength, setCharLength] = useState(0);
-
-    const readOpentype = async (url: string) => {
-        const tt = new Typetools();
-        const glyphs = await tt.generateGlyphs(url);
-        return glyphs;
-    };
 
     const chooseGlyph = useCallback(
         (glyph: NewGlyph | null) => {
@@ -50,13 +44,11 @@ export const ProviderGlyphs: FC = (props) => {
     );
 
     useEffect(() => {
-        const fileUrl = selectedFont.fileUrl;
-        readOpentype(fileUrl).then((glyphs) => {
-            setGlyphs(glyphs);
-            setSelectedGlyph(glyphs.find((item) => item.name === "A")!);
-            setGlyphsLength(glyphs.length);
-            setCharLength(() => glyphs.filter((item) => item.character).length);
-        });
+        const baseGlyphs = selectedFont.glyphs;
+        setGlyphs(baseGlyphs);
+        setSelectedGlyph(baseGlyphs.find((item) => item.name === "A")!);
+        setGlyphsLength(baseGlyphs.length);
+        setCharLength(() => baseGlyphs.filter((item) => item.character).length);
     }, [selectedFont]);
 
     return (

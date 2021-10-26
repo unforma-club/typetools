@@ -1,8 +1,7 @@
 import styles from "./glyph.module.scss";
 import { NewGlyph } from "@unforma-club/typetools";
 import { useFonts } from "libs/context/ContextFonts";
-import { useMeasure } from "libs/hooks";
-import { useSVGMetrics } from "libs/use-svg-metrics";
+import { GlyphGuideLine, GlyphPath } from "./GlyphPath";
 
 interface GlyphsAsideProps {
     glyph: NewGlyph;
@@ -12,94 +11,48 @@ interface GlyphsAsideProps {
 
 export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
     const { selectedFont } = useFonts();
-    const { typefaceMetrics } = selectedFont;
 
-    const [ref, { width, height }] = useMeasure();
-
-    const {
-        glyphBaseline,
-        glyphSize,
-        xmin,
-        parentHeight,
-        parentWidth,
-        glyphScale,
-    } = useSVGMetrics({
-        width,
-        height,
-        advanceWidth: glyph.glyph.advanceWidth,
-        ...typefaceMetrics,
-    });
-
-    const ypx = (val: number) => glyphBaseline - val * glyphScale;
     return (
         <aside className={styles.aside}>
             <div className={styles.glyph_inspector}>
                 <div
-                    ref={ref}
                     style={{
-                        // height: "calc(100vh - calc(var(--header-height) * 10))",
-                        height: "100%",
                         position: "relative",
-                        // backgroundColor: "var(--accents-2)",
-                        // backgroundColor: "var(--accents-12)",
                         borderBottom: "1px solid",
-                        // color: "var(--accents-1)",
+                        // padding: "var(--grid-gap)",
                     }}
                 >
                     <svg
                         width="100%"
-                        height="100%"
-                        viewBox={`0 0 ${parentWidth} ${parentHeight}`}
+                        // height="100%"
+                        viewBox={glyph.svg.viewBox}
                         fill="currentColor"
-                        style={{ userSelect: "none" }}
+                        style={{ userSelect: "none", display: "block" }}
                     >
                         <g>
-                            <line
-                                x1={0}
-                                x2={parentWidth}
-                                y1={ypx(typefaceMetrics.ascender)}
-                                y2={ypx(typefaceMetrics.ascender)}
-                                stroke="var(--accents-8)"
-                                strokeWidth="0.5"
-                                strokeDasharray="2 2"
+                            <GlyphGuideLine
+                                y={glyph.svg.ascender}
+                                width={glyph.svg.baseWidth}
                             />
-                            <line
-                                x1={0}
-                                x2={parentWidth}
-                                y1={ypx(typefaceMetrics.capHeight)}
-                                y2={ypx(typefaceMetrics.capHeight)}
-                                stroke="var(--accents-8)"
-                                strokeWidth="0.5"
-                                strokeDasharray="2 2"
+                            <GlyphGuideLine
+                                y={glyph.svg.descender}
+                                width={glyph.svg.baseWidth}
                             />
-                            <line
-                                x1={0}
-                                x2={parentWidth}
-                                y1={ypx(typefaceMetrics.xHeight)}
-                                y2={ypx(typefaceMetrics.xHeight)}
-                                stroke="var(--accents-8)"
-                                strokeWidth="0.5"
-                                strokeDasharray="2 2"
+                            <GlyphGuideLine
+                                y={glyph.svg.baseLine}
+                                width={glyph.svg.baseWidth}
                             />
-                            <line
-                                x1={0}
-                                x2={parentWidth}
-                                y1={ypx(typefaceMetrics.baseLine)}
-                                y2={ypx(typefaceMetrics.baseLine)}
-                                stroke="var(--accents-8)"
-                                strokeWidth="0.5"
+                            <GlyphGuideLine
+                                y={glyph.svg.xHeight}
+                                width={glyph.svg.baseWidth}
+                                type="dash"
                             />
-                            <line
-                                x1={0}
-                                x2={parentWidth}
-                                y1={ypx(typefaceMetrics.descender)}
-                                y2={ypx(typefaceMetrics.descender)}
-                                stroke="var(--accents-8)"
-                                strokeWidth="0.5"
-                                strokeDasharray="2 2"
+                            <GlyphGuideLine
+                                y={glyph.svg.capHeight}
+                                width={glyph.svg.baseWidth}
                             />
 
-                            <text
+                            {/* <text
                                 fontSize="0.65em"
                                 fontFamily="var(--font-sans)"
                                 fill="var(--accents-8)"
@@ -109,14 +62,14 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                             >
                                 <tspan
                                     x="1em"
-                                    y={ypx(typefaceMetrics.baseLine) - 4}
+                                    y={glyph.svg.baseLine - 4}
                                     textAnchor="start"
                                 >
                                     Baseline
                                 </tspan>
                                 <tspan
-                                    x={parentWidth - 4}
-                                    y={ypx(typefaceMetrics.baseLine) - 4}
+                                    x={320 - 4}
+                                    y={glyph.svg.baseLine - 4}
                                     textAnchor="end"
                                 >
                                     {typefaceMetrics.baseLine}
@@ -177,14 +130,9 @@ export const GlyphsAside = ({ glyph }: GlyphsAsideProps) => {
                                 >
                                     {typefaceMetrics.ascender}
                                 </tspan>
-                            </text>
+                            </text> */}
                         </g>
-                        <path
-                            fill="currentColor"
-                            d={glyph.glyph
-                                .getPath(xmin, glyphBaseline, glyphSize)
-                                .toPathData(10)}
-                        />
+                        <GlyphPath path={glyph.svg.path} />
                     </svg>
                 </div>
 
