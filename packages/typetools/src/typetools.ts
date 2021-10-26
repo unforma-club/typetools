@@ -5,8 +5,20 @@ import type {
     BaseTypeface,
     FontInfo,
 } from "./types/typeface";
-import { load, Font, Glyph } from "opentype.js";
+import { load, Font } from "opentype.js";
 import VariableTools from "./VariableTools";
+
+interface SVG {
+    ascender: number;
+    descender: number;
+    baseLine: number;
+    capHeight: number;
+    xHeight: number;
+    path: string;
+    viewBox: string;
+    baseWidth: number;
+    baseHeight: number;
+}
 
 export interface NewGlyph {
     id: number;
@@ -14,7 +26,7 @@ export interface NewGlyph {
     unicode: string | undefined;
     html: string | undefined;
     character: string | undefined;
-    glyph: Glyph;
+    svg: SVG;
 }
 
 interface Feature {
@@ -156,14 +168,83 @@ export default class Typetools {
         };
     }
 
+    private generateMetrics(font: Font) {
+        const typefaceMetrics = {
+            unitsPerEm: font.unitsPerEm,
+            usWinAscent: font.tables.os2.usWinAscent,
+            usWinDescent: font.tables.os2.usWinDescent,
+            sTypoAscender: font.tables.os2.sTypoAscender,
+            sTypoDescender: font.tables.os2.sTypoDescender,
+            descender: font.tables.hhea.descender,
+            ascender: font.tables.hhea.ascender,
+            xHeight: font.tables.os2.sxHeight,
+            capHeight: font.tables.os2.sCapHeight,
+            baseLine: 0,
+            xMax: font.tables.head.xMax,
+            xMin: font.tables.head.xMin,
+            yMax: font.tables.head.yMax,
+            yMin: font.tables.head.yMin,
+        };
+        return typefaceMetrics;
+    }
+
     public async generateGlyphs(url: string) {
         const font = await load(url);
         const initLength = font.glyphs.length;
         const glyphLength = Array(initLength).fill(0);
 
+        const unitsPerEm = font.unitsPerEm;
+        const pixelRatio = 1;
+        const width = 420;
+        const height = width;
+
+        const parentWidth = width / pixelRatio;
+        const parentHeight = height / pixelRatio / 1.1;
+
+        const {
+            xMax,
+            xMin,
+            yMax,
+            yMin,
+            ascender,
+            descender,
+            baseLine,
+            capHeight,
+            xHeight,
+        } = this.generateMetrics(font);
+
+        const maxHeight = yMax - yMin;
+        const maxWidth = xMax - xMin;
+        const glyphScale = Math.min(
+            parentWidth / maxWidth,
+            parentHeight / maxHeight
+        );
+
         return Promise.all(
             glyphLength.map((_i, i) => {
                 const glyph = font.glyphs.get(i);
+                const glyphSize = glyphScale * unitsPerEm;
+                const glyphBaseline = (parentHeight * yMax) / maxHeight;
+                const glyphWidth = glyph.advanceWidth * glyphScale;
+                const xmin = (parentWidth - glyphWidth) / 2;
+                const ypx = (val: number) => glyphBaseline - val * glyphScale;
+
+                const svg = glyph
+                    .getPath(xmin, glyphBaseline, glyphSize)
+                    .toPathData(10);
+
+                const newSVG: SVG = {
+                    ascender: ypx(ascender),
+                    descender: ypx(descender),
+                    baseLine: ypx(baseLine),
+                    capHeight: ypx(capHeight),
+                    xHeight: ypx(xHeight),
+                    path: svg,
+                    viewBox: `0 0 ${width} ${height}`,
+                    baseHeight: height,
+                    baseWidth: width,
+                };
+
                 const unicode = glyph.unicode;
                 const newOBJ = {
                     id: glyph.index,
@@ -175,7 +256,8 @@ export default class Typetools {
                     character: unicode
                         ? String.fromCharCode(unicode)
                         : undefined,
-                    glyph,
+                    // glyph,
+                    svg: newSVG,
                 };
                 return new Promise<NewGlyph>((resolve) => {
                     resolve(newOBJ);
@@ -261,22 +343,8 @@ export default class Typetools {
 
                 const typefaceTables = Object.keys(font.tables);
 
-                const typefaceMetrics = {
-                    unitsPerEm: font.unitsPerEm,
-                    usWinAscent: font.tables.os2.usWinAscent,
-                    usWinDescent: font.tables.os2.usWinDescent,
-                    sTypoAscender: font.tables.os2.sTypoAscender,
-                    sTypoDescender: font.tables.os2.sTypoDescender,
-                    descender: font.tables.hhea.descender,
-                    ascender: font.tables.hhea.ascender,
-                    xHeight: font.tables.os2.sxHeight,
-                    capHeight: font.tables.os2.sCapHeight,
-                    baseLine: 0,
-                    xMax: font.tables.head.xMax,
-                    xMin: font.tables.head.xMin,
-                    yMax: font.tables.head.yMax,
-                    yMin: font.tables.head.yMin,
-                };
+                const typefaceMetrics = this.generateMetrics(font);
+                const glyphs = await this.generateGlyphs(item.fileUrl);
 
                 return new Promise<BaseTypeface>((resolve) => {
                     resolve({
@@ -292,6 +360,7 @@ export default class Typetools {
                         typefaceInfo,
                         typefaceTables,
                         typefaceMetrics,
+                        glyphs,
                     });
                 });
             })

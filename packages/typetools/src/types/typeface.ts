@@ -1,4 +1,5 @@
 import { FileReaderOutput } from "./file";
+import { NewGlyph } from "../typetools";
 
 export interface VariableAxes {
     defaultValue: number;
@@ -92,6 +93,7 @@ export interface BaseTypeface extends FileReaderOutput {
     typefaceInfo: FontInfo;
     typefaceTables: Array<string>;
     typefaceMetrics: TypefaceMetrics;
+    glyphs: Array<NewGlyph>;
 }
 
 export interface Typeface extends BaseTypeface {
