@@ -6,7 +6,7 @@ const withTM = require("next-transpile-modules")(
 );
 
 module.exports = withTM({
-    swcMinify: true,
+    // swcMinify: true,
     async rewrites() {
         return [
             {
