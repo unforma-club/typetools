@@ -256,7 +256,6 @@ export default class Typetools {
                     character: unicode
                         ? String.fromCharCode(unicode)
                         : undefined,
-                    // glyph,
                     svg: newSVG,
                 };
                 return new Promise<NewGlyph>((resolve) => {
